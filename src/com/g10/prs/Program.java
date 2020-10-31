@@ -1,6 +1,6 @@
 package com.g10.prs;
 
-import com.g10.prs.command.PetRescueSaga;
+import com.g10.prs.game.PetRescueSaga;
 
 /** This is main class of the cli program. */
 public class Program {
