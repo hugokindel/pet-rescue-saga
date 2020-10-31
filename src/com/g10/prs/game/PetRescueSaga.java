@@ -23,6 +23,8 @@ public class PetRescueSaga extends Runnable {
             System.out.println("  |_|   \\___|\\__| |_|  \\_\\___||___/\\___|\\__,_|\\___| |_____/ \\__,_|\\__, |\\__,_|");
             System.out.println("                                                                   __/ |      ");
             System.out.println("                                                                  |___/       ");
+
+            // TODO: Menu principal
         }
 
         return 0;
