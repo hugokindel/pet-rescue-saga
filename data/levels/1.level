@@ -1,0 +1,56 @@
+FORMAT 1.0-LEVEL
+# The first line must always contain the name of the format,
+# in case we added support for other format later on.
+
+# The name of the level
+name = "Introduction"
+version = 1
+authors = {
+	"Hugo Kindel",
+	"Maxime Jauroyon"
+}
+
+# The board of the level
+board_width = 5
+board_height = 5
+
+# Possible values:
+# 0: Empty
+# 1: Animal dog
+# 2: Animal chicken
+# 3: Animal pig
+# 4: Block red
+# 5: Block green
+# 6: Block blue
+# 7: Block purple
+# 8: Block yellow
+# 9: Obstacle wood
+board = {
+	{1,0,1,0,1},
+	{4,5,6,7,8},
+	{4,5,6,7,8},
+	{4,5,6,7,8},
+	{4,5,6,7,8}
+}
+
+# The visible zone of the level.
+# Compared to the board, it starts at the position (-1,-1) because of the border
+# The size can be at most superior by two to the board size
+visible_zone_width = 7
+visible_zone_height = 7
+visible_zone_x = 0 # The base position -1 still applies, so the real value will be -1 + visible_zone_x = -1
+visible_zone_y = 0 # Same
+
+# Possible values:
+# 0: Outside
+# 1: Border
+# 2: 
+visible_zone = {
+	{1,1,1,1,1,1,1},
+	{1,2,2,2,2,2,1},
+	{1,2,2,2,2,2,1},
+	{1,2,2,2,2,2,1},
+	{1,2,2,2,2,2,1},
+	{1,2,2,2,2,2,1},
+	{1,1,1,1,1,1,1}
+}

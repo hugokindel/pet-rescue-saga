@@ -1,14 +1,14 @@
-package com.g10.prs.cli.type;
+package com.g10.prs.model.cli.type;
 
-import com.g10.prs.cli.annotation.Command;
-import com.g10.prs.cli.annotation.Option;
-import com.g10.prs.cli.util.Parser;
+import com.g10.prs.model.cli.annotation.Command;
+import com.g10.prs.model.cli.annotation.Option;
+import com.g10.prs.model.cli.util.Parser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Runnable {
+public abstract class Runnable {
     /** Option to show the help message. */
     @Option(names = {"-h", "--help"}, description = "Show this help message.")
     protected boolean showHelp;
@@ -22,6 +22,14 @@ public class Runnable {
         showHelp = false;
         showVersion = false;
     }
+
+    /**
+     * Run this command.
+     *
+     * @param args The arguments.
+     * @return the return code.
+     */
+    public abstract int run(String[] args);
 
     /**
      * Read every arguments provided and try to see if any option is corresponding to define their values.
