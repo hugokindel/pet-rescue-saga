@@ -6,10 +6,6 @@ import com.g10.prs.core.type.PrsException;
 import java.io.File;
 
 public class Resources {
-    public static Level loadLevel(String fileName) throws Exception {
-        return new Level(getLevelsDirectory() + "/" + fileName);
-    }
-
     public static String getDataDirectory() throws Exception {
         String path = "data";
         createDirectoryIfNotExist(path);
