@@ -1,4 +1,4 @@
-package com.g10.prs.util.print;
+package com.g10.prs.printer;
 
 public class BackgroundColor {
     public static final String Black = "\u001B[40m";

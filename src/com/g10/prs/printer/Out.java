@@ -1,4 +1,4 @@
-package com.g10.prs.util.print;
+package com.g10.prs.printer;
 
 import com.g10.prs.resource.Manager;
 

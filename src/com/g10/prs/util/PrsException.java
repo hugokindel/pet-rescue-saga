@@ -1,8 +1,8 @@
 package com.g10.prs.util;
 
-import com.g10.prs.util.print.Color;
-import com.g10.prs.util.print.Out;
-import com.g10.prs.util.print.TextColor;
+import com.g10.prs.printer.Color;
+import com.g10.prs.printer.Out;
+import com.g10.prs.printer.TextColor;
 
 public class PrsException extends Exception {
     public PrsException(String message){

@@ -4,7 +4,7 @@ import com.g10.prs.cli.annotation.Command;
 import com.g10.prs.cli.type.Runnable;
 import com.g10.prs.level.Level;
 import com.g10.prs.view.ViewType;
-import com.g10.prs.util.print.Out;
+import com.g10.prs.printer.Out;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
