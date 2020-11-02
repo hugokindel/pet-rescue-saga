@@ -1,11 +1,11 @@
-package com.g10.prs.resource;
+package com.g10.prs.core.resource;
 
 import com.g10.prs.level.Level;
-import com.g10.prs.util.PrsException;
+import com.g10.prs.core.type.PrsException;
 
 import java.io.File;
 
-public class Manager {
+public class Resources {
     public static Level loadLevel(String fileName) throws Exception {
         return new Level(getLevelsDirectory() + "/" + fileName);
     }

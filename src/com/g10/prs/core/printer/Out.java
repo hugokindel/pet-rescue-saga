@@ -1,6 +1,6 @@
-package com.g10.prs.printer;
+package com.g10.prs.core.printer;
 
-import com.g10.prs.resource.Manager;
+import com.g10.prs.core.resource.Resources;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +16,7 @@ public class Out {
 
     public static void start() {
         try {
-            writer = new FileWriter(Manager.getDataDirectory() + "/all-logs.log", false);
+            writer = new FileWriter(Resources.getDataDirectory() + "/all-logs.log", false);
             bw = new BufferedWriter(writer);
             out = new PrintWriter(bw);
         } catch (Exception e) {

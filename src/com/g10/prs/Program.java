@@ -1,6 +1,6 @@
 package com.g10.prs;
 
-import com.g10.prs.printer.Out;
+import com.g10.prs.core.printer.Out;
 
 /** This is main class of the cli program. */
 public class Program {

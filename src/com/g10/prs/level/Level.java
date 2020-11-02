@@ -1,8 +1,8 @@
 package com.g10.prs.level;
 
-import com.g10.prs.resource.Manager;
-import com.g10.prs.resource.DataParser;
-import com.g10.prs.util.PrsException;
+import com.g10.prs.core.resource.Resources;
+import com.g10.prs.core.resource.DataParser;
+import com.g10.prs.core.type.PrsException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ public class Level {
     }
 
     private void readLevelFile(String filePath) throws Exception {
-        File levelFile = new File(Manager.getLevelsDirectory() + "/" + filePath);
+        File levelFile = new File(Resources.getLevelsDirectory() + "/" + filePath);
 
         if (!levelFile.exists()) {
             throw new PrsException("[ERROR] Cannot load error file.");

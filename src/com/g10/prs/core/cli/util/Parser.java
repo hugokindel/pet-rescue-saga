@@ -1,4 +1,4 @@
-package com.g10.prs.cli.util;
+package com.g10.prs.core.cli.util;
 
 /** This is a parser for options with value passed through the cli. */
 public class Parser {

@@ -1,7 +1,7 @@
-package com.g10.prs.resource;
+package com.g10.prs.core.resource;
 
-import com.g10.prs.util.Pair;
-import com.g10.prs.util.PrsException;
+import com.g10.prs.core.type.Pair;
+import com.g10.prs.core.type.PrsException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package com.g10.prs.printer;
+package com.g10.prs.core.printer;
 
 public class TextColor {
     public static final String Black = "\u001B[30m";

@@ -1,10 +1,10 @@
 package com.g10.prs;
 
-import com.g10.prs.cli.annotation.Command;
-import com.g10.prs.cli.type.Runnable;
+import com.g10.prs.core.cli.annotation.Command;
+import com.g10.prs.core.cli.type.Runnable;
 import com.g10.prs.level.Level;
 import com.g10.prs.view.ViewType;
-import com.g10.prs.printer.Out;
+import com.g10.prs.core.printer.Out;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
