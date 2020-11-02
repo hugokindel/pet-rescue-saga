@@ -1,4 +1,4 @@
-package com.g10.prs.model.util;
+package com.g10.prs.util;
 
 public class Pair<T, U> {
     private final T object1;

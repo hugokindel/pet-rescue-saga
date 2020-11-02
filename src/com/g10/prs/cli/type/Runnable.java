@@ -1,8 +1,8 @@
-package com.g10.prs.model.cli.type;
+package com.g10.prs.cli.type;
 
-import com.g10.prs.model.cli.annotation.Command;
-import com.g10.prs.model.cli.annotation.Option;
-import com.g10.prs.model.cli.util.Parser;
+import com.g10.prs.cli.annotation.Command;
+import com.g10.prs.cli.annotation.Option;
+import com.g10.prs.cli.util.Parser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

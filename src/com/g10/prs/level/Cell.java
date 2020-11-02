@@ -1,4 +1,4 @@
-package com.g10.prs.model.level;
+package com.g10.prs.level;
 
 public class Cell {
     private CellType type;

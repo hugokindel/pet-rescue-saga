@@ -1,6 +1,7 @@
-package com.g10.prs.model.resource;
+package com.g10.prs.resource;
 
-import com.g10.prs.model.util.Pair;
+import com.g10.prs.util.Pair;
+import com.g10.prs.util.PrsException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -88,7 +89,7 @@ public class DataParser {
         }
 
         if (currentCharacter != symbol) {
-            throw new Exception("error not character " + symbol);
+            throw new PrsException("error not character " + symbol);
         }
 
         getNextCharacter();
@@ -100,7 +101,7 @@ public class DataParser {
         }
 
         if (!isAlphabetic()) {
-            throw new Exception("error not identifier");
+            throw new PrsException("error not identifier");
         }
 
         StringBuilder identifier = new StringBuilder();
@@ -127,7 +128,7 @@ public class DataParser {
         } else if (currentCharacter == '{') {
             object = parseLiteralArray();
         } else {
-            throw new Exception("error not value");
+            throw new PrsException("error not value");
         }
 
         return object;
@@ -180,7 +181,7 @@ public class DataParser {
             if (currentCharacter == ',') {
                 getNextCharacter();
             } else if (currentCharacter != '}') {
-                throw new Exception("error not , or }");
+                throw new PrsException("error not , or }");
             }
         }
         getNextCharacter();

@@ -1,12 +1,17 @@
 package com.g10.prs;
 
-import com.g10.prs.model.PetRescueSaga;
+import com.g10.prs.util.print.Out;
 
 /** This is main class of the cli program. */
 public class Program {
+    public static PetRescueSaga prs;
+
     /** Start of the program. */
     public static void main(String[] args) {
-        // Exit with the error code returned by the Pet Rescue Saga command.
-        System.exit(new PetRescueSaga().run(args));
+        Out.start();
+        prs = new PetRescueSaga();
+        int errorCode = prs.run(args);
+        Out.end();
+        System.exit(errorCode);
     }
 }

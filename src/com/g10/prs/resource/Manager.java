@@ -1,6 +1,7 @@
-package com.g10.prs.model.resource;
+package com.g10.prs.resource;
 
-import com.g10.prs.model.level.Level;
+import com.g10.prs.level.Level;
+import com.g10.prs.util.PrsException;
 
 import java.io.File;
 
@@ -32,7 +33,7 @@ public class Manager {
 
         if (!saveDirectory.exists()) {
             if (!saveDirectory.mkdirs()) {
-                throw new Exception("Cannot create save directory!");
+                throw new PrsException("Cannot create save directory!");
             }
         }
     }

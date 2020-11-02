@@ -1,7 +1,8 @@
-package com.g10.prs.model.level;
+package com.g10.prs.level;
 
-import com.g10.prs.model.resource.Manager;
-import com.g10.prs.model.resource.DataParser;
+import com.g10.prs.resource.Manager;
+import com.g10.prs.resource.DataParser;
+import com.g10.prs.util.PrsException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,13 +30,13 @@ public class Level {
         File levelFile = new File(Manager.getLevelsDirectory() + "/" + filePath);
 
         if (!levelFile.exists()) {
-            throw new Exception("[ERROR] Cannot load error file.");
+            throw new PrsException("[ERROR] Cannot load error file.");
         }
 
         Map<String, Object> data = DataParser.parseData("1.0-LEVEL", new FileInputStream(levelFile));
 
         if (data == null) {
-            throw new Exception("unknown format");
+            throw new PrsException("unknown format");
         }
 
         name = readLevelDataValue(data, "name", "Name of level missing!");
@@ -53,7 +54,7 @@ public class Level {
 
     private <T> T readLevelDataValue(Map<String, Object> dataMap, String key, String errorMessage) throws Exception {
         if (!dataMap.containsKey(key)) {
-            throw new Exception("[ERROR] " + errorMessage);
+            throw new PrsException("[ERROR] " + errorMessage);
         }
 
         return (T)dataMap.get(key);
