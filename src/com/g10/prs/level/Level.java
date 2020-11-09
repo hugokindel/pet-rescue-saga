@@ -138,8 +138,7 @@ public class Level {
                         verif = false;
                         break;
                     }
-                }
-                if (board[y][x].getType() != CellType.Empty) {
+                } else if (board[y][x].getType() != CellType.Empty) {
                     verif = false;
                     break;
                 }
