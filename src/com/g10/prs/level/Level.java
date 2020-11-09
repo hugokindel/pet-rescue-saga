@@ -95,4 +95,83 @@ public class Level {
 
         return board;
     }
+
+    private boolean clearBoardVertical(){
+        boolean madeChange = false;
+
+        for (int y = 0; y < boardHeight - 1; y++) {
+            for (int x = 0; x < boardWidth; x++) {
+                Cell cell = board[y][x];
+
+                if (cell.getType() == CellType.Empty ) {
+                    int c = y;
+
+                    while (c < boardHeight - 1) {
+                        Cell cell2 = board[++c][x];
+
+                        if (cell2.getType() == CellType.Animal || cell2.getType() == CellType.Block) {
+                            board[y][x] = board[c][x];
+                            board[c][x] = cell;
+                            madeChange = true;
+                            break;
+                        } else if (cell2.getType() == CellType.Obstacle) {
+                            break;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return madeChange;
+    }
+
+    private boolean clearBoardHorizontal(){
+        boolean madeChange = false;
+
+        for (int x = 0; x < boardWidth - 1; x++) {
+            boolean verif = true;
+
+            for (int y = 0; y < boardHeight; y++) {
+                if (board[y][x].getType() == CellType.Obstacle) {
+                    if (board[y][x + 1].getType() != CellType.Empty || board[y][x + 1].getType() != CellType.Obstacle) {
+                        verif = false;
+                        break;
+                    }
+                }
+                if (board[y][x].getType() != CellType.Empty) {
+                    verif = false;
+                    break;
+                }
+            }
+
+            if (verif) {
+
+                for (int y = 0; y < boardHeight; y++) {
+                    if (board[y][x].getType() != CellType.Obstacle) {
+                        if (board[y][x + 1].getType() != CellType.Obstacle) {
+                            board[y][x] = board[y][x + 1];
+                            board[y][x + 1] = new Cell(CellType.Empty);
+                            madeChange = true;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return madeChange;
+    }
+
+    // TODO : renvoyer boolean pour clearBoard function
+
+    private void clearBoard(){
+        boolean v = true;
+        boolean h = true;
+
+        while (v || h) {
+            v = clearBoardVertical();
+            h = clearBoardHorizontal();
+        }
+    }
 }
