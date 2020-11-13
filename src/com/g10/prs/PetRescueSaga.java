@@ -67,7 +67,6 @@ public class PetRescueSaga extends Runnable {
                 level.remove(0, 5);
                 Out.println("Remove (1,4)");
                 level.remove(1, 4);
-                System.out.print("\033[H\033[2J");
                 Out.println("Remove (3,5)");
                 level.remove(3,5);
             } catch (Exception e) {
