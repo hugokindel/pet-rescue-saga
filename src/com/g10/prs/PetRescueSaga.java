@@ -6,6 +6,10 @@ import com.g10.prs.core.printer.BackgroundColor;
 import com.g10.prs.core.printer.TextColor;
 import com.g10.prs.core.type.PrsException;
 import com.g10.prs.level.*;
+import com.g10.prs.ui.Element;
+import com.g10.prs.ui.MainMenu;
+import com.g10.prs.ui.Menu;
+import com.g10.prs.ui.Popup;
 import com.g10.prs.view.ViewType;
 import com.g10.prs.core.printer.Out;
 import com.g10.prs.player.Player;
@@ -13,24 +17,44 @@ import java.util.Scanner;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Stack;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
-    public ViewType viewType;
+    public static ViewType view;
+    public static Element currentElement;
+    public static Stack<Menu> elementsUndoList;
+    public static Player player;
+
+    public static int showMenu(Menu element, boolean addCurrentMenuToBacklog) {
+        if (addCurrentMenuToBacklog) {
+            elementsUndoList.push((Menu)currentElement);
+        }
+
+        currentElement = element;
+
+        int result = (int)currentElement.use();
+
+        if (result == -1) {
+            return 0;
+        } else if (result == 0) {
+            currentElement = elementsUndoList.pop();
+        }
+
+        return result;
+    }
+
+    public static String showPopup(Popup popup) {
+        elementsUndoList.push((Menu)currentElement);
+        currentElement = popup;
+        return ((Popup)currentElement).use();
+    }
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);
 
         if (!showHelp && !showVersion) {
-            Out.println("   _____     _     _____                              _____                   ");
-            Out.println("  |  __ \\   | |   |  __ \\                            / ____|                  ");
-            Out.println("  | |__) |__| |_  | |__) |___  ___  ___ _   _  ___  | (___   __ _  __ _  __ _ ");
-            Out.println("  |  ___/ _ \\ __| |  _  // _ \\/ __|/ __| | | |/ _ \\  \\___ \\ / _` |/ _` |/ _` |");
-            Out.println("  | |  |  __/ |_  | | \\ \\  __/\\__ \\ (__| |_| |  __/  ____) | (_| | (_| | (_| |");
-            Out.println("  |_|   \\___|\\__| |_|  \\_\\___||___/\\___|\\__,_|\\___| |_____/ \\__,_|\\__, |\\__,_|");
-            Out.println("                                                                   __/ |      ");
-            Out.println("                                                                  |___/       ");
-            Out.println();
+            showMenu(new MainMenu(), false);
 
             /**
              Player player = new Player();
@@ -57,7 +81,7 @@ public class PetRescueSaga extends Runnable {
                  }
              } */
 
-            try {
+            /*try {
                 Level level = new Level("1.level");
                 Out.println("Level: " + level.getName());
                 level.print();
@@ -71,7 +95,7 @@ public class PetRescueSaga extends Runnable {
                 level.remove(3,5);
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         }
 
         return 0;
