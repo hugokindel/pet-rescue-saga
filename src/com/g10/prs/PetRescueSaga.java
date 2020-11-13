@@ -46,8 +46,9 @@ public class PetRescueSaga extends Runnable {
         readArguments(args, PetRescueSaga.class);
 
         if (!showHelp && !showVersion) {
+            currentElement = new MainMenu();
             while (true) {
-                int result = showMenu(new MainMenu(), false);
+                int result = showMenu((Menu)currentElement, false);
 
                 if (result == -1) {
                     return 0;
