@@ -33,15 +33,7 @@ public class PetRescueSaga extends Runnable {
 
         currentElement = element;
 
-        int result = (int)currentElement.use();
-
-        if (result == -1) {
-            return 0;
-        } else if (result == 0) {
-            currentElement = elementsUndoList.pop();
-        }
-
-        return result;
+        return (int)currentElement.use();
     }
 
     public static String showPopup(Popup popup) {
@@ -54,7 +46,15 @@ public class PetRescueSaga extends Runnable {
         readArguments(args, PetRescueSaga.class);
 
         if (!showHelp && !showVersion) {
-            showMenu(new MainMenu(), false);
+            while (true) {
+                int result = showMenu(new MainMenu(), false);
+
+                if (result == -1) {
+                    return 0;
+                } else if (result == 0) {
+                    currentElement = elementsUndoList.pop();
+                }
+            }
 
             /**
              Player player = new Player();
