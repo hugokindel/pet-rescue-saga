@@ -22,65 +22,60 @@ import java.util.Stack;
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
     public static ViewType view;
-    public static Element currentElement;
-    public static Stack<Menu> elementsUndoList;
-    public static Player player;
+    public static Player player = new Player();
+    public static Element currentElement = new MainMenu();
+    public static Stack<Menu> elementsUndoList = new Stack<>();
 
-    public static int showMenu(Menu element, boolean addCurrentMenuToBacklog) {
+    public static int showMenu(Menu element, boolean addCurrentMenuToBacklog,Scanner sc) {
         if (addCurrentMenuToBacklog) {
             elementsUndoList.push((Menu)currentElement);
         }
 
         currentElement = element;
 
-        return (int)currentElement.use();
+        return (int)currentElement.use(sc);
     }
 
-    public static String showPopup(Popup popup) {
-        elementsUndoList.push((Menu)currentElement);
-        currentElement = popup;
-        return ((Popup)currentElement).use();
+    public static void placeMenu(Menu element, boolean addCurrentMenuToBacklog){
+        if (addCurrentMenuToBacklog) {
+            elementsUndoList.push((Menu)currentElement);
+        }
+
+        currentElement = element;
+    }
+
+    public static String nextString(Scanner sc){
+        return sc.next();
+    }
+
+    public static int nextAnswer(String s, boolean v){
+        if (s == null) return -2;
+        if (s.charAt(0) == 'q') return -1;
+        if (v && s.charAt(0) == 'b') return 0;
+        try {
+            int i = Integer.parseInt(s);
+            return i;
+        } catch (Exception e) {
+            return -2;
+        }
     }
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);
+        Scanner sc = new Scanner(System.in);
 
         if (!showHelp && !showVersion) {
-            currentElement = new MainMenu();
             while (true) {
-                int result = showMenu((Menu)currentElement, false);
+                int result = showMenu((Menu)currentElement, false,sc);
 
                 if (result == -1) {
+                    sc.close();
                     return 0;
                 } else if (result == 0) {
                     currentElement = elementsUndoList.pop();
                 }
             }
 
-            /**
-             Player player = new Player();
-             boolean verif = true;
-             Scanner sc = new Scanner(System.in);
-             while (verif) {
-                 Out.println("Welcome " + player.getName() + " , what do you wnat to do ?");
-                 Out.println("(p) Play ?  /   (q) Leave ?  /  (n) Choose a different name ?");
-                 char result = player.choice(sc);
-                 switch (result) {
-                 case 'p':
-                     verif = false;
-                     // Level with Player in param to change the player stat
-                     break;
-                 case 'q':
-                     sc.close();
-                     return 0;
-                 case 'n':
-                     player.newName(sc); //Redo the same Question
-                     break;
-                 default:
-                     Out.println("Wrong char");
-                     break;
-                 }
-             } */
 
             /*try {
                 Level level = new Level("1.level");

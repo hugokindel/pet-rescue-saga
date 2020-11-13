@@ -1,13 +1,17 @@
 package com.g10.prs.ui;
 
+import com.g10.prs.PetRescueSaga;
 import com.g10.prs.core.printer.Out;
+import com.g10.prs.level.Level;
+
+import java.util.Scanner;
 
 public class MainMenu extends Menu {
     public MainMenu() {
         super("Menu principal", false, new String[] {"Jouer", "Changer de nom"});
     }
 
-    public Integer use() {
+    public Integer use(Scanner sc) {
         Out.println("   _____     _     _____                              _____                   ");
         Out.println("  |  __ \\   | |   |  __ \\                            / ____|                  ");
         Out.println("  | |__) |__| |_  | |__) |___  ___  ___ _   _  ___  | (___   __ _  __ _  __ _ ");
@@ -18,15 +22,18 @@ public class MainMenu extends Menu {
         Out.println("                                                                  |___/       ");
         Out.println();
 
-        int result = super.use();
+        int result = super.use(sc);
 
         if (result == 1) {
-            // TODO: jouer (choisir un niveau)
+            LevelSelectionMenu selectionMenu = new LevelSelectionMenu();
+            PetRescueSaga.placeMenu(selectionMenu,true);
         } else if (result == 2) {
-            // TODO: changer nom
-            // TODO: make a popup to ask name, get string result and change accordingly
+            Popup newName = new Popup("Changer de nom","Veuillez entrez votre nouveau nom: ",PopupType.ReturnString);
+            String r = newName.use(sc);
+            PetRescueSaga.player.setName(r);
         }
 
         return result;
     }
 }
+

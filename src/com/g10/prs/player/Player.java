@@ -15,12 +15,8 @@ public class Player {
         return name;
     }
 
-    public void newName(Scanner sc){
-        Out.println("Write your new name");
-        if(sc.hasNext()) {
-            name = sc.next();
-            Out.println("Your new name is : " + name);
-        }
+    public void setName(String s){
+        name = s;
     }
 
     public char choice(Scanner sc){
@@ -30,9 +26,5 @@ public class Player {
         }
         return 'e';
     }
-
-
-
-
 
 }
