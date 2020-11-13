@@ -3,10 +3,7 @@ package com.g10.prs.core.resource;
 import com.g10.prs.core.type.Pair;
 import com.g10.prs.core.type.PrsException;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +16,7 @@ public class DataParser {
     static int line;
     static char currentCharacter;
 
-    public static Map<String, Object> parseData(String expectedFormat, InputStream file) throws Exception {
+    public static Map<String, Object> parseData(String expectedFormat, InputStream file) throws PrsException, IOException {
         Map<String, Object> symbolTable = new HashMap<>();
         reader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
         column = 1;
@@ -37,7 +34,7 @@ public class DataParser {
         return symbolTable;
     }
 
-    private static boolean checkFormat(String expectedFormat) throws Exception {
+    private static boolean checkFormat(String expectedFormat) throws PrsException, IOException {
         int currentLine = line;
         StringBuilder format = new StringBuilder();
 
@@ -50,7 +47,7 @@ public class DataParser {
         return format.toString().replaceAll(" ", "").equals("FORMAT" + expectedFormat);
     }
 
-    private static void getNextCharacter() throws Exception {
+    private static void getNextCharacter() throws PrsException, IOException {
         int next = reader.read();
         currentCharacter = (next == -1) ? 0 : (char)next;
         column++;
@@ -71,7 +68,7 @@ public class DataParser {
         }
     }
 
-    private static Pair<String, Object> parseSymbol() throws Exception {
+    private static Pair<String, Object> parseSymbol() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -83,7 +80,7 @@ public class DataParser {
         return new Pair<>(identifier, object);
     }
 
-    private static void parseCharacter(char symbol) throws Exception {
+    private static void parseCharacter(char symbol) throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -95,7 +92,7 @@ public class DataParser {
         getNextCharacter();
     }
 
-    private static String parseIdentifier() throws Exception {
+    private static String parseIdentifier() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -114,7 +111,7 @@ public class DataParser {
         return identifier.toString();
     }
 
-    private static Object parseValue() throws Exception {
+    private static Object parseValue() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -134,7 +131,7 @@ public class DataParser {
         return object;
     }
 
-    private static int parseLiteralInteger() throws Exception {
+    private static int parseLiteralInteger() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -149,7 +146,7 @@ public class DataParser {
         return Integer.parseInt(identifier.toString());
     }
 
-    private static String parseLiteralString() throws Exception {
+    private static String parseLiteralString() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
@@ -166,7 +163,7 @@ public class DataParser {
         return identifier.toString();
     }
 
-    private static List<Object> parseLiteralArray() throws Exception {
+    private static List<Object> parseLiteralArray() throws PrsException, IOException {
         while (isSpace()) {
             getNextCharacter();
         }
