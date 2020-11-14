@@ -1,9 +1,7 @@
 package com.g10.prs.ui;
 
-import com.g10.prs.PetRescueSaga;
+import com.g10.prs.core.printer.In;
 import com.g10.prs.core.printer.Out;
-
-import java.util.Scanner;
 
 public class Menu implements Element<Integer> {
     private String title;
@@ -16,20 +14,23 @@ public class Menu implements Element<Integer> {
         this.categories = categories;
     }
 
-    public Integer use(Scanner sc) {
+    public Integer use() {
+        return use(false);
+    }
+
+    public Integer use(boolean customClear) {
+        if (!customClear) {
+            Out.println("--------------------------------------------------------------------------------");
+            Out.clear();
+        }
+
         Out.println(title);
         Out.println();
-        for (int i = 0; i<categories.length ; i++) {
-            Out.println(i+1 + ". " + categories[i]);
+        for (int i = 0; i < categories.length; i++) {
+            Out.println(i + 1 + ". " + categories[i]);
         }
         Out.println();
-        if (canGoBack) {
-            Out.print("Sélectionnez une catégorie du menu, 'q' pour quitter ou 'b' pour revenir au menu précédent: ");
-        } else {
-            Out.print("Sélectionnez une catégorie du menu ou 'q' pour quitter: ");
-        }
-        String result = PetRescueSaga.nextString(sc);
-        Out.println();
-        return PetRescueSaga.nextAnswer(result,canGoBack);
+        String description = "Sélectionnez une catégorie du menu" + (canGoBack ? ", 'q' pour quitter ou 'b' pour revenir au menu précédent" : " ou 'q' pour quitter") + ": ";
+        return In.nextAnswer(description, canGoBack, categories.length);
     }
 }

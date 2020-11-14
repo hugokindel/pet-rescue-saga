@@ -1,6 +1,7 @@
 package com.g10.prs.ui;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.core.printer.In;
 import com.g10.prs.core.printer.Out;
 
 import java.util.Scanner;
@@ -16,25 +17,19 @@ public class Popup implements Element<String> {
         this.type = type;
     }
 
-    public String use(Scanner sc) {
+    public String use() {
+        Out.println("--------------------------------------------------------------------------------");
+        Out.clear();
         Out.println(title);
         Out.println();
-        Out.print(description);
-        if ( type == PopupType.ReturnInt) {
-            String result = PetRescueSaga.nextString(sc);
-            Out.println();
-            try {
-                int i = Integer.parseInt(result);
-            } catch (Exception e) {
-                Out.println("Ceci n'est pas une bonne valeur");
-                return "";
-            }
-            return result;
+
+        String result = "";
+        if (type == PopupType.ReturnInt) {
+            result = String.valueOf(In.nextInt(description));
         } else if (type == PopupType.ReturnString) {
-            String result = PetRescueSaga.nextString(sc);
-            Out.println();
-            return result;
+            result = In.nextString(description);
         }
-        return "";
+
+        return result;
     }
 }

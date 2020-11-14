@@ -102,6 +102,15 @@ public class Out {
         System.out.print("\033[H\033[2J");
     }
 
+    public static void simulateNewLine() {
+        isStartOfLine = true;
+        fileOutput.println();
+    }
+
+    public static void printToFile(Object object) {
+        fileOutput.print(object);
+    }
+
     private static void printAndResetColor(Object object) {
         String text = object + Color.ResetAll;
 

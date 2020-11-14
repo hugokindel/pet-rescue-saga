@@ -11,7 +11,10 @@ public class MainMenu extends Menu {
         super("Menu principal", false, new String[] {"Jouer", "Changer de nom"});
     }
 
-    public Integer use(Scanner sc) {
+    public Integer use() {
+        Out.println("--------------------------------------------------------------------------------");
+        Out.clear();
+
         Out.println("   _____     _     _____                              _____                   ");
         Out.println("  |  __ \\   | |   |  __ \\                            / ____|                  ");
         Out.println("  | |__) |__| |_  | |__) |___  ___  ___ _   _  ___  | (___   __ _  __ _  __ _ ");
@@ -22,15 +25,14 @@ public class MainMenu extends Menu {
         Out.println("                                                                  |___/       ");
         Out.println();
 
-        int result = super.use(sc);
+        int result = super.use(true);
 
         if (result == 1) {
             LevelSelectionMenu selectionMenu = new LevelSelectionMenu();
-            PetRescueSaga.placeMenu(selectionMenu,true);
+            PetRescueSaga.setNextMenu(selectionMenu);
         } else if (result == 2) {
-            Popup newName = new Popup("Changer de nom","Veuillez entrez votre nouveau nom: ",PopupType.ReturnString);
-            String r = newName.use(sc);
-            PetRescueSaga.player.setName(r);
+            String name = PetRescueSaga.showPopup("Changer de nom", "Veuillez entrez votre nouveau nom: ", PopupType.ReturnString);
+            PetRescueSaga.player.setName(name);
         }
 
         return result;
