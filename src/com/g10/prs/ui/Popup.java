@@ -6,7 +6,7 @@ import com.g10.prs.core.printer.Out;
 
 import java.util.Scanner;
 
-public class Popup implements Element<String> {
+public class Popup {
     private String title;
     private String description;
     private PopupType type;

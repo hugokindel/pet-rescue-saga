@@ -3,7 +3,7 @@ package com.g10.prs.ui;
 import com.g10.prs.core.printer.In;
 import com.g10.prs.core.printer.Out;
 
-public class Menu implements Element<Integer> {
+public class Menu {
     private String title;
     private boolean canGoBack;
     private String[] categories;
