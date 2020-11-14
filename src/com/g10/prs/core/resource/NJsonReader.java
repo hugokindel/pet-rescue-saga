@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-// TODO: ARRAY
 public class NJsonReader {
     Reader reader;
     int currentColumn;
