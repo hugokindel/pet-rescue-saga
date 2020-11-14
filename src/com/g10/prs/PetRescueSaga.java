@@ -2,12 +2,13 @@ package com.g10.prs;
 
 import com.g10.prs.core.cli.annotation.Command;
 import com.g10.prs.core.cli.type.Runnable;
+import com.g10.prs.core.printer.Out;
+import com.g10.prs.core.resource.NJsonReader;
 import com.g10.prs.ui.*;
 import com.g10.prs.view.ViewType;
 import com.g10.prs.player.Player;
-import java.util.Scanner;
 
-import java.util.Stack;
+import java.util.*;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
@@ -31,7 +32,7 @@ public class PetRescueSaga extends Runnable {
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
 
         if (!showHelp && !showVersion) {
             while (true) {
@@ -60,7 +61,14 @@ public class PetRescueSaga extends Runnable {
                 level.remove(3,5);
             } catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
+        }*/
+
+        try {
+            Map<String, Object> fileContent = new NJsonReader().parse("test.njson");
+            Out.println(fileContent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return 0;

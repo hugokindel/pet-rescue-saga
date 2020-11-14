@@ -187,7 +187,7 @@ public class DataParser {
     }
 
     private static boolean isSpace() {
-        return currentCharacter == ' ' || currentCharacter == '\n' || currentCharacter == '\t' || currentCharacter == '\r';
+        return currentCharacter == ' ' || currentCharacter == '\t' || currentCharacter == '\r' || currentCharacter == '\n';
     }
 
     private static boolean isAlphabetic() {
