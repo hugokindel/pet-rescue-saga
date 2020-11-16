@@ -223,7 +223,7 @@ public class NJsonReader {
      * @return the map.
      */
     private Map<String, Object> parseMap() throws NJSonCannotParseException, IOException {
-        Map<String, Object> elements = new HashMap<>();
+        Map<String, Object> elements = new LinkedHashMap<>();
 
         do {
             check(next(), '}', '"');

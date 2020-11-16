@@ -1,5 +1,8 @@
 package com.g10.prs;
 
+import com.g10.prs.core.Resources;
+import com.g10.prs.core.njson.NJsonReader;
+import com.g10.prs.core.njson.NJsonWriter;
 import com.g10.prs.core.options.Command;
 import com.g10.prs.core.options.Runnable;
 import com.g10.prs.level.Level;
@@ -33,7 +36,7 @@ public class PetRescueSaga extends Runnable {
         readArguments(args, PetRescueSaga.class);
         Scanner sc = new Scanner(System.in);
 
-        if (!showHelp && !showVersion) {
+        /*if (!showHelp && !showVersion) {
             while (true) {
                 int result = showMenu(currentMenu);
 
@@ -44,18 +47,21 @@ public class PetRescueSaga extends Runnable {
                     currentMenu = menuBacklog.pop();
                 }
             }
-        }
+        }*/
 
-        /*try {
+        try {
             Level level = Level.load("campaign/level_01.njson");
             level.print();
             level.removeGameMode(0, 3, true);
             level.print();
             level.removeGameMode(0, 3, true);
             level.print();
+            Map<String, Object> test = new NJsonReader(Resources.getCampaignLevelsDirectory() + "/level_01.njson").readMap();
+            test.put("test",  new NJsonReader(Resources.getCampaignLevelsDirectory() + "/level_01.njson").readMap());
+            NJsonWriter.write("test.njson", test);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
         return 0;
     }
