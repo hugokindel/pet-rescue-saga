@@ -3,7 +3,8 @@ package com.g10.prs;
 import com.g10.prs.core.cli.annotation.Command;
 import com.g10.prs.core.cli.type.Runnable;
 import com.g10.prs.core.printer.Out;
-import com.g10.prs.core.resource.NJsonReader;
+import com.g10.prs.core.resource.njson.NJsonReader;
+import com.g10.prs.level.Level;
 import com.g10.prs.ui.*;
 import com.g10.prs.view.ViewType;
 import com.g10.prs.player.Player;
@@ -65,8 +66,12 @@ public class PetRescueSaga extends Runnable {
         }*/
 
         try {
-            Map<String, Object> fileContent = new NJsonReader().parse("test.njson");
-            Out.println(fileContent);
+            Level level = Level.load("campaign/level_01.njson");
+            level.print();
+            level.removeGameMode(0, 3, true);
+            level.print();
+            level.removeGameMode(0, 3, true);
+            level.print();
         } catch (Exception e) {
             e.printStackTrace();
         }

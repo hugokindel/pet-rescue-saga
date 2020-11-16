@@ -1,7 +1,10 @@
 package com.g10.prs.level;
 
 public enum AnimalType {
-    Dog,
-    Chicken,
-    Pig
+    Hedgehod,
+    Parrot,
+    Piglet,
+    Puppy,
+    Turtle,
+    Kitten
 }

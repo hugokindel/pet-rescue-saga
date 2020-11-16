@@ -1,4 +1,4 @@
-package com.g10.prs.core.resource;
+package com.g10.prs.core.resource.njson;
 
 import com.g10.prs.core.type.Pair;
 
@@ -47,6 +47,8 @@ public class NJsonReader {
             return parseCharacter();
         } else if (is(currentCharacter, '[')) {
             return parseArray();
+        } else if (is(currentCharacter, 'n')) {
+            return parseNull();
         }
 
         return null;
@@ -82,22 +84,33 @@ public class NJsonReader {
             return Double.parseDouble(number);
         }
 
-        return Long.parseLong(number);
+        return Integer.parseInt(number);
     }
 
     private boolean parseBoolean() throws IOException, NJSonCannotParseException {
         StringBuilder contentBuilder = new StringBuilder(new String(new char[] {currentCharacter}));
-        while (!is(next(true), 'e')) {
+        while (Character.isAlphabetic(next(true))) {
             if (!"false".startsWith(contentBuilder.toString()) && !"true".startsWith(contentBuilder.toString())) {
                 throw new NJSonCannotParseException("Not boolean");
             }
 
             contentBuilder.append(currentCharacter);
         }
-        contentBuilder.append(currentCharacter);
-        next();
 
         return contentBuilder.toString().equals("true");
+    }
+
+    private Object parseNull() throws IOException, NJSonCannotParseException {
+        StringBuilder contentBuilder = new StringBuilder(new String(new char[] {currentCharacter}));
+        while (Character.isAlphabetic(next(true))) {
+            if (!"null".startsWith(contentBuilder.toString())) {
+                throw new NJSonCannotParseException("Not null");
+            }
+
+            contentBuilder.append(currentCharacter);
+        }
+
+        return null;
     }
 
     private Map<String, Object> parseMap() throws NJSonCannotParseException, IOException {
@@ -137,14 +150,33 @@ public class NJsonReader {
         return next(false);
     }
 
-    private char next(boolean isInStringLiteral) throws IOException {
+    private char next(boolean isInStringOrComment) throws IOException {
         currentCharacter = (char)reader.read();
         currentColumn++;
 
-        if (!isInStringLiteral && is(currentCharacter, '/') && is((char)reader.read(), '/')) {
-            int currentLine = this.currentLine;
+        if (!isInStringOrComment && is(currentCharacter, '/')) {
+            char currChar = next(true);
+            if (is(currChar, '/')) {
+                // Comments
+                int currentLine = this.currentLine;
 
-            while (currentLine == this.currentLine) {
+                while (currentLine == this.currentLine) {
+                    next();
+                }
+            } else if (is(currChar, '*')) {
+                // Multiline comments
+                boolean foundFirst = false;
+                do {
+                    if (!foundFirst && next(true) == '*') {
+                        foundFirst = true;
+                    } else if (foundFirst) {
+                        if (next(true) == '/') {
+                            break;
+                        } else {
+                            foundFirst = false;
+                        }
+                    }
+                } while (true);
                 next();
             }
         } else if (isRF()) {
@@ -152,7 +184,7 @@ public class NJsonReader {
             currentColumn = 0;
         }
 
-        while (isCLRF() || (!isInStringLiteral && isSpace())) {
+        while (isCLRF() || (!isInStringOrComment && isSpace())) {
             next();
         }
 

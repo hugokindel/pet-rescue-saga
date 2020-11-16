@@ -1,4 +1,4 @@
-package com.g10.prs.core.resource;
+package com.g10.prs.core.resource.njson;
 
 import com.g10.prs.core.printer.Color;
 import com.g10.prs.core.printer.Out;
