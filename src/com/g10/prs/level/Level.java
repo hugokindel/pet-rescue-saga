@@ -18,18 +18,23 @@ public class Level {
     /** The name of the level. */
     @NJsonSerializable
     String name;
+
     /** A list of authors. */
     @NJsonSerializable
     List<String> authors;
+
     /** The version of the level (useful to keep track of versioning if it were to exist). */
     @NJsonSerializable
     String version;
+
     /** The number of columns of the level. It defines the x length of all the grid based attributes. */
     @NJsonSerializable
     int columns;
+
     /** The number of rows of the level. */
     @NJsonSerializable
     int rows;
+
     /**
      * The background grid defining the borders of the board, it can have different values:
      * 0 - Border (which is comparable to an obstacle cell).
