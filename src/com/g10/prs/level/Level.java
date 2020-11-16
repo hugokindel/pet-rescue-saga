@@ -174,7 +174,7 @@ public class Level {
     }
 
     public void removeColumn(int c) {
-        for (int r = 0; r < columns; r++) {
+        for (int r = 0; r < rows; r++) {
             remove(c, r, true, false);
         }
 
