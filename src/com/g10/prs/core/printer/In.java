@@ -4,9 +4,17 @@ import com.g10.prs.core.PrsException;
 
 import java.util.Scanner;
 
+/** Contains every functions to get inputs from user. */
 public class In {
-    private static Scanner sc = new Scanner(System.in);
+    /** Scanner for system input. */
+    private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Gets a string from the user.
+     *
+     * @param message The message to show.
+     * @return the string.
+     */
     public static String nextString(String message) {
         String ret;
 
@@ -21,6 +29,12 @@ public class In {
         }
     }
 
+    /**
+     * Gets an integer from the user.
+     *
+     * @param message The message to show.
+     * @return the integer.
+     */
     public static int nextInt(String message) {
         int ret;
 
@@ -36,6 +50,14 @@ public class In {
         }
     }
 
+    /**
+     * Gets the next answer (to a menu's question) from the user.
+     *
+     * @param message The message to show.
+     * @param canGoBack Defines if he is in a sub-menu (from which he can go back).
+     * @param max The maximum value of the answer.
+     * @return the answer.
+     */
     public static int nextAnswer(String message, boolean canGoBack, int max) {
         int ret;
 
@@ -62,10 +84,16 @@ public class In {
         }
     }
 
-    private static String next(String description) {
+    /**
+     * Gets the next input from the user.
+     *
+     * @param message The message to show.
+     * @return the next input as a string.
+     */
+    private static String next(String message) {
         String ret;
-        Out.print(description);
-        ret = sc.nextLine().trim();
+        Out.print(message);
+        ret = scanner.nextLine().trim();
         Out.printToFile(ret.length() == 0 ? "<empty>" : ret);
         Out.simulateNewLine();
         return ret;

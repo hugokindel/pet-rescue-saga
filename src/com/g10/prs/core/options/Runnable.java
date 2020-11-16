@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This class defines a runnable command,
- * which means it can read arguments back from the CLI and set any @Option attributes. */
+ * This class defines a runnable command, which means it can read arguments back from the CLI and set any @Option
+ * attributes. */
 public abstract class Runnable {
     /** Option to show the help message. */
     @Option(names = {"-h", "--help"}, description = "Show this help message.")

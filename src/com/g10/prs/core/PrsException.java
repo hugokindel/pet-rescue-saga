@@ -11,6 +11,6 @@ public class PrsException extends Exception {
 
     @Override
     public String getMessage() {
-        return TextColor.Red + Out.prefix + Out.error + Color.ResetAll + " " + super.getMessage() + Color.ResetAll;
+        return TextColor.Red + Out.getPrefix() + Out.getErrorPrefix() + Color.ResetAll + " " + super.getMessage() + Color.ResetAll;
     }
 }
