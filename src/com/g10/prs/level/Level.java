@@ -37,21 +37,21 @@ public class Level {
 
     /**
      * The background grid defining the borders of the board, it can have different values:
-     * 0 - Border (which is comparable to an obstacle cell).
-     * 1 - Content (which is any type of cell, including an obstacle).
+     * 0: Border (which is comparable to an obstacle cell).
+     * 1: Content (which is any type of cell, including an obstacle).
      */
     @NJsonSerializable
     List<List<Integer>> backgroundGrid;
 
     /**
      * The initial blocks contained within the board, it can have different values:
-     * 0 - Empty cell (an empty space, which is not obstacle, which means it can be filled when cells are moving).
-     * 1 - Animal (it will randomly choose any animal).
-     * 2 - Specific color block. |
-     * 3 - Specific color block. |
-     * 4 - Specific color block. | => The game has 5 colors, every color will be choosen randomly on each game.
-     * 5 - Specific color block. |
-     * 6 - Specific color block. |
+     * 0: Empty cell (an empty space, which is not obstacle, which means it can be filled when cells are moving).
+     * 1: Animal (it will randomly choose any animal).
+     * 2: Specific color block. |
+     * 3: Specific color block. |
+     * 4: Specific color block. | => The game has 5 colors, every color will be choosen randomly on each game.
+     * 5: Specific color block. |
+     * 6: Specific color block. |
      * */
     @NJsonSerializable
     List<List<Integer>> initialBlocks;
@@ -59,18 +59,18 @@ public class Level {
     /**
      * The board is built with the backgroundGrid and the initialBlocks, it represents the current state of play:
      * Each cell represents the current start at position [row][column], it can have different types of cells:
-     * Cell - An empty space that can be filled.
-     * Block - Any color block, a movable and removable cell.
-     * Animal - Any animal, a movable and removable (but not by the user) cell.
-     * Obstacle - Any osbtacle, nor movable nor removable cell.
+     * Cell : An empty space that can be filled.
+     * Block : Any color block, a movable and removable cell.
+     * Animal : Any animal, a movable and removable (but not by the user) cell.
+     * Obstacle: Any osbtacle, nor movable nor removable cell.
      */
     Cell[][] board;
 
     /**
      * The background represents what we can see when showing the level,
      * it can have different values (same as backgroundGrid):
-     * 0 - Border (which is comparable to an obstacle cell).
-     * 1 - Content (which is any type of cell, including an obstacle).
+     * 0: Border (which is comparable to an obstacle cell).
+     * 1: Content (which is any type of cell, including an obstacle).
      */
     Visibility[][] background;
 
@@ -319,7 +319,7 @@ public class Level {
     }
 
     /**
-     * Apply gravity on the level.
+     * Applies gravity on the level.
      *
      * We go through each cells of the board, and look for two possibilities, if true, we apply gravity:
      * If the current cell has an empty space behind it, it falls:
@@ -371,7 +371,7 @@ public class Level {
     }
 
     /**
-     * Apply lefty shifting on the leveL;
+     * Applies lefty shifting on the leveL;
      *
      * We go through each cells of the board, and look for one possibility, if true we apply left shifting:
      * If the current cell is sitting on an unmovable cell (border or obstacle) and the column at its left is empty:

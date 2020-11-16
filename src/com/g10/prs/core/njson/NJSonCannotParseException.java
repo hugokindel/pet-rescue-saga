@@ -1,16 +1,15 @@
 package com.g10.prs.core.njson;
 
-import com.g10.prs.core.printer.Color;
-import com.g10.prs.core.printer.Out;
-import com.g10.prs.core.printer.TextColor;
+import com.g10.prs.core.PrsException;
 
-public class NJSonCannotParseException extends Exception {
+/** Exception for parsing related issues. */
+public class NJSonCannotParseException extends PrsException {
+    /**
+     * Class constructor.
+     *
+     * @param message The message to pass.
+     */
     public NJSonCannotParseException(String message){
         super(message);
-    }
-
-    @Override
-    public String getMessage() {
-        return TextColor.Red + Out.prefix + Out.error + Color.ResetAll + " " + super.getMessage() + Color.ResetAll;
     }
 }
