@@ -4,6 +4,7 @@ import com.g10.prs.core.printer.Out;
 
 /** This is main class of the cli program. */
 public class Program {
+    /** The instance of the game. */
     public static PetRescueSaga prs;
 
     /** Start of the program. */
