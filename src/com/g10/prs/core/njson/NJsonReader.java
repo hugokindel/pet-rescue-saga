@@ -12,7 +12,7 @@ import java.util.*;
  * it does not follow any JSON RFC and has a few particularities.
  * The parser uses a recursive descent parser algorithm.
  *
- * NJSon's basic data types are:
+ * NJson's basic data types are:
  * Integer: Can contain an unary minus and an integer number.
  * Double: Must contain a period, can contain an unary minus and a double number.
  * String: Can contain any string sequence between double quotes (with support for escape sequences).
