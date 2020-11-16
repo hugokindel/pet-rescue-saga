@@ -1,6 +1,7 @@
 package com.g10.prs;
 
 import com.g10.prs.core.Resources;
+import com.g10.prs.core.njson.NJson;
 import com.g10.prs.core.njson.NJsonReader;
 import com.g10.prs.core.njson.NJsonWriter;
 import com.g10.prs.core.options.Command;
@@ -59,6 +60,7 @@ public class PetRescueSaga extends Runnable {
             Map<String, Object> test = new NJsonReader(Resources.getCampaignLevelsDirectory() + "/level_01.njson").readMap();
             test.put("test",  new NJsonReader(Resources.getCampaignLevelsDirectory() + "/level_01.njson").readMap());
             NJsonWriter.write("test.njson", test);
+            NJson.serialize("test2.njson", level);
         } catch (Exception e) {
             e.printStackTrace();
         }

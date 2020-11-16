@@ -1,30 +1,26 @@
 package com.g10.prs.player;
 
-import com.g10.prs.core.printer.Out;
-
-import java.util.Scanner;
-
+/** Structure for a class. */
 public class Player {
+    /** The nme of the player */
     private String name;
 
-    public Player(){
+    /** Class constructor. */
+    public Player() {
         name = "Player";
     }
 
-    public String getName(){
+    /**
+     * Sets the name of the player.
+     *
+     * @param name The name to use.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /** @return the name of the player. */
+    public String getName() {
         return name;
     }
-
-    public void setName(String s){
-        name = s;
-    }
-
-    public char choice(Scanner sc){
-        if(sc.hasNext()) {
-            char result = sc.next().charAt(0);
-            return result;
-        }
-        return 'e';
-    }
-
 }
