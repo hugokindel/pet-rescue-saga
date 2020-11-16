@@ -1,7 +1,7 @@
 package com.g10.prs;
 
-import com.g10.prs.core.options.annotation.Command;
-import com.g10.prs.core.options.type.Runnable;
+import com.g10.prs.core.options.Command;
+import com.g10.prs.core.options.Runnable;
 import com.g10.prs.ui.*;
 import com.g10.prs.view.ViewType;
 import com.g10.prs.player.Player;

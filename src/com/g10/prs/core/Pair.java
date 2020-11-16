@@ -1,4 +1,4 @@
-package com.g10.prs.core.type;
+package com.g10.prs.core;
 
 public class Pair<T, U> {
     private final T object1;

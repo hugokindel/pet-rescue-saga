@@ -1,8 +1,4 @@
-package com.g10.prs.core.options.type;
-
-import com.g10.prs.core.options.annotation.Command;
-import com.g10.prs.core.options.annotation.Option;
-import com.g10.prs.core.options.util.Parser;
+package com.g10.prs.core.options;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

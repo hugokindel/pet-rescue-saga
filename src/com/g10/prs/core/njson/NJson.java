@@ -1,7 +1,7 @@
-package com.g10.prs.core.resource.njson;
+package com.g10.prs.core.njson;
 
-import com.g10.prs.core.options.type.Runnable;
-import com.g10.prs.core.type.PrsException;
+import com.g10.prs.core.options.Runnable;
+import com.g10.prs.core.PrsException;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

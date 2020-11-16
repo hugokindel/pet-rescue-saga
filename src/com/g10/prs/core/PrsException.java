@@ -1,4 +1,4 @@
-package com.g10.prs.core.type;
+package com.g10.prs.core;
 
 import com.g10.prs.core.printer.Color;
 import com.g10.prs.core.printer.Out;

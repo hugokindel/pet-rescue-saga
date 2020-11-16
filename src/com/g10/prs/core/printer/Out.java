@@ -1,12 +1,10 @@
 package com.g10.prs.core.printer;
 
-import com.g10.prs.core.resource.Resources;
+import com.g10.prs.core.Resources;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class Out {
     public static final String prefix = "[prs]";

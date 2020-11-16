@@ -1,5 +1,6 @@
 package com.g10.prs.level;
 
+/** Base class of every cell. */
 public class Cell {
     private CellType type;
 

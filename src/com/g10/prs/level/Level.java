@@ -2,11 +2,11 @@ package com.g10.prs.level;
 
 import com.g10.prs.core.printer.Out;
 import com.g10.prs.core.printer.TextColor;
-import com.g10.prs.core.resource.Resources;
-import com.g10.prs.core.resource.njson.NJSonCannotParseException;
-import com.g10.prs.core.resource.njson.NJson;
-import com.g10.prs.core.resource.njson.NJsonSerializable;
-import com.g10.prs.core.type.PrsException;
+import com.g10.prs.core.Resources;
+import com.g10.prs.core.njson.NJSonCannotParseException;
+import com.g10.prs.core.njson.NJson;
+import com.g10.prs.core.njson.NJsonSerializable;
+import com.g10.prs.core.PrsException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

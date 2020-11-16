@@ -1,7 +1,4 @@
-package com.g10.prs.core.resource;
-
-import com.g10.prs.level.Level;
-import com.g10.prs.core.type.PrsException;
+package com.g10.prs.core;
 
 import java.io.File;
 
