@@ -1,16 +1,11 @@
 package com.g10.prs.core.resource.njson;
 
-import com.g10.prs.core.cli.annotation.Option;
-import com.g10.prs.core.cli.type.Runnable;
-import com.g10.prs.core.cli.util.Parser;
+import com.g10.prs.core.options.type.Runnable;
 import com.g10.prs.core.type.PrsException;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.lang.Class;
 import java.util.ArrayList;
 import java.util.Arrays;

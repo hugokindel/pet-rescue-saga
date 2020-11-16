@@ -1,4 +1,4 @@
-package com.g10.prs.core.cli.annotation;
+package com.g10.prs.core.options.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

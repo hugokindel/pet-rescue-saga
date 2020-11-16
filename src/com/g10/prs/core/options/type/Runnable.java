@@ -1,13 +1,16 @@
-package com.g10.prs.core.cli.type;
+package com.g10.prs.core.options.type;
 
-import com.g10.prs.core.cli.annotation.Command;
-import com.g10.prs.core.cli.annotation.Option;
-import com.g10.prs.core.cli.util.Parser;
+import com.g10.prs.core.options.annotation.Command;
+import com.g10.prs.core.options.annotation.Option;
+import com.g10.prs.core.options.util.Parser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class defines a runnable command,
+ * which means it can read arguments back from the CLI and set any @Option attributes. */
 public abstract class Runnable {
     /** Option to show the help message. */
     @Option(names = {"-h", "--help"}, description = "Show this help message.")
