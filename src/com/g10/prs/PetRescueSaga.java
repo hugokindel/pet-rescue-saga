@@ -33,7 +33,7 @@ public class PetRescueSaga extends Runnable {
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);
-        /*Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         if (!showHelp && !showVersion) {
             while (true) {
@@ -46,26 +46,9 @@ public class PetRescueSaga extends Runnable {
                     currentMenu = menuBacklog.pop();
                 }
             }
+        }
 
-
-            /*try {
-                Level level = new Level("1.level");
-                Out.println("Level: " + level.getName());
-                level.print();
-                Out.println("Remove (0,4)");
-                level.remove(0, 4);
-                Out.println("Remove (0,5)");
-                level.remove(0, 5);
-                Out.println("Remove (1,4)");
-                level.remove(1, 4);
-                Out.println("Remove (3,5)");
-                level.remove(3,5);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
-
-        try {
+        /*try {
             Level level = Level.load("campaign/level_01.njson");
             level.print();
             level.removeGameMode(0, 3, true);
@@ -74,7 +57,7 @@ public class PetRescueSaga extends Runnable {
             level.print();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         return 0;
     }
