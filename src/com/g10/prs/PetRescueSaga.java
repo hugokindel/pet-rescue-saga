@@ -5,8 +5,11 @@ import com.g10.prs.core.njson.NJson;
 import com.g10.prs.core.njson.NJsonReader;
 import com.g10.prs.core.njson.NJsonWriter;
 import com.g10.prs.core.options.Command;
+import com.g10.prs.core.options.Option;
 import com.g10.prs.core.options.Runnable;
+import com.g10.prs.core.printer.Out;
 import com.g10.prs.level.Level;
+import com.g10.prs.view.graphic.SwingView;
 import com.g10.prs.view.ui.*;
 import com.g10.prs.view.View;
 import com.g10.prs.player.Player;
@@ -16,26 +19,30 @@ import java.util.*;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
+    @Option(names = {"--view"}, description = "Select which type of view to show", usage = "<gui> or <cli>")
+    protected String viewType;
+
     public static Player player = new Player();
-    public static View view = new CliView();
+
+    public static View view;
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);
 
-        view.run();
+        if (viewType != null && !viewType.equals("cli") && !viewType.equals("gui")) {
+            Out.println("Unknown view!");
+            return 1;
+        }
 
-        /*if (!showHelp && !showVersion) {
-            while (true) {
-                int result = showMenu(currentMenu);
-
-                if (result == -1) {
-                    sc.close();
-                    return 0;
-                } else if (result == 0) {
-                    currentMenu = menuBacklog.pop();
-                }
+        if (!showHelp && !showVersion) {
+            if (viewType == null || viewType.equals("cli")) {
+                view = new CliView();
+            } else {
+                view = new SwingView();
             }
-        }*/
+
+            view.run();
+        }
 
         return 0;
     }
