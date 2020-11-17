@@ -1,5 +1,7 @@
 package com.g10.prs.core;
 
+import com.g10.prs.common.PrsException;
+
 import java.io.File;
 
 /** Contains various functions for files handling. */

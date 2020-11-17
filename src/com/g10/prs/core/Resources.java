@@ -1,5 +1,7 @@
 package com.g10.prs.core;
 
+import com.g10.prs.common.PrsException;
+
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {
     /**

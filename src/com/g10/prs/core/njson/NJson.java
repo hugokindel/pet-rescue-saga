@@ -1,7 +1,7 @@
 package com.g10.prs.core.njson;
 
 import com.g10.prs.core.options.Runnable;
-import com.g10.prs.core.PrsException;
+import com.g10.prs.common.PrsException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
