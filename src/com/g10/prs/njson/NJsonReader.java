@@ -1,4 +1,4 @@
-package com.g10.prs.core.njson;
+package com.g10.prs.njson;
 
 import com.g10.prs.common.Pair;
 

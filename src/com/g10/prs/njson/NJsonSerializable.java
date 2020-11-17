@@ -1,4 +1,4 @@
-package com.g10.prs.core.njson;
+package com.g10.prs.njson;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

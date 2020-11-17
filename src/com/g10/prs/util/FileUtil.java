@@ -1,4 +1,4 @@
-package com.g10.prs.core;
+package com.g10.prs.util;
 
 import com.g10.prs.common.PrsException;
 

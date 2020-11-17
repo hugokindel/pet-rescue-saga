@@ -1,8 +1,8 @@
 package com.g10.prs;
 
-import com.g10.prs.core.options.Command;
-import com.g10.prs.core.options.Option;
-import com.g10.prs.core.options.Runnable;
+import com.g10.prs.option.Command;
+import com.g10.prs.option.Option;
+import com.g10.prs.option.Runnable;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.view.graphic.SwingView;
 import com.g10.prs.view.View;
