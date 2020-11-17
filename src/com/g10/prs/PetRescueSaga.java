@@ -4,7 +4,7 @@ import com.g10.prs.option.Command;
 import com.g10.prs.option.Option;
 import com.g10.prs.option.Runnable;
 import com.g10.prs.common.print.Out;
-import com.g10.prs.view.graphic.SwingView;
+import com.g10.prs.view.gui.SwingView;
 import com.g10.prs.view.View;
 import com.g10.prs.player.Player;
 import com.g10.prs.view.cli.CliView;
@@ -19,21 +19,25 @@ public class PetRescueSaga extends Runnable {
     public static View view;
 
     public int run(String[] args) {
-        readArguments(args, PetRescueSaga.class);
+        try {
+            readArguments(args, PetRescueSaga.class);
 
-        if (viewType != null && !viewType.equals("cli") && !viewType.equals("gui")) {
-            Out.println("Unknown view!");
-            return 1;
-        }
-
-        if (!showHelp && !showVersion) {
-            if (viewType == null || viewType.equals("cli")) {
-                view = new CliView();
-            } else {
-                view = new SwingView();
+            if (viewType != null && !viewType.equals("cli") && !viewType.equals("gui")) {
+                Out.println("Unknown view!");
+                return 1;
             }
 
-            view.run();
+            if (!showHelp && !showVersion) {
+                if (viewType == null || viewType.equals("cli")) {
+                    view = new CliView();
+                } else {
+                    view = new SwingView();
+                }
+
+                view.run();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return 0;
