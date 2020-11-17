@@ -61,6 +61,7 @@ public class PetRescueSaga extends Runnable {
             test.put("test",  new NJsonReader(Resources.getCampaignLevelsDirectory() + "/level_01.njson").readMap());
             NJsonWriter.write("test.njson", test);
             NJson.serialize("test2.njson", level);
+            level.save("save.njson");
         } catch (Exception e) {
             e.printStackTrace();
         }

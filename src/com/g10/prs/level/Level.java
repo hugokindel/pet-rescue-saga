@@ -1,5 +1,6 @@
 package com.g10.prs.level;
 
+import com.g10.prs.core.printer.BackgroundColor;
 import com.g10.prs.core.printer.Out;
 import com.g10.prs.core.printer.TextColor;
 import com.g10.prs.core.Resources;
@@ -8,6 +9,7 @@ import com.g10.prs.core.njson.NJson;
 import com.g10.prs.core.njson.NJsonSerializable;
 import com.g10.prs.core.PrsException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -125,6 +127,35 @@ public class Level {
     }
 
     /**
+     * Saves the level to a NJson file.
+     *
+     * @param filepath The file path to use.
+     */
+    public void save(String filepath) throws IllegalAccessException, FileNotFoundException, PrsException {
+        List<List<Integer>> savedBoard = new ArrayList<List<Integer>>(initialBlocks);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                Cell cell = board[r][c];
+
+                if (cell instanceof Animal) {
+                    initialBlocks.get(r).set(c, 1);
+                } else if (cell instanceof Block) {
+                    initialBlocks.get(r).set(c, ((Block)cell).getBlockType().ordinal() + 2);
+                } else if (cell instanceof Obstacle) {
+                    initialBlocks.get(r).set(c, ((Obstacle)cell).getObstacleType().ordinal() +
+                            BlockType.values().length + 2);
+                } else {
+                    initialBlocks.get(r).set(c, 0);
+                }
+            }
+        }
+
+        NJson.serialize(filepath, this);
+        initialBlocks = savedBoard;
+    }
+
+    /**
      * Print the level.
      * TODO: Move to CLI view
      */
@@ -147,15 +178,15 @@ public class Level {
                 int bc = c - 1;
 
                 if (r == 0) {
-                    Out.print("*");
+                    Out.print(BackgroundColor.White + "▓");
                 } else if (r == rows + 1) {
-                    Out.print("*");
+                    Out.print(BackgroundColor.White + "▓");
                 } else if (c == 0) {
-                    Out.print("*");
+                    Out.print(BackgroundColor.White + "▓");
                 } else if (c == columns + 1) {
-                    Out.print("*");
+                    Out.print(BackgroundColor.White + "▓");
                 } else if (background[br][bc] == Visibility.Border) {
-                    Out.print("*");
+                    Out.print(BackgroundColor.White + "▓");
                 } else {
                     Cell cell = board[br][bc];
 
@@ -199,7 +230,7 @@ public class Level {
                                 break;
                         }
                     } else if (cell instanceof Obstacle) {
-                        Out.print("W");
+                        Out.print(BackgroundColor.White + "▓");
                     } else {
                         Out.print(" ");
                     }
