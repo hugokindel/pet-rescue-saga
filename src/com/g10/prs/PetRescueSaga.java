@@ -1,5 +1,6 @@
 package com.g10.prs;
 
+import com.g10.prs.level.Level;
 import com.g10.prs.option.Command;
 import com.g10.prs.option.Option;
 import com.g10.prs.option.Runnable;
@@ -17,6 +18,8 @@ public class PetRescueSaga extends Runnable {
     public static Player player = new Player();
 
     public static View view;
+
+    public static Level level;
 
     public int run(String[] args) {
         readArguments(args, PetRescueSaga.class);

@@ -87,7 +87,7 @@ public class Level {
      */
     public static Level load(String filePath) throws PrsException, IllegalAccessException, InstantiationException,
             NoSuchMethodException, NJSonCannotParseException, InvocationTargetException, IOException {
-        Level level = NJson.deserialize(Resources.getLevelsDirectory() + "/" + filePath, Level.class);
+        Level level = NJson.deserialize(filePath, Level.class);
 
         Random rand = new Random();
         List<Integer> colors = new ArrayList<>();

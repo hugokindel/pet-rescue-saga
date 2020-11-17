@@ -1,8 +1,10 @@
 package com.g10.prs.view.cli;
 
+import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.print.In;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
+import com.g10.prs.view.ui.LevelMenu;
 import com.g10.prs.view.ui.MainMenu;
 import com.g10.prs.view.ui.Menu;
 import com.g10.prs.view.ui.Popup;
@@ -10,13 +12,15 @@ import com.g10.prs.view.View;
 
 public class CliView extends View {
     @Override
-    public void showPopup(Popup popup) {
+    public void showPopup(Popup popup,boolean v) {
         Out.println("--------------------------------------------------------------------------------");
         Out.clear();
         Out.println(popup.getTitle().toUpperCase());
         Out.println();
+        Out.println(popup.getDescription());
+        Out.println();
 
-        popup.handleAnswer();
+        if (v) popup.handleAnswer();
     }
 
     @Override
@@ -49,6 +53,9 @@ public class CliView extends View {
             Out.println(TextColor.Red + "  |_|   \\___|\\__| |_|  \\_\\___||___/\\___|\\__,_|\\___| |_____/ \\__,_|\\__, |\\__,_|");
             Out.println(TextColor.Red + "                                                                   __/ |      ");
             Out.println(TextColor.Red + "                                                                  |___/       ");
+            Out.println();
+        } else if (menu instanceof LevelMenu) {
+            PetRescueSaga.level.print();
             Out.println();
         }
 
