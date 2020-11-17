@@ -1,4 +1,4 @@
-package com.g10.prs.view.graphic;
+package com.g10.prs.view.gui;
 
 import javax.swing.*;
 

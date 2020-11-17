@@ -1,4 +1,4 @@
-package com.g10.prs.view.graphic;
+package com.g10.prs.view.gui;
 
 import com.g10.prs.view.View;
 import com.g10.prs.view.ui.Menu;
