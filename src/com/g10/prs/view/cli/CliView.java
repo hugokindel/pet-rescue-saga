@@ -12,15 +12,14 @@ import com.g10.prs.view.View;
 
 public class CliView extends View {
     @Override
-    public void showPopup(Popup popup,boolean v) {
+    public void showPopup(Popup popup) {
         Out.println("--------------------------------------------------------------------------------");
         Out.clear();
         Out.println(popup.getTitle().toUpperCase());
         Out.println();
-        Out.println(popup.getDescription());
-        Out.println();
+        Out.print(popup.getDescription());
 
-        if (v) popup.handleAnswer();
+        popup.handleAnswer();
     }
 
     @Override
@@ -31,12 +30,12 @@ public class CliView extends View {
 
     @Override
     public String nextString() {
-        return In.nextString("Veuillez entrer une chaîne de caractère: ");
+        return In.nextString(" (chaîne de caractère): ");
     }
 
     @Override
     public int nextInt() {
-        return In.nextInt("Veuillez entrer un nombre entier: ");
+        return In.nextInt(" (nombre entier): ");
     }
 
     @Override
@@ -54,13 +53,15 @@ public class CliView extends View {
             Out.println(TextColor.Red + "                                                                   __/ |      ");
             Out.println(TextColor.Red + "                                                                  |___/       ");
             Out.println();
-        } else if (menu instanceof LevelMenu) {
-            PetRescueSaga.level.print();
-            Out.println();
         }
 
         Out.println(menu.getTitle().toUpperCase());
         Out.println();
+
+        if (menu instanceof LevelMenu) {
+            PetRescueSaga.level.print();
+            Out.println();
+        }
 
         for (int i = 0; i < menu.getCategories().length; i++) {
             Out.println(i + 1 + ". " + menu.getCategories()[i]);

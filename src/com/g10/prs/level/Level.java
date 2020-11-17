@@ -155,14 +155,11 @@ public class Level {
         initialBlocks = savedBoard;
     }
 
-    /**
-     * Print the level.
-     * TODO: Move to CLI view
-     */
+    /** Print the level. */
     public void print() {
         Out.print("   ");
         for (int c = 0; c < columns; c++) {
-            Out.print((char)(65 + c));
+            Out.print(c);
         }
         Out.println();
 

@@ -25,11 +25,7 @@ public abstract class View {
         currentMenu = menu;
     }
 
-    public void showPopup(Popup popup){
-        showPopup(popup,true);
-    }
-
-    public abstract void showPopup(Popup popup,boolean v);
+    public abstract void showPopup(Popup popup);
 
     public abstract int nextAnswer();
 

@@ -7,7 +7,7 @@ public class LevelMenu extends Menu {
 
 
     public LevelMenu() {
-        super("Level", new String[] {"Detruire un bloc", "Utiliser la fusee","Utiliser le sabre"});
+        super("Niveau", new String[] {"Détruire un bloc", "Utiliser la fusée","Utiliser le sabre"});
     }
 
     @Override
@@ -16,10 +16,10 @@ public class LevelMenu extends Menu {
 
         if ( answer == 1) {
             Popup x = new LevelPopup('x');
-            PetRescueSaga.view.showPopup(x,false);
-            int resultX = PetRescueSaga.view.nextInt();
+            PetRescueSaga.view.showPopup(x);
+            int resultX = Integer.parseInt(x.getAnswer());
             Popup y = new LevelPopup('y');
-            PetRescueSaga.view.showPopup(y,false);
+            PetRescueSaga.view.showPopup(y);
             int resultY = PetRescueSaga.view.nextInt();
             PetRescueSaga.level.removeGameMode(resultX,resultY,true);
             if (PetRescueSaga.level.hasWin() /** TODO : || PetRescueSaga.Level.hasLose() */) {

@@ -1,7 +1,5 @@
 package com.g10.prs.view.ui;
 
-import com.g10.prs.PetRescueSaga;
-
 public abstract class Menu extends Element {
     private final String title;
     private final String[] categories;
@@ -20,7 +18,9 @@ public abstract class Menu extends Element {
         this.answered = false;
     }
 
-    public abstract void handleAnswer();
+    public void handleAnswer() {
+
+    }
 
     public String getTitle() {
         return title;

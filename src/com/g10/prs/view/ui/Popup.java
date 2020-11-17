@@ -11,7 +11,9 @@ public abstract class Popup extends Element {
         this.description = description;
     }
 
-    public abstract void handleAnswer();
+    public void handleAnswer() {
+
+    }
 
     public String getTitle() {
         return title;

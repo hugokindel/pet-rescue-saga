@@ -6,7 +6,7 @@ import com.g10.prs.view.ui.Popup;
 
 public class SwingView extends View {
     @Override
-    public void showPopup(Popup popup,boolean v) {
+    public void showPopup(Popup popup) {
 
     }
 
