@@ -1,6 +1,6 @@
-package com.g10.prs.core.printer;
+package com.g10.prs.common.print;
 
-import com.g10.prs.core.PrsException;
+import com.g10.prs.common.PrsException;
 
 import java.util.Scanner;
 

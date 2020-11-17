@@ -1,4 +1,4 @@
-package com.g10.prs.core;
+package com.g10.prs.common;
 
 /** A container for a pair of objects. */
 public class Pair<T, U> {

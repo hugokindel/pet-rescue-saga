@@ -1,8 +1,8 @@
 package com.g10.prs.view.cli;
 
-import com.g10.prs.core.printer.In;
-import com.g10.prs.core.printer.Out;
-import com.g10.prs.core.printer.TextColor;
+import com.g10.prs.common.print.In;
+import com.g10.prs.common.print.Out;
+import com.g10.prs.common.print.TextColor;
 import com.g10.prs.view.ui.MainMenu;
 import com.g10.prs.view.ui.Menu;
 import com.g10.prs.view.ui.Popup;

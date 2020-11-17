@@ -1,4 +1,7 @@
-package com.g10.prs.core;
+package com.g10.prs.common;
+
+import com.g10.prs.common.PrsException;
+import com.g10.prs.util.FileUtil;
 
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {

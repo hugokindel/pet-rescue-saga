@@ -1,7 +1,7 @@
-package com.g10.prs.core.printer;
+package com.g10.prs.common.print;
 
-import com.g10.prs.core.PrsException;
-import com.g10.prs.core.Resources;
+import com.g10.prs.common.PrsException;
+import com.g10.prs.common.Resources;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;

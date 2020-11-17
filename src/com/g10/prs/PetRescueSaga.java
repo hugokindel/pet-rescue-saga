@@ -1,21 +1,13 @@
 package com.g10.prs;
 
-import com.g10.prs.core.Resources;
-import com.g10.prs.core.njson.NJson;
-import com.g10.prs.core.njson.NJsonReader;
-import com.g10.prs.core.njson.NJsonWriter;
-import com.g10.prs.core.options.Command;
-import com.g10.prs.core.options.Option;
-import com.g10.prs.core.options.Runnable;
-import com.g10.prs.core.printer.Out;
-import com.g10.prs.level.Level;
+import com.g10.prs.option.Command;
+import com.g10.prs.option.Option;
+import com.g10.prs.option.Runnable;
+import com.g10.prs.common.print.Out;
 import com.g10.prs.view.graphic.SwingView;
-import com.g10.prs.view.ui.*;
 import com.g10.prs.view.View;
 import com.g10.prs.player.Player;
 import com.g10.prs.view.cli.CliView;
-
-import java.util.*;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {

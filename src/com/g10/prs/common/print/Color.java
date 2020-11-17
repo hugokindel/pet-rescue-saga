@@ -1,4 +1,4 @@
-package com.g10.prs.core.printer;
+package com.g10.prs.common.print;
 
 /** Colors as ANSI escape sequences to use in output. */
 public class Color {

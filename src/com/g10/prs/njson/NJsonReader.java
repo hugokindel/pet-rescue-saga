@@ -1,6 +1,6 @@
-package com.g10.prs.core.njson;
+package com.g10.prs.njson;
 
-import com.g10.prs.core.Pair;
+import com.g10.prs.common.Pair;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
