@@ -2,7 +2,7 @@ package com.g10.prs.view.ui;
 
 import com.g10.prs.PetRescueSaga;
 
-public class Element {
+public abstract class Element {
     protected boolean answered;
     protected String answer;
     protected ReturnType type;

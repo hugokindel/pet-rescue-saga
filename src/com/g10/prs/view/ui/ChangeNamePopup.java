@@ -4,7 +4,7 @@ import com.g10.prs.PetRescueSaga;
 
 public class ChangeNamePopup extends Popup {
     public ChangeNamePopup() {
-        super("Changer mon nom", "Veuillez indiquez votre nouveau nom:", ReturnType.String);
+        super("Changer mon nom", "Veuillez indiquez votre nouveau nom", ReturnType.String);
     }
 
     @Override
