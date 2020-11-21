@@ -1,6 +1,7 @@
 package com.g10.prs.view.ui;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.print.In;
 
 public class LevelMenu extends Menu {
     public LevelMenu() {
@@ -8,7 +9,7 @@ public class LevelMenu extends Menu {
     }
 
     @Override
-    public void handleAnswer() {
+    public void handleAnswer(){
         int answer = getAnswer();
 
         if ( answer == 1) {

@@ -44,14 +44,14 @@ public class CliView extends View {
         Out.clear();
 
         if (menu instanceof MainMenu) {
-            Out.println(TextColor.Red + "   _____     _     _____                              _____                   ");
-            Out.println(TextColor.Red + "  |  __ \\   | |   |  __ \\                            / ____|                  ");
-            Out.println(TextColor.Red + "  | |__) |__| |_  | |__) |___  ___  ___ _   _  ___  | (___   __ _  __ _  __ _ ");
-            Out.println(TextColor.Red + "  |  ___/ _ \\ __| |  _  // _ \\/ __|/ __| | | |/ _ \\  \\___ \\ / _` |/ _` |/ _` |");
-            Out.println(TextColor.Red + "  | |  |  __/ |_  | | \\ \\  __/\\__ \\ (__| |_| |  __/  ____) | (_| | (_| | (_| |");
-            Out.println(TextColor.Red + "  |_|   \\___|\\__| |_|  \\_\\___||___/\\___|\\__,_|\\___| |_____/ \\__,_|\\__, |\\__,_|");
-            Out.println(TextColor.Red + "                                                                   __/ |      ");
-            Out.println(TextColor.Red + "                                                                  |___/       ");
+            Out.println(TextColor.Red + " _____     _     _____                              _____                   ");
+            Out.println(TextColor.Red + "|  __ \\   | |   |  __ \\                            / ____|                  ");
+            Out.println(TextColor.Red + "| |__) |__| |_  | |__) |___  ___  ___ _   _  ___  | (___   __ _  __ _  __ _ ");
+            Out.println(TextColor.Red + "|  ___/ _ \\ __| |  _  // _ \\/ __|/ __| | | |/ _ \\  \\___ \\ / _` |/ _` |/ _` |");
+            Out.println(TextColor.Red + "| |  |  __/ |_  | | \\ \\  __/\\__ \\ (__| |_| |  __/  ____) | (_| | (_| | (_| |");
+            Out.println(TextColor.Red + "|_|   \\___|\\__| |_|  \\_\\___||___/\\___|\\__,_|\\___| |_____/ \\__,_|\\__, |\\__,_|");
+            Out.println(TextColor.Red + "                                                                 __/ |      ");
+            Out.println(TextColor.Red + "                                                                |___/       ");
             Out.println();
         }
 

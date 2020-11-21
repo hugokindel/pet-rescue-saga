@@ -10,6 +10,8 @@ import com.g10.prs.view.View;
 import com.g10.prs.player.Player;
 import com.g10.prs.view.cli.CliView;
 
+import java.util.Random;
+
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
     @Option(names = {"--view"}, description = "Select which type of view to show", usage = "<gui> or <cli>")
@@ -20,6 +22,8 @@ public class PetRescueSaga extends Runnable {
     public static View view;
 
     public static Level level;
+
+    public static Random randomizer = new Random();
 
     public int run(String[] args) {
         try {

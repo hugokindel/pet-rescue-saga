@@ -2,16 +2,16 @@ package com.g10.prs.njson;
 
 import com.g10.prs.option.Runnable;
 import com.g10.prs.common.PrsException;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.Class;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.*;
 
 /** Contains utility functions to deserialize and serialize NJson data format files. */
 public class NJson {
@@ -24,10 +24,15 @@ public class NJson {
      *
      * @return the class created of type T.
      */
-    public static <T> T deserialize(String filePath, Class<T> classType) throws PrsException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, IOException, NJSonCannotParseException {
+    public static <T> T deserialize(String filePath, Class<T> classType) throws PrsException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, IOException, NJSonCannotParseException, ClassNotFoundException {
         checkSerializable(classType);
 
-        Map<String, Object> njson = new NJsonReader(filePath).readMap();
+        return deserialize(new NJsonReader(filePath).readMap(), classType);
+    }
+
+    public static <T> T deserialize(Map<String, Object> njson, Class<T> classType) throws PrsException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException {
+        checkSerializable(classType);
+
         T object = classType.getConstructor().newInstance();
 
         ArrayList<Field> fields = new ArrayList<>(Arrays.asList(Runnable.class.getDeclaredFields()));
@@ -50,11 +55,41 @@ public class NJson {
                 }
             }
 
+            field.setAccessible(true);
+
             if (!mapToSearch.containsKey(path[path.length - 1])) {
-                throw new PrsException("Missing key!");
+                if (serializable.necessary()) {
+                    throw new PrsException("Missing key!");
+                } else {
+                    field.set(object, null);
+                }
             }
 
-            field.setAccessible(true);
+            Object value = mapToSearch.get(path[path.length - 1]);
+
+            if (field.getType().isAssignableFrom(Map.class)) {
+                if (field.getType().isAnnotationPresent(NJsonSerializable.class)) {
+                    field.set(object, deserialize((Map<String, Object>)value, field.getType()));
+
+                    continue;
+                }
+            } else if (field.getType().isAssignableFrom(List.class)) {
+                ParameterizedType parameterizedType = (ParameterizedType)field.getGenericType();
+                Type tType = parameterizedType.getActualTypeArguments()[0];
+
+                if (!tType.getTypeName().contains("<") && Class.forName(tType.getTypeName()).isAnnotationPresent(NJsonSerializable.class)) {
+                    List<Object> list = new ArrayList<>();
+
+                    for (Object element : (List<Object>)value) {
+                        list.add(deserialize((Map<String, Object>)element, Class.forName(tType.getTypeName())));
+                    }
+
+                    field.set(object, list);
+
+                    continue;
+                }
+            }
+
             field.set(object, mapToSearch.get(path[path.length - 1]));
         }
 

@@ -1,9 +1,9 @@
 package com.g10.prs.level;
 
+import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.print.BackgroundColor;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
-import com.g10.prs.common.Resources;
 import com.g10.prs.njson.NJSonCannotParseException;
 import com.g10.prs.njson.NJson;
 import com.g10.prs.njson.NJsonSerializable;
@@ -48,15 +48,20 @@ public class Level {
     /**
      * The initial blocks contained within the board, it can have different values:
      * 0: Empty cell (an empty space, which is not obstacle, which means it can be filled when cells are moving).
-     * 1: Animal (it will randomly choose any animal).
+     * 1: Animal (it will randomly choose any animal) cell.
      * 2: Specific color block. |
      * 3: Specific color block. |
      * 4: Specific color block. | => The game has 5 colors, every color will be choosen randomly on each game.
      * 5: Specific color block. |
      * 6: Specific color block. |
+     * 7: Obstacle cell.
+     * Other values: A group ID.
      * */
     @NJsonSerializable
     List<List<Integer>> initialBlocks;
+
+    @NJsonSerializable(necessary = false)
+    List<Group> groups;
 
     /**
      * The board is built with the backgroundGrid and the initialBlocks, it represents the current state of play:
@@ -86,14 +91,13 @@ public class Level {
      * @return the loaded level.
      */
     public static Level load(String filePath) throws PrsException, IllegalAccessException, InstantiationException,
-            NoSuchMethodException, NJSonCannotParseException, InvocationTargetException, IOException {
+            NoSuchMethodException, InvocationTargetException, IOException, ClassNotFoundException {
         Level level = NJson.deserialize(filePath, Level.class);
 
-        Random rand = new Random();
         List<Integer> colors = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             while (true) {
-                int color = rand.nextInt(5);
+                int color = PetRescueSaga.randomizer.nextInt(5);
                 if (!colors.contains(color)) {
                     colors.add(color);
                     break;
@@ -107,23 +111,44 @@ public class Level {
         for (int r = 0; r < level.rows; r++) {
             for (int c = 0; c < level.columns; c++) {
                 int block = level.initialBlocks.get(r).get(c);
-
-                if (block == 0) {
-                    level.board[r][c] = new Cell(CellType.Empty);
-                } else if (block == 1) {
-                    level.board[r][c] = new Animal(AnimalType.values()[rand.nextInt(6)]);
-                    level.animalsLeft++;
-                } else if (block <= 6) {
-                    level.board[r][c] = new Block(BlockType.values()[colors.get(block - 2)]);
-                } else {
-                    level.board[r][c] = new Obstacle(ObstacleType.Wood);
-                }
-
+                level.board[r][c] = createBlock(level, block, colors);
                 level.background[r][c] = Visibility.values()[level.backgroundGrid.get(r).get(c)];
             }
         }
 
         return level;
+    }
+
+    private static Cell createBlock(Level level, int block, List<Integer> colors) throws NJSonCannotParseException {
+        if (block == 0) {
+            return new Cell(CellType.Empty);
+        } else if (block == 1) {
+            Animal animal = new Animal(AnimalType.values()[PetRescueSaga.randomizer.nextInt(6)]);
+            level.animalsLeft++;
+            return animal;
+        } else if (block <= 6) {
+            return new Block(BlockType.values()[colors.get(block - 2)]);
+        } else if (block <= 7) {
+            return new Obstacle(ObstacleType.Wood);
+        } else {
+            boolean found = false;
+
+            int i = 0;
+            for (; i < level.groups.size(); i++) {
+                if (level.groups.get(i).getId() == block) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                List<Integer> blocks = level.groups.get(i).getBlocks();
+
+                return createBlock(level, blocks.get(PetRescueSaga.randomizer.nextInt(blocks.size())), colors);
+            }
+        }
+
+        throw new NJSonCannotParseException("Unknown block");
     }
 
     /**

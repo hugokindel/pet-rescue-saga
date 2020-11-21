@@ -11,4 +11,7 @@ import java.lang.annotation.Target;
 public @interface NJsonSerializable {
     /** The path to search for this element. */
     String path() default "";
+
+    /** Defines if this is a necessary field or not (if not, it can be deserialized as null if not found). */
+    boolean necessary() default true;
 }
