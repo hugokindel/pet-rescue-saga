@@ -1,11 +1,11 @@
 {
-	"name": "Unnamed rescue level",
-	"authors": [
-		"Hugo Kindel",
-		"Maxime Jauroyon"
-	],
-	"version": "1.0",
-	"columns": 9,
+    "name": "Unnamed rescue level",
+    "authors": [
+        "Hugo Kindel",
+        "Maxime Jauroyon"
+    ],
+    "version": "1.0",
+    "columns": 9,
     "rows": 9,
     "groups" : [
         {
@@ -14,7 +14,12 @@
         },
         {
             "id": 9,
-            "blocks": [4, 5]
+            "blocks": [4, 5],
+            "canRefill": true,
+            "refillCondition": {
+                "name": "amongColumns",
+                "values": ["8"]
+            }
         }
     ],
     "backgroundGrid": [

@@ -59,20 +59,29 @@ public class NJson {
 
             if (!mapToSearch.containsKey(path[path.length - 1])) {
                 if (serializable.necessary()) {
-                    throw new PrsException("Missing key!");
+                    throw new PrsException("Missing key '" + key + "'!");
                 } else {
-                    field.set(object, null);
+                    if (field.getType().equals(boolean.class)) {
+                        field.set(object, false);
+                    } else if (field.getType().equals(String.class)) {
+                        field.set(object, "");
+                    } else if (field.getType().equals(Integer.class)) {
+                        field.set(object, 0);
+                    } else if (field.getType().equals(Double.class)) {
+                        field.set(object, 0.0);
+                    } else {
+                        field.set(object, null);
+                    }
+                    continue;
                 }
             }
 
             Object value = mapToSearch.get(path[path.length - 1]);
 
-            if (field.getType().isAssignableFrom(Map.class)) {
-                if (field.getType().isAnnotationPresent(NJsonSerializable.class)) {
-                    field.set(object, deserialize((Map<String, Object>)value, field.getType()));
+            if (field.getType().isAnnotationPresent(NJsonSerializable.class)) {
+                field.set(object, deserialize((Map<String, Object>)value, field.getType()));
 
-                    continue;
-                }
+                continue;
             } else if (field.getType().isAssignableFrom(List.class)) {
                 ParameterizedType parameterizedType = (ParameterizedType)field.getGenericType();
                 Type tType = parameterizedType.getActualTypeArguments()[0];

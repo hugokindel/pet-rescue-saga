@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+// TODO: Weird shifting in real game when applying refill
+
 /** It represents the structure of a level (which is basically a board of cells to represents the state of the game). */
 @NJsonSerializable
 public class Level {
@@ -81,6 +83,8 @@ public class Level {
      */
     Visibility[][] background;
 
+    List<Integer> colors;
+
     /** The number of animals left before winning. */
     int animalsLeft;
 
@@ -94,12 +98,12 @@ public class Level {
             NoSuchMethodException, InvocationTargetException, IOException, ClassNotFoundException {
         Level level = NJson.deserialize(filePath, Level.class);
 
-        List<Integer> colors = new ArrayList<>();
+        level.colors = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             while (true) {
                 int color = PetRescueSaga.randomizer.nextInt(5);
-                if (!colors.contains(color)) {
-                    colors.add(color);
+                if (!level.colors.contains(color)) {
+                    level.colors.add(color);
                     break;
                 }
             }
@@ -111,7 +115,7 @@ public class Level {
         for (int r = 0; r < level.rows; r++) {
             for (int c = 0; c < level.columns; c++) {
                 int block = level.initialBlocks.get(r).get(c);
-                level.board[r][c] = createBlock(level, block, colors);
+                level.board[r][c] = createBlock(level, block, level.colors);
                 level.background[r][c] = Visibility.values()[level.backgroundGrid.get(r).get(c)];
             }
         }
@@ -119,7 +123,7 @@ public class Level {
         return level;
     }
 
-    private static Cell createBlock(Level level, int block, List<Integer> colors) throws NJSonCannotParseException {
+    private static Cell createBlock(Level level, int block, List<Integer> colors) {
         if (block == 0) {
             return new Cell(CellType.Empty);
         } else if (block == 1) {
@@ -148,7 +152,7 @@ public class Level {
             }
         }
 
-        throw new NJSonCannotParseException("Unknown block");
+        return null;
     }
 
     /**
@@ -363,9 +367,9 @@ public class Level {
             boolean gravityNeedsToBeApplied = true;
             while (gravityNeedsToBeApplied) {
                 gravityNeedsToBeApplied = applyGravity();
+                gravityNeedsToBeApplied = removeAnimalsAtBottom() || gravityNeedsToBeApplied;
+                applyRefill();
             }
-
-            removeAnimalsAtBottom();
 
             needsToCheck = applyShift();
         }
@@ -414,13 +418,18 @@ public class Level {
     }
 
     /** Removes any animal on the bottom of the board. */
-    private void removeAnimalsAtBottom() {
+    private boolean removeAnimalsAtBottom() {
+        boolean removed = false;
+
         for (int c = 0; c < columns; c++) {
             if (board[rows - 1][c] instanceof Animal) {
                 board[rows - 1][c] = null;
                 animalsLeft--;
+                removed = true;
             }
         }
+
+        return removed;
     }
 
     /**
@@ -474,6 +483,45 @@ public class Level {
         }
 
         return false;
+    }
+
+    private boolean applyRefill() {
+        boolean filled = false;
+
+        if (groups != null) {
+            for (int c = 0; c < columns; c++) {
+                if (!isMovable(0, c)) {
+                    break;
+                }
+
+                if (board[0][c] == null || board[0][c].getType() == CellType.Empty) {
+                    for (Group group : groups) {
+                        if (group.canRefill()) {
+                            boolean canRefill = false;
+
+                            if (group.getRefillCondition() == null || group.getRefillCondition().isTrue("amongColumns", String.valueOf(c))) {
+                                canRefill = true;
+                            }
+
+                            if (canRefill) {
+                                for (int r = 0; r < rows; r++) {
+                                    if ((!isMovable(r, c))) {
+                                        break;
+                                    }
+
+                                    board[r][c] = createBlock(this, group.getId(), colors);
+                                }
+                                filled = true;
+                            } else {
+                                Out.print("tset");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return filled;
     }
 
     /**

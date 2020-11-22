@@ -14,8 +14,14 @@ import java.util.Random;
 
 @Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
 public class PetRescueSaga extends Runnable {
+    @Option(names = {"-d", "--debug"}, description = "Enables debug mode.")
+    protected static boolean debug;
+
+    @Option(names = {"-s", "--seed"}, description = "Defines a seed for generating level blocks.", usage = "<long value>")
+    protected static long seed;
+
     @Option(names = {"--view"}, description = "Select which type of view to show", usage = "<gui> or <cli>")
-    protected String viewType;
+    protected static String viewType;
 
     public static Player player = new Player();
 
@@ -23,11 +29,17 @@ public class PetRescueSaga extends Runnable {
 
     public static Level level;
 
-    public static Random randomizer = new Random();
+    public static Random randomizer;
 
     public int run(String[] args) {
         try {
             readArguments(args, PetRescueSaga.class);
+
+            if (seed == 0) {
+                seed = System.currentTimeMillis();
+            }
+
+            randomizer = new Random(seed);
 
             if (viewType != null && !viewType.equals("cli") && !viewType.equals("gui")) {
                 Out.println("Unknown view!");
@@ -48,5 +60,13 @@ public class PetRescueSaga extends Runnable {
         }
 
         return 0;
+    }
+
+    public static boolean isDebug() {
+        return debug;
+    }
+
+    public static long getSeed() {
+        return seed;
     }
 }

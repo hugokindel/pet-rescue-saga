@@ -19,17 +19,17 @@ public class Parser {
         } else if (classType == boolean.class) {
             return !value.equals("0");
         } else if (classType == int.class) {
-            return Integer.valueOf(value);
+            return Integer.parseInt(value);
         } else if (classType == byte.class) {
-            return Byte.valueOf(value);
+            return Byte.parseByte(value);
         } else if (classType == short.class) {
-            return Short.valueOf(value);
-        } else if (classType == Long.class) {
-            return Long.valueOf(value);
+            return Short.parseShort(value);
+        } else if (classType == long.class) {
+            return Long.parseLong(value);
         } else if (classType == float.class) {
-            return Float.valueOf(value);
+            return Float.parseFloat(value);
         } else if (classType == double.class) {
-            return Double.valueOf(value);
+            return Double.parseDouble(value);
         }
 
         return null;

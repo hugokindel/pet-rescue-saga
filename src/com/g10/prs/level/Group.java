@@ -12,11 +12,25 @@ public class Group {
     @NJsonSerializable
     private List<Integer> blocks;
 
+    @NJsonSerializable(necessary = false)
+    private boolean canRefill;
+
+    @NJsonSerializable(necessary = false)
+    Condition refillCondition;
+
     public int getId() {
         return id;
     }
 
     public List<Integer> getBlocks() {
         return blocks;
+    }
+
+    public boolean canRefill() {
+        return canRefill;
+    }
+
+    public Condition getRefillCondition() {
+        return refillCondition;
     }
 }
