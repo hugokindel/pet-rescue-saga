@@ -1,5 +1,6 @@
 package com.g10.prs;
 
+import com.g10.prs.AI.AI;
 import com.g10.prs.level.Level;
 import com.g10.prs.option.Command;
 import com.g10.prs.option.Option;
@@ -24,6 +25,8 @@ public class PetRescueSaga extends Runnable {
     protected static String viewType;
 
     public static Player player = new Player();
+
+    public static AI bot = new AI();
 
     public static View view;
 

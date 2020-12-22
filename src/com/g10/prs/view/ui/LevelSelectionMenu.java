@@ -16,7 +16,7 @@ public class LevelSelectionMenu extends Menu {
         try {
             if (answer == 1) {
                 // TODO : prendre en compte la progression du joueur pour qu'il continue le niveau plus tard
-                PetRescueSaga.level = Level.load(Resources.getCampaignLevelsDirectory() + "/level_06.njson");
+                PetRescueSaga.level = Level.load(Resources.getCampaignLevelsDirectory() + "/level_01.njson");
                 PetRescueSaga.view.showMenu(new LevelMenu());
             }
         } catch (Exception e) {

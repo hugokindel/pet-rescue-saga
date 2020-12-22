@@ -89,6 +89,66 @@ public class Level {
     int animalsLeft;
 
     /**
+     * getter of board
+     *
+     * @return the board
+     */
+    public Cell[][] getBoard(){
+        return board;
+    }
+
+    /**
+     * getter of animalsLeft
+     *
+     * @return the number of animalsleft
+     */
+    public int getAnimalsLeft(){
+        return animalsLeft;
+    }
+
+    //fixme
+    /**
+    public Level copy(){
+        Level res = new Level();
+        res.board = copyDoubleTab(board);
+        res.rows = rows;
+        res.columns = columns;
+        res.initialBlocks = copyDoubleList(initialBlocks);
+        res.colors = copyList(colors);
+        res.groups = copyList(groups);
+        res.background = copyDoubleTab(background);
+        res.animalsLeft = animalsLeft;
+        res.backgroundGrid = copyDoubleList(backgroundGrid);
+        res.authors = authors;
+        res.name = name;
+        res.version = version;
+        return res;
+    }
+
+    public <T> T[][] copyDoubleTab(T[][] tab){
+        Object[][] res = new Object[tab.length][tab[0].length];
+        for (int i=0;i<tab.length;i++){
+            for (int v=0;v<tab[i].length;v++){
+                res[i][v] = tab[i][v];
+            }
+        }
+        return (T[][])res;
+    }
+
+    public <T> List<T> copyList(List<T> list){
+        return new LinkedList<>(list);
+    }
+
+    public <T> List<List<T>> copyDoubleList(List<List<T>> list){
+        List<List<T>> res = new LinkedList<>();
+        for (List<T> ts : list) {
+            res.add(copyList(ts));
+        }
+        return res;
+    }
+     */
+
+    /**
      * Loads the level at path (the path must be inside the levels folder in the game's data).
      *
      * @param filePath The path to use.
