@@ -85,6 +85,12 @@ public class Level {
 
     List<Integer> colors;
 
+    int numberOfPlay = 0;
+
+    int numberOfBlockRemoved = 0;
+
+    int score = 0;
+
     /** The number of animals left before winning. */
     int animalsLeft;
 
@@ -246,7 +252,7 @@ public class Level {
 
     /** Print the level. */
     public void print() {
-        Out.print("   ");
+        Out.print("  ");
         for (int c = 0; c < columns; c++) {
             Out.print(c);
         }
@@ -254,9 +260,9 @@ public class Level {
 
         for (int r = 0; r < rows + 2; r++) {
             if (r != 0 && r != rows + 1) {
-                Out.print(r - 1 + " ");
+                Out.print(r - 1);
             } else {
-                Out.print("  ");
+                Out.print(" ");
             }
 
             for (int c = 0; c < columns + 2; c++) {
@@ -338,6 +344,8 @@ public class Level {
     public void remove(int c, int r, boolean onlyBlocks, boolean recalculate) {
         if (!onlyBlocks || board[r][c] instanceof Block) {
             board[r][c] = null;
+            score += 100;
+            numberOfBlockRemoved++;
 
             if (recalculate) {
                 recalculate();
@@ -356,6 +364,7 @@ public class Level {
         }
 
         recalculate();
+        played();
     }
 
     /**
@@ -369,6 +378,7 @@ public class Level {
         }
 
         recalculate();
+        played();
     }
 
     /**
@@ -379,38 +389,50 @@ public class Level {
      * @param r The row.
      * @param recalculate Indicates if we need to recalculate (apply gravity, ...).
      */
-    public void removeGameMode(int c, int r, boolean recalculate) {
+    public void removeGameMode(int c, int r, boolean recalculate, boolean played) {
+        if (board[r][c] == null) {
+            return;
+        }
+
         Block block = (Block)board[r][c];
         remove(c, r, true, false);
 
         if (r - 1 >= 0 && board[r - 1][c] instanceof Block &&
                 ((Block)board[r - 1][c]).getBlockType() == block.getBlockType()) {
-            removeGameMode(c, r - 1, false);
+            removeGameMode(c, r - 1, false, false);
         }
 
         if (r + 1 < rows && board[r + 1][c] instanceof Block &&
                 ((Block)board[r + 1][c]).getBlockType() == block.getBlockType()) {
-            removeGameMode(c, r + 1, false);
+            removeGameMode(c, r + 1, false, false);
         }
 
         if (c - 1 >= 0 && board[r][c - 1] instanceof Block &&
                 ((Block)board[r][c - 1]).getBlockType() == block.getBlockType()) {
-            removeGameMode(c - 1, r, false);
+            removeGameMode(c - 1, r, false, false);
         }
 
         if (c + 1 < columns && board[r][c + 1] instanceof Block &&
                 ((Block)board[r][c + 1]).getBlockType() == block.getBlockType()) {
-            removeGameMode(c + 1, r, false);
+            removeGameMode(c + 1, r, false, false);
         }
 
         if (recalculate) {
             recalculate();
         }
+
+        if (played) {
+            played();
+        }
     }
 
     /** @return if the level is won. */
-    public boolean hasWin() {
+    public boolean hasWon() {
         return animalsLeft == 0;
+    }
+
+    public boolean hasLost() {
+        return false;
     }
 
     /**
@@ -484,7 +506,11 @@ public class Level {
         for (int c = 0; c < columns; c++) {
             if (board[rows - 1][c] instanceof Animal) {
                 board[rows - 1][c] = null;
+                score += 1000;
                 animalsLeft--;
+                if (animalsLeft == 0) {
+                    score += 5000;
+                }
                 removed = true;
             }
         }
@@ -591,7 +617,31 @@ public class Level {
      * @param r The row.
      * @return if the cell at position [row][column] is movable.
      */
-    private boolean isMovable(int c, int r) {
+    public boolean isMovable(int c, int r) {
         return !(background[r][c] == Visibility.Border || board[r][c] instanceof Obstacle);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void played() {
+        numberOfPlay++;
+    }
+
+    public int getNumberOfPlay() {
+        return numberOfPlay;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

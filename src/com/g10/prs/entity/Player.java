@@ -1,4 +1,4 @@
-package com.g10.prs.player;
+package com.g10.prs.entity;
 
 /** Structure for a class. */
 public class Player {

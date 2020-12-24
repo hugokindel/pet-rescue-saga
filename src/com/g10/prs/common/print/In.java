@@ -35,7 +35,7 @@ public class In {
      * @param message The message to show.
      * @return the integer.
      */
-    public static int nextInt(String message) {
+    public static int nextInt(String message, boolean hasMin, int min, boolean hasMax, int max) {
         int ret;
 
         while (true) {
@@ -43,7 +43,12 @@ public class In {
 
             try {
                 ret = Integer.parseInt(result);
-                return ret;
+
+                if ((!hasMin || ret >= min) && (!hasMax || ret <= max)) {
+                    return ret;
+                } else {
+                    Out.println("Cette valeur n'est pas valide !");
+                }
             } catch (Exception e) {
                 Out.println("Cette valeur n'est pas un nombre entier !");
             }

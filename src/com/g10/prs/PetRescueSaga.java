@@ -1,15 +1,14 @@
 package com.g10.prs;
 
-import com.g10.prs.AI.AI;
+import com.g10.prs.entity.AI;
 import com.g10.prs.level.Level;
 import com.g10.prs.option.Command;
 import com.g10.prs.option.Option;
 import com.g10.prs.option.Runnable;
 import com.g10.prs.common.print.Out;
-import com.g10.prs.view.gui.SwingView;
+import com.g10.prs.entity.Player;
 import com.g10.prs.view.View;
-import com.g10.prs.player.Player;
-import com.g10.prs.view.cli.CliView;
+import com.g10.prs.view.cli.MainMenu;
 
 import java.util.Random;
 
@@ -45,15 +44,15 @@ public class PetRescueSaga extends Runnable {
             randomizer = new Random(seed);
 
             if (viewType != null && !viewType.equals("cli") && !viewType.equals("gui")) {
-                Out.println("Unknown view!");
+                Out.println("Unknown view !");
                 return 1;
             }
 
             if (!showHelp && !showVersion) {
                 if (viewType == null || viewType.equals("cli")) {
-                    view = new CliView();
+                    view = new View(new MainMenu());
                 } else {
-                    view = new SwingView();
+                    //view = new SwingView();
                 }
 
                 view.run();

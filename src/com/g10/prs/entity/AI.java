@@ -1,13 +1,10 @@
-package com.g10.prs.AI;
+package com.g10.prs.entity;
 
-import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.Pair;
 import com.g10.prs.common.Triplet;
-import com.g10.prs.common.print.Out;
 import com.g10.prs.level.Block;
 import com.g10.prs.level.Cell;
 import com.g10.prs.level.CellType;
-import com.g10.prs.level.Level;
 
 import java.util.ArrayList;
 

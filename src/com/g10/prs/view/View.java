@@ -1,65 +1,50 @@
 package com.g10.prs.view;
 
-import com.g10.prs.view.ui.MainMenu;
-import com.g10.prs.view.ui.Menu;
-import com.g10.prs.view.ui.Popup;
-
 import java.util.Stack;
 
-public abstract class View {
-    public Menu currentMenu;
-    public Stack<Menu> menuBacklog;
-    private boolean quit;
+public class View {
+    protected Menu currentMenu;
+    protected Stack<Menu> menuBacklog;
+    protected boolean quit;
 
-    public View() {
-        currentMenu = new MainMenu();
-        menuBacklog = new Stack<Menu>();
+    public View(Menu defaultMenu) {
+        currentMenu = defaultMenu;
+        menuBacklog = new Stack<>();
         quit = false;
     }
 
-    public void showMenu(Menu menu) {
-        if (currentMenu != null) {
+    public void quit() {
+        quit = true;
+    }
+
+    public void goBack() {
+        currentMenu = menuBacklog.pop();
+    }
+
+    public void run() {
+        while (!quit) {
+            currentMenu.draw();
+            int choice = currentMenu.getChoice();
+
+            if (choice == -1) {
+                quit();
+            } else if (choice == 0) {
+                goBack();
+            } else {
+                currentMenu.handleChoice(choice);
+            }
+        }
+    }
+
+    public void changeMenu(Menu menu, boolean addCurrentToBacklog) {
+        if (addCurrentToBacklog) {
             menuBacklog.push(currentMenu);
         }
 
         currentMenu = menu;
     }
 
-    public abstract void showPopup(Popup popup);
-
-    public abstract int nextAnswer();
-
-    public abstract String nextString();
-
-    public abstract int nextInt();
-
-    public void run() {
-        start();
-
-        while (!quit) {
-            currentMenu.resetAnswer();
-            drawMenu(currentMenu);
-            int result = currentMenu.getAnswer();
-
-            if (result == -1) {
-                quit = true;
-            } else if (result == 0) {
-                currentMenu = menuBacklog.pop();
-            } else {
-                currentMenu.handleAnswer();
-            }
-        }
-
-        end();
+    public void changeMenu(Menu menu) {
+        changeMenu(menu, true);
     }
-
-    protected void start() {
-
-    }
-
-    protected void end() {
-
-    }
-
-    protected abstract void drawMenu(Menu menu);
 }
