@@ -6,7 +6,7 @@ import com.g10.prs.common.print.TextColor;
 
 public class MainMenu extends CliMenu {
     public MainMenu() {
-        super("Menu principal", new String[] {"Jouer", "Changer de nom", "Voir les règles du jeu", "Crédits"}, false);
+        super("Menu principal", new String[] {"Jouer", "Changer de nom", "Voir les règles du jeu", "Voir les crédits"}, false);
     }
 
     @Override
