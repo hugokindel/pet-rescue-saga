@@ -12,15 +12,15 @@ import com.g10.prs.view.cli.MainMenu;
 
 import java.util.Random;
 
-@Command(name = "prs", version = "1.0.0", description = "A game about rescuing animals.")
+@Command(name = "prs", version = "1.0.0", description = "Un jeu pour sauver des animaux.")
 public class PetRescueSaga extends Runnable {
-    @Option(names = {"-d", "--debug"}, description = "Enables debug mode.")
+    @Option(names = {"-d", "--debug"}, description = "Active le mode déboguage.")
     protected static boolean debug;
 
-    @Option(names = {"-s", "--seed"}, description = "Defines a seed for generating level blocks.", usage = "<long value>")
+    @Option(names = {"-s", "--seed"}, description = "Défini une graine pour la génération des niveaux.", usage = "<long value>")
     protected static long seed;
 
-    @Option(names = {"--view"}, description = "Select which type of view to show", usage = "<gui> or <cli>")
+    @Option(names = {"--view"}, description = "Défini quel vue utiliser.", usage = "<gui> ou <cli>")
     protected static String viewType;
 
     public static Player player = new Player();

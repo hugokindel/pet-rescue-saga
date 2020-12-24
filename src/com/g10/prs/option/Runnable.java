@@ -1,5 +1,7 @@
 package com.g10.prs.option;
 
+import com.g10.prs.common.print.Out;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +11,11 @@ import java.util.Arrays;
  * attributes. Some syntax is inspired from: https://picocli.info */
 public abstract class Runnable {
     /** Option to show the help message. */
-    @Option(names = {"-h", "--help"}, description = "Show this help message.")
+    @Option(names = {"-h", "--help"}, description = "Montre ce message d'erreur.")
     protected boolean showHelp;
 
     /** Option to show the version message. */
-    @Option(names = {"-v", "--version"}, description = "Show the current version of this software.")
+    @Option(names = {"-v", "--version"}, description = "Montre la version actuelle de Pet Rescue Saga.")
     protected boolean showVersion;
 
     /** Class constructor. */
@@ -110,10 +112,10 @@ public abstract class Runnable {
             }
         }
 
-        System.out.println("Unknown option '" + unknownOption + "'!");
+        Out.println("Option inconnue '" + unknownOption + "' !");
 
         if (!nearest.isEmpty()) {
-            System.out.println("Did you mean '" + nearest + "'?");
+            Out.println("Vouliez-vous dire '" + nearest + "' ?");
         }
     }
 
@@ -124,7 +126,7 @@ public abstract class Runnable {
      * @param <T> The type of the child's class.
      */
     private <T extends Runnable> void displayVersion(Class<T> classWithArgs) {
-        System.out.println("Version: " + classWithArgs.getAnnotation(Command.class).version());
+        Out.println("Version: " + classWithArgs.getAnnotation(Command.class).version());
     }
 
     /**
@@ -135,36 +137,36 @@ public abstract class Runnable {
      * @param <T> The type of the child's class.
      */
     private <T extends Runnable> void displayHelp(Class<T> classWithArgs, ArrayList<Field> fields) {
-        System.out.println("usage: " + classWithArgs.getAnnotation(Command.class).name() + " [options...]");
+        Out.println("usage: " + classWithArgs.getAnnotation(Command.class).name() + " [options...]");
 
-        System.out.println();
+        Out.println();
 
         for (String line : classWithArgs.getAnnotation(Command.class).description()) {
-            System.out.println(line);
+            Out.println(line);
         }
 
-        System.out.println();
+        Out.println();
 
-        System.out.println("Options:");
+        Out.println("Options:");
         for (Field field : fields) {
             Option option = field.getAnnotation(Option.class);
             int numberOfNames = option.names().length;
 
-            System.out.print(" \t");
+            Out.print(" \t");
 
             for (int i = 0; i < numberOfNames; i++) {
-                System.out.print(option.names()[i] + (i == numberOfNames - 1 ? "" : ", "));
+                Out.print(option.names()[i] + (i == numberOfNames - 1 ? "" : ", "));
             }
 
             if (!option.usage().isEmpty()) {
-                System.out.print("=" + option.usage());
+                Out.print("=" + option.usage());
             }
 
-            System.out.println();
+            Out.println();
 
             for (String line : option.description()) {
-                System.out.print(" \t\t");
-                System.out.println(line);
+                Out.print(" \t\t");
+                Out.println(line);
             }
         }
     }
