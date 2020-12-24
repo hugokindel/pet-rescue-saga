@@ -8,13 +8,13 @@ public class GuiView extends View {
 
     public GuiView() {
         super(new MainMenu());
-        window = new Window();
-        window.setVisible(true);
     }
 
     @Override
     public void run() {
-
+        window = new Window();
+        currentMenu.draw();
+        window.setVisible(true);
     }
 
     public Window getWindow() {
