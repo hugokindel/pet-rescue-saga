@@ -41,6 +41,7 @@ public class AI {
         ArrayList<Triplet<Integer, Integer, Double>> list = createList(level.getBoard());
         list = scoreAdj(copy(level.getBoard()), list);
         list = scoreAnimal(level.copy(), list);
+        list = scoreAlea(list);
         return bestChoice(list);
     }
 
@@ -128,8 +129,14 @@ public class AI {
         return res;
     }
 
-    //fixme
 
+    /**
+     * calculate the score of each block
+     *
+     * @param level The level
+     * @param list list of all the block
+     * @return a list of all the block with a new score
+     */
     public ArrayList<Triplet<Integer,Integer,Double>> scoreAnimal(Level level, ArrayList<Triplet<Integer,Integer,Double>> list){
         ArrayList<Triplet<Integer,Integer,Double>> l = new ArrayList<>();
 
@@ -146,6 +153,23 @@ public class AI {
             tmp.removeGameMode(c, r, true, false);
             int animalAfter = tmp.getAnimalsLeft();
             l.add(new Triplet<>(r, c, (element.getObject3() + (animalBefore - animalAfter))));
+        }
+
+        return l;
+    }
+
+    /**
+     * calculate the score of each block with random numbers
+     *
+     * @param list list of all the block
+     * @return a list of all the block with a new score
+     */
+    public ArrayList<Triplet<Integer,Integer,Double>> scoreAlea(ArrayList<Triplet<Integer,Integer,Double>> list){
+        ArrayList<Triplet<Integer,Integer,Double>> l = new ArrayList<>();
+
+        for (Triplet<Integer, Integer, Double> element : list) {
+            double tmp = Math.random()*0.5;
+            l.add(new Triplet<>(element.getObject1(), element.getObject2(), (element.getObject3()+tmp)));
         }
 
         return l;
