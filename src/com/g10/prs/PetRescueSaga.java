@@ -8,8 +8,11 @@ import com.g10.prs.option.Runnable;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.entity.Player;
 import com.g10.prs.view.View;
-import com.g10.prs.view.cli.MainMenu;
+import com.g10.prs.view.cli.CliView;
+import com.g10.prs.view.gui.GuiView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 @Command(name = "prs", version = "1.0.0", description = "Un jeu pour sauver des animaux.")
@@ -50,12 +53,14 @@ public class PetRescueSaga extends Runnable {
 
             if (!showHelp && !showVersion) {
                 if (viewType == null || viewType.equals("cli")) {
-                    view = new View(new MainMenu());
+                    view = new CliView();
+                    view.run();
                 } else {
-                    //view = new SwingView();
+                    javax.swing.SwingUtilities.invokeAndWait(() -> {
+                        view = new GuiView();
+                        view.run();
+                    });
                 }
-
-                view.run();
             }
         } catch (Exception e) {
             e.printStackTrace();

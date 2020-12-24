@@ -18,7 +18,9 @@ public class View {
     }
 
     public void goBack() {
-        currentMenu = menuBacklog.pop();
+        if (!menuBacklog.empty()) {
+            currentMenu = menuBacklog.pop();
+        }
     }
 
     public void run() {

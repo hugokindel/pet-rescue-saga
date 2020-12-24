@@ -10,9 +10,24 @@ public class Program {
     /** Start of the program. */
     public static void main(String[] args) {
         Out.start();
+
         prs = new PetRescueSaga();
         int errorCode = prs.run(args);
-        Out.end();
-        System.exit(errorCode);
+
+        if (!inGuiView(args)) {
+            Out.end();
+            System.exit(errorCode);
+        }
+    }
+
+    /** @return if we are in gui view or not. */
+    private static boolean inGuiView(String[] args) {
+        for (String arg : args) {
+            if (arg.contains("=gui")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

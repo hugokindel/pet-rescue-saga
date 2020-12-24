@@ -17,6 +17,7 @@ public class EndLevelMenu extends CliMenu {
 
         Out.println("Vous avez joué " + TextColor.Red + numberOfPlay + Color.ResetAll + " " + (numberOfPlay > 1 ? "coups" : "coup") +
                 " et votre score final est de " + TextColor.Red + PetRescueSaga.level.getScore() + Color.ResetAll + " !");
+        Out.println("Merci d'avoir joué, " + TextColor.Red + PetRescueSaga.player.getName() + Color.ResetAll + " !");
         Out.println();
         PetRescueSaga.level.print();
         Out.println();
