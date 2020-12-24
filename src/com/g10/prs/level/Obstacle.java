@@ -19,4 +19,8 @@ public class Obstacle extends Cell {
     public ObstacleType getObstacleType() {
         return obstacleType;
     }
+
+    public Obstacle copy(){
+        return new Obstacle(obstacleType);
+    }
 }

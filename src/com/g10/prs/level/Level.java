@@ -112,42 +112,58 @@ public class Level {
         return animalsLeft;
     }
 
-    //fixme
-
     public Level copy(){
-        Level res = new Level();
-        res.board = copyDoubleTab(board);
-        res.rows = rows;
-        res.columns = columns;
-        res.initialBlocks = copyDoubleList(initialBlocks);
-        res.colors = new ArrayList<>(colors);
-        if(groups != null) {
-            res.groups = new ArrayList<>();
-            for (Group i : groups) res.groups.add(i.copy());
+        Level level = new Level();
+
+        level.name =  name;
+        level.authors = new ArrayList<>(authors);
+        level.version = version;
+        level.columns = columns;
+        level.rows = rows;
+        level.backgroundGrid = new ArrayList<>();
+        for (List<Integer> value : backgroundGrid) {
+            level.backgroundGrid.add(new ArrayList<>(value));
         }
-        res.background = copyDoubleTab(background);
-        res.animalsLeft = animalsLeft;
-        res.backgroundGrid = copyDoubleList(backgroundGrid);
-        res.authors = authors;
-        res.name = name;
-        res.version = version;
-        return res;
-    }
-
-    public <T> T[][] copyDoubleTab(T[][] tab){
-        T[][] res = tab.clone();
-        for (int i=0;i<tab.length;i++){
-            System.arraycopy(tab[i], 0, res[i], 0, tab[i].length);
+        level.initialBlocks = new ArrayList<>();
+        for (List<Integer> value : initialBlocks) {
+            level.initialBlocks.add(new ArrayList<>(value));
         }
-        return res;
-    }
+        if (groups != null) {
+            level.groups = new ArrayList<>(groups);
+            for (Group value : groups) {
+                level.groups.add(value.copy());
+            }
+        } else {
+            level.groups = null;
+        }
+        level.board = new Cell[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] instanceof Animal) {
+                    level.board[i][j] = ((Animal)board[i][j]).copy();
+                } else if (board[i][j] instanceof Block) {
+                    level.board[i][j] = ((Block)board[i][j]).copy();
+                } else if (board[i][j] instanceof Obstacle) {
+                    level.board[i][j] = ((Obstacle)board[i][j]).copy();
+                } else if (board[i][j] != null) {
+                    level.board[i][j] = board[i][j].copy();
+                } else {
+                    level.board[i][j] = null;
+                }
+            }
+        }
+        level.background = new Visibility[background.length][background[0].length];
+        for (int i = 0; i < background.length; i++) {
+            System.arraycopy(background[i], 0, level.background[i], 0, background[i].length);
+        }
+        level.colors = new ArrayList<>(colors);
+        level.numberOfPlay = numberOfPlay;
+        level.numberOfBlockRemoved = numberOfBlockRemoved;
+        level.score = score;
+        level.animalsLeft = animalsLeft;
 
-    public <T> List<List<T>> copyDoubleList(List<List<T>> list){
-        List<List<T>> res = new ArrayList<>();
-        for (List<T> ts : list) res.add(new ArrayList<>(ts));
-        return res;
+        return level;
     }
-
 
     /**
      * Loads the level at path (the path must be inside the levels folder in the game's data).

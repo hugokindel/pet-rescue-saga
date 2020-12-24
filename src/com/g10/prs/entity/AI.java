@@ -3,10 +3,7 @@ package com.g10.prs.entity;
 import com.g10.prs.common.Pair;
 import com.g10.prs.common.Triplet;
 import com.g10.prs.common.print.Out;
-import com.g10.prs.level.Block;
-import com.g10.prs.level.Cell;
-import com.g10.prs.level.CellType;
-import com.g10.prs.level.Level;
+import com.g10.prs.level.*;
 
 import java.util.ArrayList;
 
@@ -41,9 +38,9 @@ public class AI {
      * @return a pair with the coordonne of the block to destroy
      */
     public Pair<Integer,Integer> play(Level level){
-        ArrayList<Triplet<Integer,Integer,Double>> list = createList(level.getBoard());
-        list = scoreAdj(copy(level.getBoard()),list);
-        list = scoreAnimal(level.copy(),list);
+        ArrayList<Triplet<Integer, Integer, Double>> list = createList(level.getBoard());
+        list = scoreAdj(copy(level.getBoard()), list);
+        list = scoreAnimal(level.copy(), list);
         return bestChoice(list);
     }
 
@@ -135,15 +132,22 @@ public class AI {
 
     public ArrayList<Triplet<Integer,Integer,Double>> scoreAnimal(Level level, ArrayList<Triplet<Integer,Integer,Double>> list){
         ArrayList<Triplet<Integer,Integer,Double>> l = new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+
+        for (Triplet<Integer, Integer, Double> element : list) {
             Level tmp = level.copy();
-            int r = list.get(i).getObject1();
-            int c = list.get(i).getObject2();
+            int r = element.getObject1();
+            int c = element.getObject2();
             int animalBefore = tmp.getAnimalsLeft();
-            tmp.removeGameMode(c,r,true,false);
+
+            if (level.getBoard()[r][c] instanceof Animal) {
+                continue;
+            }
+
+            tmp.removeGameMode(c, r, true, false);
             int animalAfter = tmp.getAnimalsLeft();
-            l.add(new Triplet<>(r,c,(list.get(i).getObject3()+(animalBefore-animalAfter))));
+            l.add(new Triplet<>(r, c, (element.getObject3() + (animalBefore - animalAfter))));
         }
+
         return l;
     }
 

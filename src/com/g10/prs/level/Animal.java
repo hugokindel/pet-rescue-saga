@@ -19,4 +19,8 @@ public class Animal extends Cell {
     public AnimalType getAnimalType() {
         return animalType;
     }
+
+    public Animal copy(){
+        return new Animal(animalType);
+    }
 }

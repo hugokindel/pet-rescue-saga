@@ -1,9 +1,11 @@
 package com.g10.prs.level;
 
+import java.util.ArrayList;
+
 /** Base class of every cell. */
 public class Cell {
     /** The type of the cell. */
-    private CellType type;
+    protected CellType type;
 
     /**
      * Class constructor.
@@ -17,5 +19,9 @@ public class Cell {
     /** @return the type of the cell. */
     public CellType getType() {
         return type;
+    }
+
+    public Cell copy(){
+        return new Cell(type);
     }
 }

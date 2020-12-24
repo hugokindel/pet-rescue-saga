@@ -19,4 +19,8 @@ public class Block extends Cell {
     public BlockType getBlockType() {
         return blockType;
     }
+
+    public Block copy(){
+        return new Block(blockType);
+    }
 }
