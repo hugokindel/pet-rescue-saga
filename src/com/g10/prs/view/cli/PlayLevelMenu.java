@@ -33,7 +33,7 @@ public class PlayLevelMenu extends CliMenu {
         } else if (choice == 3) {
             CliPopup.show(new UseSaberPopup());
         } else if (choice == 4) {
-            Pair<Integer,Integer> pair = PetRescueSaga.bot.play(PetRescueSaga.level.getBoard());
+            Pair<Integer,Integer> pair = PetRescueSaga.bot.play(PetRescueSaga.level);
             PetRescueSaga.level.removeGameMode(pair.getObject2(), pair.getObject1(), true, true); //use of Object2 because the first int is the column
         }
 

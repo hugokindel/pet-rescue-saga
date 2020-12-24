@@ -2,6 +2,7 @@ package com.g10.prs.level;
 
 import com.g10.prs.njson.NJsonSerializable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NJsonSerializable
@@ -32,5 +33,12 @@ public class Condition {
         }
 
         return false;
+    }
+
+    public Condition copy(){
+        Condition res = new Condition();
+        res.name = name;
+        res.values = new ArrayList<>(values);
+        return res;
     }
 }

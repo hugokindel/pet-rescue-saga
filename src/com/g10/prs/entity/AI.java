@@ -2,9 +2,11 @@ package com.g10.prs.entity;
 
 import com.g10.prs.common.Pair;
 import com.g10.prs.common.Triplet;
+import com.g10.prs.common.print.Out;
 import com.g10.prs.level.Block;
 import com.g10.prs.level.Cell;
 import com.g10.prs.level.CellType;
+import com.g10.prs.level.Level;
 
 import java.util.ArrayList;
 
@@ -35,13 +37,13 @@ public class AI {
     /**
      * calculate the best choice
      *
-     * @param board The actual board of the level
+     * @param level The level
      * @return a pair with the coordonne of the block to destroy
      */
-    public Pair<Integer,Integer> play(Cell[][] board){
-        ArrayList<Triplet<Integer,Integer,Double>> list = createList(board);
-        list = scoreAdj(board,list);
-        //list = scoreAnimal(PetRescueSaga.level,list); fixme
+    public Pair<Integer,Integer> play(Level level){
+        ArrayList<Triplet<Integer,Integer,Double>> list = createList(level.getBoard());
+        list = scoreAdj(copy(level.getBoard()),list);
+        list = scoreAnimal(level.copy(),list);
         return bestChoice(list);
     }
 
@@ -90,9 +92,7 @@ public class AI {
     public Cell[][] copy(Cell[][] board){
         Cell[][] res = new Cell[board.length][board[0].length];
         for(int i=0;i<board.length;i++){
-            for(int v=0;v<board[i].length;v++){
-                res[i][v] = board[i][v];
-            }
+            System.arraycopy(board[i], 0, res[i], 0, board[i].length);
         }
         return res;
     }
@@ -132,7 +132,7 @@ public class AI {
     }
 
     //fixme
-/**
+
     public ArrayList<Triplet<Integer,Integer,Double>> scoreAnimal(Level level, ArrayList<Triplet<Integer,Integer,Double>> list){
         ArrayList<Triplet<Integer,Integer,Double>> l = new ArrayList<>();
         for(int i=0;i<list.size();i++){
@@ -140,13 +140,13 @@ public class AI {
             int r = list.get(i).getObject1();
             int c = list.get(i).getObject2();
             int animalBefore = tmp.getAnimalsLeft();
-            tmp.removeGameMode(c,r,true);
+            tmp.removeGameMode(c,r,true,false);
             int animalAfter = tmp.getAnimalsLeft();
             l.add(new Triplet<>(r,c,(list.get(i).getObject3()+(animalBefore-animalAfter))));
         }
         return l;
     }
-*/
+
     /**
      * Choose the block with the highest score
      *

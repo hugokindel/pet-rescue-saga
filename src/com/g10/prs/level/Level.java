@@ -113,15 +113,18 @@ public class Level {
     }
 
     //fixme
-    /**
+
     public Level copy(){
         Level res = new Level();
         res.board = copyDoubleTab(board);
         res.rows = rows;
         res.columns = columns;
         res.initialBlocks = copyDoubleList(initialBlocks);
-        res.colors = copyList(colors);
-        res.groups = copyList(groups);
+        res.colors = new ArrayList<>(colors);
+        if(groups != null) {
+            res.groups = new ArrayList<>();
+            for (Group i : groups) res.groups.add(i.copy());
+        }
         res.background = copyDoubleTab(background);
         res.animalsLeft = animalsLeft;
         res.backgroundGrid = copyDoubleList(backgroundGrid);
@@ -132,27 +135,19 @@ public class Level {
     }
 
     public <T> T[][] copyDoubleTab(T[][] tab){
-        Object[][] res = new Object[tab.length][tab[0].length];
+        T[][] res = tab.clone();
         for (int i=0;i<tab.length;i++){
-            for (int v=0;v<tab[i].length;v++){
-                res[i][v] = tab[i][v];
-            }
-        }
-        return (T[][])res;
-    }
-
-    public <T> List<T> copyList(List<T> list){
-        return new LinkedList<>(list);
-    }
-
-    public <T> List<List<T>> copyDoubleList(List<List<T>> list){
-        List<List<T>> res = new LinkedList<>();
-        for (List<T> ts : list) {
-            res.add(copyList(ts));
+            System.arraycopy(tab[i], 0, res[i], 0, tab[i].length);
         }
         return res;
     }
-     */
+
+    public <T> List<List<T>> copyDoubleList(List<List<T>> list){
+        List<List<T>> res = new ArrayList<>();
+        for (List<T> ts : list) res.add(new ArrayList<>(ts));
+        return res;
+    }
+
 
     /**
      * Loads the level at path (the path must be inside the levels folder in the game's data).
