@@ -13,7 +13,10 @@ public class GuiView extends View {
     @Override
     public void run() {
         window = new Window();
+        
         currentMenu.draw();
+
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
 
