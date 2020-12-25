@@ -1,12 +1,10 @@
 package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
-import com.g10.prs.common.Pair;
 import com.g10.prs.common.Resources;
 import com.g10.prs.level.Level;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
