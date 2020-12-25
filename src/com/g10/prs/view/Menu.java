@@ -11,7 +11,11 @@ public abstract class Menu {
 
     public abstract void draw();
 
-    public abstract int getChoice();
+    public int getChoice() {
+        return 0;
+    }
 
-    public abstract void handleChoice(int choice);
+    public void handleChoice(int choice) {
+
+    }
 }

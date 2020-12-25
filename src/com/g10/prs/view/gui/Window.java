@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Window extends JFrame {
     public Window() {
         setTitle("Pet Rescue Saga");
-        setSize(600, 600);
+        setSize(960, 720);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -16,5 +16,10 @@ public class Window extends JFrame {
                 Out.end();
             }
         });
+    }
+
+    public void quit() {
+        setVisible(false);
+        dispose();
     }
 }

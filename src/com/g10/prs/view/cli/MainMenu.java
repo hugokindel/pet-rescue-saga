@@ -38,7 +38,7 @@ public class MainMenu extends CliMenu {
         } else if (choice == 3) {
             PetRescueSaga.view.changeMenu(new RulesMenu());
         } else if (choice == 4) {
-            PetRescueSaga.view.changeMenu(new CreditMenu());
+            PetRescueSaga.view.changeMenu(new CreditsMenu());
         }
     }
 }

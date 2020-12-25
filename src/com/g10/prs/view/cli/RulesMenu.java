@@ -14,9 +14,9 @@ public class RulesMenu extends CliMenu {
     protected void drawContent() {
         Out.println("Voici comment jouer à " + TextColor.Red + "Pet Rescue Saga" + Color.ResetAll + " :");
         Out.println();
-        Out.println("Votre but est de " + TextColor.Red + "sauver" + Color.ResetAll + " tous les animaux (indiqué par des lettres sur la carte du niveau).");
+        Out.println("Votre but est de " + TextColor.Red + "sauver" + Color.ResetAll + " tous les animaux (indiqués par des lettres sur la carte du niveau).");
         Out.println("Pour le faire, vous devez " + TextColor.Red + "enlever" + Color.ResetAll + " les blocs colorés, ce qui va aussi affecter votre score final.");
-        Out.println("N'oubliez pas de tenir compte de la gravité ! Les blocs tombent vers le bas, et se déplace vers la gauche lorsqu'ils sont sur un obstacle et que la voie est libre.");
+        Out.println("N'oubliez pas de tenir compte de la gravité ! Les blocs tombent vers le bas et se déplace vers la gauche lorsqu'ils sont sur un obstacle et que la voie est libre.");
         Out.println("Il est aussi possible d'utiliser la " + TextColor.Red + "fusée" + Color.ResetAll + " pour supprimer tous les blocs d'une colonne ou le " +
                 TextColor.Red + "sabre" + Color.ResetAll + " pour supprimer tous les blocs d'une ligne.");
         Out.println();
