@@ -3,7 +3,7 @@ package com.g10.prs.level;
 /** Cell that represents a blocK. */
 public class Block extends Cell {
     /** The type of block. */
-    private BlockType blockType;
+    private final BlockType blockType;
 
     /**
      * Class constructor.

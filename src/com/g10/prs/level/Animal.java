@@ -3,7 +3,7 @@ package com.g10.prs.level;
 /** Cell that represents an animal. */
 public class Animal extends Cell {
     /** The type of animal. */
-    private AnimalType animalType;
+    private final AnimalType animalType;
 
     /**
      * Class constructor.

@@ -23,7 +23,7 @@ public class NJson {
      *
      * @return the class created of type T.
      */
-    public static <T> T deserialize(String filePath, Class<T> classType) throws PrsException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, IOException, NJSonCannotParseException, ClassNotFoundException {
+    public static <T> T deserialize(String filePath, Class<T> classType) throws PrsException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, IOException, ClassNotFoundException {
         checkSerializable(classType);
 
         return deserialize(new NJsonReader(filePath).readMap(), classType);

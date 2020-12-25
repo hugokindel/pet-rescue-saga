@@ -3,7 +3,7 @@ package com.g10.prs.level;
 /** Cell that represents an obstacle. */
 public class Obstacle extends Cell {
     /** The type of obstacle. */
-    private ObstacleType obstacleType;
+    private final ObstacleType obstacleType;
 
     /**
      * Class constructor.
