@@ -22,6 +22,15 @@ public class PlayLevelMenu extends GuiMenu {
 
     @Override
     protected void drawContent() {
+        int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
+        int animalsLeft = PetRescueSaga.level.getAnimalsLeft();
+
+        JPanel topPanel = new JPanel();
+        topPanel.add(new Label("<html>Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
+                " et votre score est de " + PetRescueSaga.level.getScore() + ".<br> Il reste " +
+                animalsLeft + " " + (animalsLeft > 1 ? "animaux" : "animal") + " à sauver...").asJLabel());
+        panel.add(topPanel);
+
         Level level = PetRescueSaga.level;
         JButton[][] buttons = new JButton[level.getRows()][level.getColumns()];
 

@@ -445,9 +445,9 @@ public class Level {
     /**
      * Recalculate the states of each cell:
      *
-     * First, we apply apply gravity, each time gravity is applied on a block, it must be reapplied.
+     * First, we try to apply gravity and each time gravity is applied on a block, it must be reapplied.
      * Then, we check for animals on the bottom and removes them if found.
-     * Finally, we apply the left shift mechanics if possible, if we did, we need to start everything over again.
+     * Finally, we apply the left shift mechanism if possible, if we did, we need to start everything over again.
      */
     private void recalculate() {
         boolean needsToCheck = true;
