@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class MainMenu extends GuiMenu {
     public MainMenu() {
         super("Menu principal", new Pair[] {
-                new Pair<String, ActionListener>("Jouer", null),
+                new Pair<String, ActionListener>("Jouer", e -> PetRescueSaga.view.changeMenu(new ChooseLevelMenu())),
                 new Pair<String, ActionListener>("Changer de nom", e -> GuiPopup.show(new ChangeNamePopup())),
                 new Pair<String, ActionListener>("Voir les règles", e -> PetRescueSaga.view.changeMenu(new RulesMenu())),
                 new Pair<String, ActionListener>("Voir les crédits", e -> PetRescueSaga.view.changeMenu(new CreditsMenu()))
