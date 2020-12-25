@@ -442,10 +442,6 @@ public class Level {
         return animalsLeft == 0;
     }
 
-    public boolean hasLost() {
-        return false;
-    }
-
     /**
      * Recalculate the states of each cell:
      *
@@ -456,7 +452,11 @@ public class Level {
     private void recalculate() {
         boolean needsToCheck = true;
 
+        int i = 0;
+
         while (needsToCheck) {
+            i++;
+
             boolean gravityNeedsToBeApplied = true;
             while (gravityNeedsToBeApplied) {
                 gravityNeedsToBeApplied = applyGravity();
@@ -465,6 +465,12 @@ public class Level {
             }
 
             needsToCheck = applyShift();
+
+            if (i >= 500) {
+                Out.printlnError("Infinite loop !");
+                print();
+                return;
+            }
         }
     }
 
@@ -559,7 +565,7 @@ public class Level {
                     int nextObstacleRow = 0;
 
                     for (int r2 = r; r2 >= 0; r2--) {
-                        if (board[r2][c] == null || !isMovable(r2, c)) {
+                        if (board[r2][c] == null || !isMovable(c, r2)) {
                             nextObstacleRow = r2 + 1;
                             break;
                         }
@@ -587,7 +593,7 @@ public class Level {
 
         if (groups != null) {
             for (int c = 0; c < columns; c++) {
-                if (!isMovable(0, c)) {
+                if (!isMovable(c, 0)) {
                     break;
                 }
 
@@ -602,15 +608,13 @@ public class Level {
 
                             if (canRefill) {
                                 for (int r = 0; r < rows; r++) {
-                                    if ((!isMovable(r, c))) {
+                                    if ((!isMovable(c, r))) {
                                         break;
                                     }
 
                                     board[r][c] = createBlock(this, group.getId(), colors);
                                 }
                                 filled = true;
-                            } else {
-                                Out.print("tset");
                             }
                         }
                     }

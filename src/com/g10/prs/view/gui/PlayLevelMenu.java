@@ -1,7 +1,6 @@
 package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
-import com.g10.prs.common.print.Out;
 import com.g10.prs.level.*;
 
 import javax.swing.*;
@@ -80,14 +79,14 @@ public class PlayLevelMenu extends GuiMenu {
                                 getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
                             } else if (usingRocket) {
                                 for (int i = 0; i < level.getRows(); i++) {
-                                    if (!(level.getBoard()[i][finalJ] instanceof Obstacle)) {
+                                    if (level.getBoard()[i][finalJ] instanceof Block) {
                                         buttons[i][finalJ].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
                                     }
                                 }
                                 getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
                             } else if (usingSaber) {
                                 for (int i = 0; i < level.getColumns(); i++) {
-                                    if (!(level.getBoard()[finalI][i] instanceof Obstacle)) {
+                                    if (level.getBoard()[finalI][i] instanceof Block) {
                                         buttons[finalI][i].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
                                     }
                                 }
