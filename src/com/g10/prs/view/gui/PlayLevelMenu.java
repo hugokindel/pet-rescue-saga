@@ -1,6 +1,7 @@
 package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.print.Out;
 import com.g10.prs.level.*;
 
 import javax.swing.*;
@@ -8,8 +9,14 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PlayLevelMenu extends GuiMenu {
+    boolean destroyingBlock = false;
+    boolean usingRocket = false;
+    boolean usingSaber = false;
+
     public PlayLevelMenu() {
         super(PetRescueSaga.level.getName());
     }
@@ -17,6 +24,7 @@ public class PlayLevelMenu extends GuiMenu {
     @Override
     protected void drawContent() {
         Level level = PetRescueSaga.level;
+        JButton[][] buttons = new JButton[level.getRows()][level.getColumns()];
 
         for (int i = 0; i < level.getRows(); i++) {
             JPanel levelPanel = new JPanel();
@@ -41,6 +49,71 @@ public class PlayLevelMenu extends GuiMenu {
                     } else if (type == BlockType.Yellow) {
                         button.setBackground(Color.YELLOW);
                     }
+
+                    Border border = button.getBorder();
+                    Cursor cursor = getWindow().getCursor();
+
+                    int finalI = i;
+                    int finalJ = j;
+                    button.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            if (destroyingBlock) {
+                                PetRescueSaga.level.removeGameMode(finalJ, finalI, true, true);
+                                getWindow().setCursor(cursor);
+                                checkWin();
+                            } else if (usingRocket) {
+                                PetRescueSaga.level.removeColumn(finalJ);
+                                getWindow().setCursor(cursor);
+                                checkWin();
+                            } else if (usingSaber) {
+                                PetRescueSaga.level.removeRow(finalI);
+                                getWindow().setCursor(cursor);
+                                checkWin();
+                            }
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            if (destroyingBlock) {
+                                button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
+                                getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
+                            } else if (usingRocket) {
+                                for (int i = 0; i < level.getRows(); i++) {
+                                    if (!(level.getBoard()[i][finalJ] instanceof Obstacle)) {
+                                        buttons[i][finalJ].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
+                                    }
+                                }
+                                getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
+                            } else if (usingSaber) {
+                                for (int i = 0; i < level.getColumns(); i++) {
+                                    if (!(level.getBoard()[finalI][i] instanceof Obstacle)) {
+                                        buttons[finalI][i].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
+                                    }
+                                }
+                                getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
+                            }
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            button.setBorder(border);
+                            if (usingRocket) {
+                                for (int i = 0; i < level.getRows(); i++) {
+                                    if (!(level.getBoard()[i][finalJ] instanceof Obstacle)) {
+                                        buttons[i][finalJ].setBorder(border);
+                                    }
+                                }
+                            } else if (usingSaber) {
+                                for (int i = 0; i < level.getColumns(); i++) {
+                                    if (!(level.getBoard()[finalI][i] instanceof Obstacle)) {
+                                        buttons[finalI][i].setBorder(border);
+                                    }
+                                }
+                            }
+                            getWindow().setCursor(cursor);
+                        }
+                    });
                 } else if (cell instanceof Animal) {
                     AnimalType type = ((Animal)cell).getAnimalType();
 
@@ -64,7 +137,9 @@ public class PlayLevelMenu extends GuiMenu {
                 }
 
                 button.setEnabled(false);
-                levelPanel.add(button);
+
+                buttons[i][j] = button;
+                levelPanel.add(buttons[i][j]);
             }
 
             panel.add(levelPanel);
@@ -81,16 +156,64 @@ public class PlayLevelMenu extends GuiMenu {
         JButton useSaber = new JButton("Utiliser un sabre");
         contentPanel.add(useSaber);
         JButton botPlay = new JButton("Laisser le robot jouer un tour");
+
+        if (destroyingBlock) {
+            destroyBlock.setEnabled(false);
+        } else if (usingRocket) {
+            useRocket.setEnabled(false);
+        } else if (usingSaber) {
+            useSaber.setEnabled(false);
+        }
+
+        destroyBlock.addActionListener(e -> {
+            destroyingBlock = true;
+            usingRocket = false;
+            usingSaber = false;
+            destroyBlock.setEnabled(false);
+            useRocket.setEnabled(true);
+            useSaber.setEnabled(true);
+        });
+
+        useRocket.addActionListener(e -> {
+            destroyingBlock = false;
+            usingRocket = true;
+            usingSaber = false;
+            destroyBlock.setEnabled(true);
+            useRocket.setEnabled(false);
+            useSaber.setEnabled(true);
+        });
+
+        useSaber.addActionListener(e -> {
+            destroyingBlock = false;
+            usingRocket = false;
+            usingSaber = true;
+            destroyBlock.setEnabled(true);
+            useRocket.setEnabled(true);
+            useSaber.setEnabled(false);
+        });
+
         botPlay.addActionListener(e -> {
+            destroyingBlock = false;
+            usingRocket = false;
+            usingSaber = false;
+
+            destroyBlock.setEnabled(true);
+            useRocket.setEnabled(true);
+            useSaber.setEnabled(true);
+
             PetRescueSaga.bot.play(PetRescueSaga.level);
 
-            if (PetRescueSaga.level.hasWon()) {
-                PetRescueSaga.view.changeMenu(new EndLevelMenu("gagné"), false);
-            } else {
-                ((GuiView)PetRescueSaga.view).reload();
-            }
+            checkWin();
         });
         contentPanel.add(botPlay);
         panel.add(contentPanel);
+    }
+
+    private void checkWin() {
+        if (PetRescueSaga.level.hasWon()) {
+            PetRescueSaga.view.changeMenu(new EndLevelMenu("gagné"), false);
+        } else {
+            ((GuiView)PetRescueSaga.view).reload();
+        }
     }
 }

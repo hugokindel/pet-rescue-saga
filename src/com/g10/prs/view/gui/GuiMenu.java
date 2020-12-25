@@ -66,7 +66,7 @@ public abstract class GuiMenu extends Menu {
     protected void drawCategories() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constr = new GridBagConstraints();
-        constr.insets = new Insets(10, 0, 10, 0);
+        constr.insets = new Insets(0, 0, 10, 0);
         constr.anchor = GridBagConstraints.CENTER;
         constr.gridy = -1;
 
