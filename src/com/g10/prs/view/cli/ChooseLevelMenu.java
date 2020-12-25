@@ -10,7 +10,7 @@ public class ChooseLevelMenu extends CliMenu {
     List<String> levels;
 
     public ChooseLevelMenu() {
-        super("Choisir un niveau", null, false);
+        super("Choisir un niveau");
 
         levels = new ArrayList<>();
         levels.addAll(Resources.getCampaignLevelsList());

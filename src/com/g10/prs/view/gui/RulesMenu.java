@@ -1,7 +1,6 @@
 package com.g10.prs.view.gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class RulesMenu extends GuiMenu {
     public RulesMenu() {
