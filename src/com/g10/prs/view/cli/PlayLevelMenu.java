@@ -33,14 +33,13 @@ public class PlayLevelMenu extends CliMenu {
         } else if (choice == 3) {
             CliPopup.show(new UseSaberPopup());
         } else if (choice == 4) {
-            Pair<Integer,Integer> pair = PetRescueSaga.bot.play(PetRescueSaga.level);
-            PetRescueSaga.level.removeGameMode(pair.getObject2(), pair.getObject1(), true, true); //use of Object2 because the first int is the column
+            PetRescueSaga.bot.play(PetRescueSaga.level);
         }
 
         if (PetRescueSaga.level.hasWon()) {
             PetRescueSaga.view.changeMenu(new EndLevelMenu("gagné"), false);
-        } else if (PetRescueSaga.level.hasLost()) {
+        }/* else if (PetRescueSaga.level.hasLost()) {
             PetRescueSaga.view.changeMenu(new EndLevelMenu("perdu"), false);
-        }
+        }*/
     }
 }

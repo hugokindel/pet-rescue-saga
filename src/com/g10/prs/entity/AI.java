@@ -1,5 +1,6 @@
 package com.g10.prs.entity;
 
+import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.Pair;
 import com.g10.prs.common.Triplet;
 import com.g10.prs.common.print.Out;
@@ -37,12 +38,13 @@ public class AI {
      * @param level The level
      * @return a pair with the coordonne of the block to destroy
      */
-    public Pair<Integer,Integer> play(Level level){
+    public void play(Level level){
         ArrayList<Triplet<Integer, Integer, Double>> list = createList(level.getBoard());
         list = scoreAdj(copy(level.getBoard()), list);
         list = scoreAnimal(level.copy(), list);
         list = scoreAlea(list);
-        return bestChoice(list);
+        Pair<Integer, Integer> pair = bestChoice(list);
+        PetRescueSaga.level.removeGameMode(pair.getObject2(), pair.getObject1(), true, true);
     }
 
     /**

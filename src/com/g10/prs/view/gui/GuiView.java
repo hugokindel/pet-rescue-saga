@@ -37,4 +37,8 @@ public class GuiView extends View {
     public void goBack() {
         changeMenu(menuBacklog.pop(), false);
     }
+
+    public void reload() {
+        changeMenu(currentMenu, false);
+    }
 }
