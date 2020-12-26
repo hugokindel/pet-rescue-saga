@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-// TODO: Weird shifting in real game when applying refill
-
 /** It represents the structure of a level (which is basically a board of cells to represents the state of the game). */
 @NJsonSerializable
 public class Level {
