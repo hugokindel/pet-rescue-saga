@@ -76,7 +76,7 @@ public class PetRescueSaga extends Runnable {
         return 0;
     }
 
-    /** @return true if it's debug */
+    /** @return true if is in debug mode */
     public static boolean isDebug() {
         return debug;
     }
