@@ -504,11 +504,7 @@ public class Level {
                         board[r + 1][c] = board[r][c];
                         board[r][c] = null;
                         return true;
-                    }/* else if (!isMovable(c, r + 1) && c - 1 >= 0 && board[r + 1][c - 1] == null) {
-                        board[r + 1][c - 1] = board[r][c];
-                        board[r][c] = null;
-                        return true;
-                    }*/
+                    }
                 }
             }
         }
