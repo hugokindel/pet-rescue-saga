@@ -33,10 +33,9 @@ public class AI {
         }
 
     /**
-     * calculate the best choice
+     * calculate the best choice and apply the action removeGameMode
      *
      * @param level The level
-     * @return a pair with the coordonne of the block to destroy
      */
     public void play(Level level){
         ArrayList<Triplet<Integer, Integer, Double>> list = createList(level.getBoard());

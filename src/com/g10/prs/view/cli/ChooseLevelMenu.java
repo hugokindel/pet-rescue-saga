@@ -6,9 +6,12 @@ import com.g10.prs.level.Level;
 
 import java.util.*;
 
+/** Menu to choose the level */
 public class ChooseLevelMenu extends CliMenu {
+    /** list of all the levels */
     List<String> levels;
 
+    /** class constructor */
     public ChooseLevelMenu() {
         super("Choisir un niveau");
 
@@ -28,6 +31,7 @@ public class ChooseLevelMenu extends CliMenu {
         this.categories = levelNames;
     }
 
+    /** handle the answer of the player */
     @Override
     public void handleChoice(int choice) {
         try {

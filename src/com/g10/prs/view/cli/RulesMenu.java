@@ -4,11 +4,15 @@ import com.g10.prs.common.print.Color;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
+/** Menu with the rules of the game */
 public class RulesMenu extends CliMenu {
+
+    /** class constructor */
     public RulesMenu() {
         super("Règles du jeu");
     }
 
+    /** draw the content (rule) */
     @Override
     protected void drawContent() {
         Out.println("Voici comment jouer à " + TextColor.Red + "Pet Rescue Saga" + Color.ResetAll + " :");

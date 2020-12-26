@@ -4,11 +4,15 @@ import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
+/** Main menu of the game */
 public class MainMenu extends CliMenu {
+
+    /** class constructor */
     public MainMenu() {
         super("Menu principal", new String[] {"Jouer", "Changer de nom", "Voir les règles du jeu", "Voir les crédits"}, false);
     }
 
+    /** draw the content before the title */
     @Override
     public void drawPrimary() {
         Out.println(TextColor.Red + " _____     _     _____                              _____                   ");
@@ -29,6 +33,7 @@ public class MainMenu extends CliMenu {
         }
     }
 
+    /** handle the answer of the player */
     @Override
     public void handleChoice(int choice) {
         if  (choice == 1) {

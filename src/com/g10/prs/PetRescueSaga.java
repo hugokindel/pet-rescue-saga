@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/** the class who launch the game */
 @Command(name = "prs", version = "1.0.0", description = "Un jeu pour sauver des animaux.")
 public class PetRescueSaga extends Runnable {
     @Option(names = {"-d", "--debug"}, description = "Active le mode déboguage.")
@@ -26,16 +27,22 @@ public class PetRescueSaga extends Runnable {
     @Option(names = {"--view"}, description = "Défini quel vue utiliser.", usage = "<gui> ou <cli>")
     protected static String viewType;
 
+    /** the player of the game */
     public static Player player = new Player();
 
+    /** the bot of the game */
     public static AI bot = new AI();
 
+    /** the view of the game */
     public static View view;
 
+    /** the level of the game */
     public static Level level;
 
+    /** random variable */
     public static Random randomizer;
 
+    /** run the game */
     public int run(String[] args) {
         try {
             readArguments(args, PetRescueSaga.class);
@@ -69,10 +76,12 @@ public class PetRescueSaga extends Runnable {
         return 0;
     }
 
+    /** @return true if is in debug mode */
     public static boolean isDebug() {
         return debug;
     }
 
+    /** @return the seed */
     public static long getSeed() {
         return seed;
     }

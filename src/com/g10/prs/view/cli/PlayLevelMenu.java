@@ -6,11 +6,15 @@ import com.g10.prs.common.print.Color;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
+/** Menu of a level */
 public class PlayLevelMenu extends CliMenu {
+
+    /** class constructor */
     public PlayLevelMenu() {
         super(PetRescueSaga.level.getName(), new String[] {"Détruire un bloc coloré", "Utiliser une fusée", "Utiliser un sabre", "Laisser le robot jouer un tour"});
     }
 
+    /** draw the content */
     @Override
     public void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
@@ -24,6 +28,7 @@ public class PlayLevelMenu extends CliMenu {
         Out.println();
     }
 
+    /** handle the answer of the player */
     @Override
     public void handleChoice(int choice) {
         if (choice == 1) {

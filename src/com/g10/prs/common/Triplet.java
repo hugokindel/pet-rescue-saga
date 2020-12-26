@@ -8,7 +8,7 @@ public class Triplet<T, U, V> {
     /** The second object of the triplet. */
     private final U object2;
 
-    /** The second object of the triplet. */
+    /** The third object of the triplet. */
     private final V object3;
 
     /**

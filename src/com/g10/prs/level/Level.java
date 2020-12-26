@@ -83,12 +83,16 @@ public class Level {
      */
     Visibility[][] background;
 
+    /** the colors of the block with random order */
     List<Integer> colors;
 
+    /** the number of move the player does */
     int numberOfPlay = 0;
 
+    /** the number of block the player removed */
     int numberOfBlockRemoved = 0;
 
+    /** the score of the player */
     int score = 0;
 
     /** The number of animals left before winning. */
@@ -112,6 +116,11 @@ public class Level {
         return animalsLeft;
     }
 
+    /**
+     * copy the level
+     *
+     * @return a copy of the level
+     */
     public Level copy(){
         Level level = new Level();
 
@@ -200,6 +209,22 @@ public class Level {
         return level;
     }
 
+    /**
+     * create a block based on the param block
+     * 0: Empty cell (an empty space, which is not obstacle, which means it can be filled when cells are moving).
+     * 1: Animal (it will randomly choose any animal) cell.
+     * 2: Specific color block. |
+     * 3: Specific color block. |
+     * 4: Specific color block. |
+     * 5: Specific color block. |
+     * 6: Specific color block. |
+     * 7: Obstacle cell.
+     *
+     * @param level the level
+     * @param block type of the block
+     * @param colors the list of the colors for the block
+     * @return a cell
+     */
     private static Cell createBlock(Level level, int block, List<Integer> colors) {
         if (block == 0) {
             return new Cell(CellType.Empty);
@@ -583,6 +608,11 @@ public class Level {
         return false;
     }
 
+    /**
+     * apply a refill on the level if possible
+     *
+     * @return true if the refill has been made
+     */
     private boolean applyRefill() {
         boolean filled = false;
 
@@ -631,26 +661,32 @@ public class Level {
         return !(background[r][c] == Visibility.Border || board[r][c] instanceof Obstacle);
     }
 
+    /** @return the name of the level*/
     public String getName() {
         return name;
     }
 
+    /** @return the number of columns of the level */
     public int getColumns() {
         return columns;
     }
 
+    /** @return the number of the rows of the level */
     public int getRows() {
         return rows;
     }
 
+    /** increment the number of moved done by the player */
     public void played() {
         numberOfPlay++;
     }
 
+    /** @return the number of moved done by the player */
     public int getNumberOfPlay() {
         return numberOfPlay;
     }
 
+    /** @return the score of the player */
     public int getScore() {
         return score;
     }

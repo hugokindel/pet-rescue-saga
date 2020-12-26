@@ -6,11 +6,15 @@ import com.g10.prs.common.print.Color;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
+/** Menu of the end of a level */
 public class EndLevelMenu extends CliMenu {
+
+    /** class constructor */
     public EndLevelMenu(String status) {
         super(PetRescueSaga.level.getName() + " - Vous avez " + status + " !", new String[] {"Recommencer", "Retourner au menu principal"});
     }
 
+    /** draw the content */
     @Override
     public void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
@@ -23,6 +27,7 @@ public class EndLevelMenu extends CliMenu {
         Out.println();
     }
 
+    /** handle the answer of the player */
     @Override
     public void handleChoice(int choice) {
         if (choice == 1) {
