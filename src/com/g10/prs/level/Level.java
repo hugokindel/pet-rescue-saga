@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-// TODO: Weird shifting in real game when applying refill
-
 /** It represents the structure of a level (which is basically a board of cells to represents the state of the game). */
 @NJsonSerializable
 public class Level {
@@ -524,13 +522,9 @@ public class Level {
     private boolean applyGravity() {
         for (int r = 0; r < rows - 1; r++) {
             for (int c = 0; c < columns; c++) {
-                if (board[r][c] != null && isMovable(c, r) && r + 1 < rows) {
-                    if (board[r + 1][c] == null) {
+                if (board[r][c] != null && isMovable(c, r)) {
+                    if (board[r + 1][c] == null || board[r + 1][c].getType() == CellType.Empty) {
                         board[r + 1][c] = board[r][c];
-                        board[r][c] = null;
-                        return true;
-                    } else if (!isMovable(c, r + 1) && c - 1 >= 0 && board[r + 1][c - 1] == null) {
-                        board[r + 1][c - 1] = board[r][c];
                         board[r][c] = null;
                         return true;
                     }
@@ -583,10 +577,9 @@ public class Level {
      * @return if a shifting was applied (at least one state of the board was changed).
      */
     private boolean applyShift() {
-        for (int r = rows - 1; r >= 0; r--) {
-            for (int c = columns - 1; c >= 1; c--) {
-                if (board[r][c] != null && isMovable(c, r) && (r + 1 == rows || !isMovable(c, r + 1)) &&
-                        board[r][c - 1] == null) {
+        for (int r = 0; r < rows; r++) {
+            for (int c = 1; c < columns; c++) {
+                if (board[r][c] != null && isMovable(c, r) && (r + 1 == rows || !isMovable(c, r + 1)) && (board[r][c - 1] == null || board[r][c - 1].getType() == CellType.Empty)) {
                     int nextObstacleRow = 0;
 
                     for (int r2 = r; r2 >= 0; r2--) {
