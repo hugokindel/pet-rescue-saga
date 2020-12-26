@@ -51,7 +51,7 @@ public class View {
     /**
      *  change the current menu
      *
-     * @param addCurrentToBacklog decide if we can go back to the previous menu 
+     * @param addCurrentToBacklog decide if we can go back to the previous menu
      */
     public void changeMenu(Menu menu, boolean addCurrentToBacklog) {
         if (addCurrentToBacklog) {
