@@ -8,13 +8,17 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Menu to choose the level */
 public class ChooseLevelMenu extends GuiMenu {
+    /** list of all the levels */
     List<String> levels;
 
+    /** class constructor */
     public ChooseLevelMenu() {
         super("Choisir un niveau");
     }
 
+    /** show the content */
     @Override
     protected void drawContent() {
         JPanel topPanel = new JPanel();

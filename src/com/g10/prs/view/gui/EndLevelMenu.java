@@ -4,11 +4,15 @@ import com.g10.prs.PetRescueSaga;
 
 import javax.swing.*;
 
+/** Menu of the end of the level */
 public class EndLevelMenu extends GuiMenu {
+
+    /** class constructor */
     public EndLevelMenu(String status) {
         super(PetRescueSaga.level.getName() + " - Vous avez " + status + " !");
     }
 
+    /** show the content */
     @Override
     protected void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();

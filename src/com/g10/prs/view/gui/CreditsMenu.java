@@ -2,11 +2,15 @@ package com.g10.prs.view.gui;
 
 import javax.swing.*;
 
+/** Menu that show the credits */
 public class CreditsMenu extends GuiMenu {
+
+    /** class constructor */
     public CreditsMenu() {
         super("Crédits");
     }
 
+    /** show the content */
     @Override
     protected void drawContent() {
         JPanel contentPanel = new JPanel();

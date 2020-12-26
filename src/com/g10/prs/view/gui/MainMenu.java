@@ -5,7 +5,10 @@ import com.g10.prs.common.Pair;
 
 import java.awt.event.ActionListener;
 
+/** Main Menu of the game */
 public class MainMenu extends GuiMenu {
+
+    /** class constructor */
     public MainMenu() {
         super("Menu principal", new Pair[] {
                 new Pair<String, ActionListener>("Jouer", e -> PetRescueSaga.view.changeMenu(new ChooseLevelMenu())),

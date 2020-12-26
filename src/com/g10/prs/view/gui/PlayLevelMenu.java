@@ -11,15 +11,21 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/** Menu of a level */
 public class PlayLevelMenu extends GuiMenu {
+    /** true if the player is going to destroy a block */
     boolean destroyingBlock = false;
+    /** true if the player is using a rocket power */
     boolean usingRocket = false;
+    /** true if the player is using a saber power */
     boolean usingSaber = false;
 
+    /** class cosntructor */
     public PlayLevelMenu() {
         super(PetRescueSaga.level.getName());
     }
 
+    /** show the content */
     @Override
     protected void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
@@ -217,6 +223,7 @@ public class PlayLevelMenu extends GuiMenu {
         panel.add(contentPanel);
     }
 
+    /** check if the level is finished */
     private void checkWin() {
         if (PetRescueSaga.level.hasWon()) {
             PetRescueSaga.view.changeMenu(new EndLevelMenu("gagné"), false);

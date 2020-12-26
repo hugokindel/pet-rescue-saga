@@ -4,7 +4,10 @@ import com.g10.prs.common.print.Out;
 
 import javax.swing.*;
 
+/** Window of the game */
 public class Window extends JFrame {
+
+    /** class constructor */
     public Window() {
         setTitle("Pet Rescue Saga");
         setSize(960, 860);
@@ -18,6 +21,7 @@ public class Window extends JFrame {
         });
     }
 
+    /** close the window (and the game) */
     public void quit() {
         setVisible(false);
         dispose();

@@ -2,11 +2,15 @@ package com.g10.prs.view.gui;
 
 import javax.swing.*;
 
+/** Menu that show the rules */
 public class RulesMenu extends GuiMenu {
+
+    /** class constructor */
     public RulesMenu() {
         super("Règles du jeu");
     }
 
+    /** show the content */
     @Override
     protected void drawContent() {
         JPanel contentPanel = new JPanel();
