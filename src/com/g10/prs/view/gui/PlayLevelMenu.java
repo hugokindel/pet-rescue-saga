@@ -31,17 +31,17 @@ public class PlayLevelMenu extends GuiMenu {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
         int animalsLeft = PetRescueSaga.level.getAnimalsLeft();
 
-        JPanel topPanel = new JPanel();
+        JPanel topPanel = new Panel();
         topPanel.add(new Label("<html>Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
                 " et votre score est de " + PetRescueSaga.level.getScore() + ".<br> Il reste " +
-                animalsLeft + " " + (animalsLeft > 1 ? "animaux" : "animal") + " à sauver...").asJLabel());
+                animalsLeft + " " + (animalsLeft > 1 ? "animaux" : "animal") + " à sauver..."));
         panel.add(topPanel);
 
         Level level = PetRescueSaga.level;
         JButton[][] buttons = new JButton[level.getRows()][level.getColumns()];
 
         for (int i = 0; i < level.getRows(); i++) {
-            JPanel levelPanel = new JPanel();
+            JPanel levelPanel = new Panel();
 
             for (int j = 0; j < level.getColumns(); j++) {
                 Cell cell = level.getBoard()[i][j];
@@ -159,7 +159,7 @@ public class PlayLevelMenu extends GuiMenu {
             panel.add(levelPanel);
         }
 
-        JPanel contentPanel = new JPanel();
+        JPanel contentPanel = new Panel();
         Border border = contentPanel.getBorder();
         Border margin = new EmptyBorder(50, 0, 0, 0);
         contentPanel.setBorder(new CompoundBorder(border, margin));

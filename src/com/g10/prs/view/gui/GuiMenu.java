@@ -2,14 +2,18 @@ package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.Pair;
+import com.g10.prs.common.Resources;
 import com.g10.prs.view.Menu;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /** base class for Gui Menu */
 public abstract class GuiMenu extends Menu {
@@ -17,28 +21,60 @@ public abstract class GuiMenu extends Menu {
     JPanel panel;
     /** the action that can be made in the menu */
     Pair<String, ActionListener>[] categories;
+    /** background image */
+    BufferedImage backgroundImage;
+    /** background image */
+    BufferedImage titleImage;
 
     /** class constructor */
-    public GuiMenu(String title, Pair<String, ActionListener>[] categories, boolean canGoBack) {
+    public GuiMenu(String title, Pair<String, ActionListener>[] categories, boolean canGoBack, String backgroundImagePath, String titleImagePath) {
         super(title, canGoBack);
 
         this.categories = categories;
+        this.backgroundImage = null;
+
+        if (backgroundImagePath != null) {
+            try {
+                backgroundImage = ImageIO.read(new File(Resources.getImagesDirectory() + "/" + backgroundImagePath));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (titleImagePath != null) {
+            try {
+                titleImage = ImageIO.read(new File(Resources.getImagesDirectory() + "/" + titleImagePath));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    /** class constructor */
-    public GuiMenu(String title, boolean canGoBack) {
-        this(title, null, canGoBack);
+    public GuiMenu(String title, Pair<String, ActionListener>[] categories, boolean canGoBack, String backgroundImagePath) {
+        this(title, categories, canGoBack, backgroundImagePath, null);
     }
 
     /** class constructor */
     public GuiMenu(String title) {
-        this(title, null, true);
+        this(title, null, true, null, null);
     }
 
     /** show the Menu */
     @Override
     public void draw() {
-        panel = new JPanel();
+        JPanel mainPanel = null;
+
+        if (backgroundImage != null) {
+            mainPanel = new Panel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(backgroundImage, 0, 0, getWindow().getWidth(), getWindow().getHeight(), null);
+                }
+            };
+        }
+
+        panel = new Panel();
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -49,7 +85,14 @@ public abstract class GuiMenu extends Menu {
         drawContent();
         drawCategories();
 
-        getWindow().add(panel);
+        if (mainPanel != null) {
+            mainPanel.add(panel);
+            getWindow().add(mainPanel);
+        } else {
+            getWindow().add(panel);
+        }
+
+        getWindow().repaint();
     }
 
     /** change the title of the window */
@@ -64,8 +107,14 @@ public abstract class GuiMenu extends Menu {
 
     /** show the title */
     protected void drawTitle() {
-        JPanel topPanel = new JPanel();
-        topPanel.add(new Label(title, 40, 0, 0, 40, 0).asJLabel());
+        JPanel topPanel = new Panel();
+
+        if (titleImage == null) {
+            topPanel.add(new Label(title, 40, 0, 0, 40, 0));
+        } else {
+            topPanel.add(new Label(new ImageIcon(titleImage), 20, 0, 40, 0));
+        }
+
         panel.add(topPanel);
     }
 
@@ -76,7 +125,8 @@ public abstract class GuiMenu extends Menu {
 
     /** show the categories */
     protected void drawCategories() {
-        JPanel contentPanel = new JPanel(new GridBagLayout());
+        JPanel contentPanel = new Panel(new GridBagLayout());
+
         GridBagConstraints constr = new GridBagConstraints();
         constr.insets = new Insets(0, 0, 10, 0);
         constr.anchor = GridBagConstraints.CENTER;
@@ -96,15 +146,16 @@ public abstract class GuiMenu extends Menu {
         }
 
         if (canGoBack) {
-            JButton quitButton = new JButton("Retour");
-            quitButton.addActionListener(e -> PetRescueSaga.view.goBack());
+            JButton backButtpn = new JButton("Retour");
+            backButtpn.addActionListener(e -> PetRescueSaga.view.goBack());
             constr.gridy = ++constr.gridy;
-            contentPanel.add(quitButton, constr);
+            contentPanel.add(backButtpn, constr);
         }
 
         JButton quitButton = new JButton("Quitter");
         quitButton.addActionListener(e -> getWindow().quit());
         constr.gridy = ++constr.gridy;
+
         contentPanel.add(quitButton, constr);
 
         panel.add(contentPanel);

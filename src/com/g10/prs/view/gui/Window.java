@@ -12,6 +12,7 @@ public class Window extends JFrame {
         setTitle("Pet Rescue Saga");
         setSize(960, 860);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon("icon.png").getImage());
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override

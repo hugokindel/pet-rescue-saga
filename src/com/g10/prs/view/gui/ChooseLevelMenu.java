@@ -21,11 +21,11 @@ public class ChooseLevelMenu extends GuiMenu {
     /** show the content */
     @Override
     protected void drawContent() {
-        JPanel topPanel = new JPanel();
-        topPanel.add(new Label("Veuillez choisir un niveau à jouer").asJLabel());
+        JPanel topPanel = new Panel();
+        topPanel.add(new Label("Veuillez choisir un niveau à jouer"));
         panel.add(topPanel);
 
-        JPanel contentPanel = new JPanel();
+        JPanel contentPanel = new Panel();
         levels = new ArrayList<>();
         levels.addAll(Resources.getCampaignLevelsList());
 

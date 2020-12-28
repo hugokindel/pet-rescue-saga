@@ -66,6 +66,18 @@ public class Resources {
         return createPathIfNeeded(getDataDirectory() + "/logs");
     }
 
+    public static String getAssetsDirectory() throws PrsException {
+        return createPathIfNeeded(getDataDirectory() + "/assets");
+    }
+
+    public static String getImagesDirectory() throws PrsException {
+        return createPathIfNeeded(getAssetsDirectory() + "/images");
+    }
+
+    public static String getFontDirectory() throws PrsException {
+        return createPathIfNeeded(getAssetsDirectory() + "/fonts");
+    }
+
     public static List<String> getCampaignLevelsList() {
         List<String> levels = new ArrayList<>();
 
