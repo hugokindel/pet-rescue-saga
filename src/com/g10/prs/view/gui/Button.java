@@ -2,17 +2,10 @@ package com.g10.prs.view.gui;
 
 import com.g10.prs.common.Resources;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -236,7 +229,7 @@ public class Button {
 
         try {
             if (Arrays.stream(gEnv.getAllFonts()).noneMatch(i -> i.getName().equals(name))) {
-                font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource(Resources.getFontDirectory() + "/" + name).openStream());
+                font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource(Resources.getFontsDirectory() + "/" + name).openStream());
                 gEnv.registerFont(font);
                 font = font.deriveFont(Font.PLAIN);
             } else {

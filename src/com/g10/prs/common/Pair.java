@@ -3,10 +3,10 @@ package com.g10.prs.common;
 /** A container for a pair of objects. */
 public class Pair<T, U> {
     /** The first object of the pair. */
-    private final T object1;
+    private T object1;
 
     /** The second object of the pair. */
-    private final U object2;
+    private U object2;
 
     /**
      * Class constructor.
@@ -27,5 +27,13 @@ public class Pair<T, U> {
     /** @return the second object of the pair. */
     public U getObject2() {
         return object2;
+    }
+
+    public void setObject1(T object) {
+        object1 = object;
+    }
+
+    public void setObject2(U object) {
+        object2 = object;
     }
 }

@@ -11,7 +11,7 @@ public class Window extends JFrame {
     /** class constructor */
     public Window() {
         setTitle("Pet Rescue Saga");
-        setSize(960, 860);
+        setSize(1200, 960);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {

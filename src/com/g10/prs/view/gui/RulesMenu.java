@@ -13,7 +13,7 @@ public class RulesMenu extends GuiMenu {
     /** show the content */
     @Override
     protected void drawContent() {
-        JPanel contentPanel = new Panel();
+        Panel contentPanel = new Panel();
         contentPanel.add(new Label("<html>Voici comment jouer à Pet Rescue Saga !<br/>" +
                 "Votre but est de sauver tous les animaux (indiqués par des lettres sur la carte du niveau).<br/>" +
                 "Pour le faire, vous devez enlever les blocs colorés, ce qui va aussi affecter votre score final.<br/>" +
@@ -25,7 +25,8 @@ public class RulesMenu extends GuiMenu {
                 "+ 1000 - pour chaque animal sauvé.<br/>" +
                 "+ 5000 - lorsque la partie est gagné.<br/>" +
                 "<br/>" +
-                "Bon jeu !</html>"));
+                "Bon jeu !</html>", getView().getStyle() == GuiView.Style.Stylized ? 21 : 12));
+        contentPanel.setBorder(0, 0, 20, 0);
         panel.add(contentPanel);
     }
 }

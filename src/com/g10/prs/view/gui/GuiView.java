@@ -19,7 +19,7 @@ public class GuiView extends View {
     /** class constructor */
     public GuiView() {
         super(new MainMenu());
-        setStyle(Style.Stylized);
+        this.style = Style.Stylized;
     }
 
     /** show the window */
@@ -65,9 +65,6 @@ public class GuiView extends View {
 
     public void setStyle(Style style) {
         this.style = style;
-
-        if (this.style == Style.Stylized) {
-            Resources.loadImages();
-        }
+        reload();
     }
 }

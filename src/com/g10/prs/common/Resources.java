@@ -6,18 +6,20 @@ import com.g10.prs.njson.NJsonReader;
 import com.g10.prs.util.FileUtil;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {
     public static Map<String, BufferedImage> images;
+
+    private static boolean imagesLoaded = false;
+    private static boolean fontsLoaded = false;
 
     /**
      * Gets the data directory's path.
@@ -81,7 +83,7 @@ public class Resources {
         return createPathIfNeeded(getAssetsDirectory() + "/images");
     }
 
-    public static String getFontDirectory() throws PrsException {
+    public static String getFontsDirectory() throws PrsException {
         return createPathIfNeeded(getAssetsDirectory() + "/fonts");
     }
 
@@ -110,8 +112,8 @@ public class Resources {
         return filepath;
     }
 
-    public static void loadImages() {
-        if (images == null) {
+    public static void loadContent() {
+        if (!imagesLoaded) {
             try {
                 images = new HashMap<>();
                 for (final File fileEntry : new File(getImagesDirectory()).listFiles()) {
@@ -125,6 +127,28 @@ public class Resources {
                         images.put(segments[segments.length - 1], ImageIO.read(new File(Resources.getImagesDirectory() + "/" + segments[segments.length - 1])));
                     }
                 }
+                imagesLoaded = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!fontsLoaded) {
+            GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+            try {
+                for (final File fileEntry : new File(getFontsDirectory()).listFiles()) {
+                    if (!fileEntry.isDirectory()) {
+                        String[] segments;
+                        if (fileEntry.getAbsolutePath().contains("\\")) {
+                            segments = fileEntry.getAbsolutePath().split("\\\\");
+                        } else {
+                            segments = fileEntry.getAbsolutePath().split("/");
+                        }
+                        gEnv.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(Resources.getFontsDirectory() + "/" + segments[segments.length - 1])));
+                    }
+                }
+                fontsLoaded = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }

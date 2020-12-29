@@ -30,6 +30,9 @@ public class PlayLevelMenu extends GuiMenu {
     protected void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
         int animalsLeft = PetRescueSaga.level.getAnimalsLeft();
+        JPanel levelNamePanel = new Panel();
+        levelNamePanel.add(new Label(PetRescueSaga.level.getName()));
+        panel.add(levelNamePanel);
 
         JPanel topPanel = new Panel();
         topPanel.add(new Label("<html>Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
@@ -161,7 +164,7 @@ public class PlayLevelMenu extends GuiMenu {
 
         JPanel contentPanel = new Panel();
         Border border = contentPanel.getBorder();
-        Border margin = new EmptyBorder(50, 0, 0, 0);
+        Border margin = new EmptyBorder(0, 0, 0, 0);
         contentPanel.setBorder(new CompoundBorder(border, margin));
         JButton destroyBlock = new JButton("Détruire un bloc coloré");
         contentPanel.add(destroyBlock);

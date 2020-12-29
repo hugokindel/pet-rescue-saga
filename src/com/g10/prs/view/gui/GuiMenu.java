@@ -5,18 +5,18 @@ import com.g10.prs.common.Pair;
 import com.g10.prs.common.Resources;
 import com.g10.prs.view.Menu;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 /** base class for Gui Menu */
 public abstract class GuiMenu extends Menu {
+    protected final Color BackgroundColor = new Color(144, 229, 249);
+    protected final Color TextColor = new Color(14, 138, 164);
+
+    private JPanel internalPanel;
+
     /** panel with the content */
     JPanel panel;
     /** the action that can be made in the menu */
@@ -30,7 +30,7 @@ public abstract class GuiMenu extends Menu {
     public GuiMenu(String title, Pair<String, ActionListener>[] categories, boolean canGoBack, String backgroundImagePath, String titleImagePath) {
         super(title, canGoBack);
 
-        Resources.loadImages();
+        Resources.loadContent();
 
         this.categories = categories;
         this.backgroundImage = null;
@@ -76,8 +76,10 @@ public abstract class GuiMenu extends Menu {
             };
         }
 
-        panel = new Panel();
+        internalPanel = new Panel();
+        internalPanel.setLayout(new BoxLayout(internalPanel, BoxLayout.Y_AXIS));
 
+        panel = new Panel(true);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         changeWindowTitle();
@@ -86,12 +88,15 @@ public abstract class GuiMenu extends Menu {
         drawTitle();
         drawContent();
         drawCategories();
+        drawLast();
+
+        internalPanel.add(panel);
 
         if (mainPanel != null) {
-            mainPanel.add(panel);
+            mainPanel.add(internalPanel);
             getWindow().add(mainPanel);
         } else {
-            getWindow().add(panel);
+            getWindow().add(internalPanel);
         }
 
         getWindow().repaint();
@@ -117,7 +122,7 @@ public abstract class GuiMenu extends Menu {
             topPanel.add(new Label(title, 40, 0, 0, 40, 0));
         }
 
-        panel.add(topPanel);
+        internalPanel.add(topPanel);
     }
 
     /** show the title */
@@ -161,6 +166,12 @@ public abstract class GuiMenu extends Menu {
         contentPanel.add(quitButton, constr);
 
         panel.add(contentPanel);
+    }
+
+    public void drawLast() {
+        if (getView().getStyle() == GuiView.Style.Stylized) {
+            panel.setBackground(new Color(144, 229, 249));
+        }
     }
 
     /** @return the window */
