@@ -57,7 +57,11 @@ public class Group {
         res.id = id;
         res.blocks = new ArrayList<>(blocks);
         res.canRefill = canRefill;
-        res.refillCondition = refillCondition.copy();
+        if (refillCondition != null) {
+            res.refillCondition = refillCondition.copy();
+        } else {
+            res.refillCondition = null;
+        }
         return res;
     }
 }
