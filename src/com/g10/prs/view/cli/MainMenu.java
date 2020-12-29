@@ -1,6 +1,7 @@
 package com.g10.prs.view.cli;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.print.Color;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
@@ -31,6 +32,12 @@ public class MainMenu extends CliMenu {
             Out.println("Seed : " + PetRescueSaga.getSeed());
             Out.println();
         }
+    }
+
+    @Override
+    protected void drawContent() {
+        Out.println("Bienvenue, " + TextColor.Red + PetRescueSaga.player.getName() + Color.ResetAll + " !");
+        Out.println();
     }
 
     /** handle the answer of the player */
