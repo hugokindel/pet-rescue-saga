@@ -1,41 +1,71 @@
 package com.g10.prs.view.gui;
 
+import com.g10.prs.common.Resources;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Optional;
+
+import static com.g10.prs.view.gui.GuiMenu.getView;
 
 /** Container to simplify JLabel usage */
-public class Label {
-    /** the JLabel */
-    protected JLabel label;
-
+public class Label extends JLabel {
     /** class constructor */
     public Label() {
-        label = new JLabel();
+        super();
     }
 
     /** class constructor */
+    public Label(ImageIcon imageIcon) {
+        this(imageIcon, 18, 0, 0, 0, 0);
+    }
+
     public Label(String text) {
-        label = new JLabel(text);
+        this(text, 18, 0, 0, 0, 0);
     }
 
     /** class constructor */
     public Label(String text, int size) {
-        label = new JLabel(text);
-        setFontSize(size);
+        this(text, size, 0, 0, 0, 0);
     }
 
     /** class constructor */
     public Label(String text, int top, int left, int bottom, int right) {
-        label = new JLabel(text);
-        setBorder(top, left, bottom, right);
+        this(text, 18, top, left, bottom, right);
     }
 
     /** class constructor */
     public Label(String text, int size, int top, int left, int bottom, int right) {
-        label = new JLabel(text);
+        super(text);
+        if (getView().getStyle() == GuiView.Style.Stylized) {
+            setFont("Curse Casual Regular");
+            setForeground(new Color(14, 138, 164));
+        }
+        setFontSize(size);
+        setBorder(top, left, bottom, right);
+    }
+
+    /** class constructor */
+    public Label(ImageIcon imageIcon, int size) {
+        this(imageIcon, size, 0, 0, 0, 0);
+    }
+
+    /** class constructor */
+    public Label(ImageIcon imageIcon, int top, int left, int bottom, int right) {
+        this(imageIcon, 18, top, left, bottom, right);
+    }
+
+    /** class constructor */
+    public Label(ImageIcon imageIcon, int size, int top, int left, int bottom, int right) {
+        super(imageIcon);
+        if (getView().getStyle() == GuiView.Style.Stylized) {
+            setFont("Curse Casual Regular");
+            setForeground(new Color(14, 138, 164));
+        }
         setFontSize(size);
         setBorder(top, left, bottom, right);
     }
@@ -46,28 +76,16 @@ public class Label {
      * @param size the size of the Font
      */
     public void setFontSize(int size) {
-        label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), size));
+        setFont(new Font(getFont().getName(), getFont().getStyle(), size));
     }
 
     /** set the Border */
     public void setBorder(int top, int left, int bottom, int right) {
-        Border border = label.getBorder();
-        Border margin = new EmptyBorder(top, left, bottom, right);
-        label.setBorder(new CompoundBorder(border, margin));
+        setBorder(new CompoundBorder(getBorder(), new EmptyBorder(top, left, bottom, right)));
     }
 
-    /** set the text */
-    public void setText(String text) {
-        label.setText(text);
-    }
-
-    /** @return the text */
-    public String getText() {
-        return label.getText();
-    }
-
-    /** @return the JLabel */
-    public JLabel asJLabel() {
-        return label;
+    public void setFont(String name) {
+        GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        setFont(Arrays.stream(gEnv.getAllFonts()).filter(i -> i.getName().equals(name)).findFirst().get().deriveFont(18f));
     }
 }

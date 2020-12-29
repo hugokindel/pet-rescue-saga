@@ -1,5 +1,5 @@
 {
-  "name": "Level 04",
+  "name": "Niveau 04",
   "authors": [
     "Hugo Kindel",
     "Maxime Jauroyon"
@@ -17,6 +17,7 @@
     [1, 1, 1, 1, 1, 0, 0, 0],
     [1, 1, 1, 1, 0, 0, 0, 0]
   ],
+  "backgroundImagePath": "level_04.png",
   "initialBlocks": [
     [7, 7, 7, 7, 1, 1, 1, 1],
     [7, 7, 7, 2, 2, 4, 2, 3],

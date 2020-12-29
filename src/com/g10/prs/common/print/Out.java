@@ -29,13 +29,15 @@ public class Out {
     /** Defines if we are at the start of a line (to know if we need to prefix the printing). */
     private static boolean isStartOfLine;
 
+    private static boolean noAnsiCode = false;
+
     /**
      * Starts the output system.
      *
      * Needed at the start of the program!
      * It creates the logging file, and initialize various informations.
      */
-    public static void start() {
+    public static void start(boolean helpOrVersion) {
         // Fix to check if we are running inside IntelliJ IDEA,
         // this information is used to avoid calling any clearing process from inside the IDE terminal,
         // because if we do, it displays an unknown "" symbol.
@@ -50,10 +52,14 @@ public class Out {
         // and also clear the terminal (on Windows and UNIX platforms).
         if (!inIntelliJ) {
             try {
-                if (System.getProperty("os.name").contains("Windows")) {
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                if (!helpOrVersion) {
+                    if (System.getProperty("os.name").contains("Windows")) {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } else {
+                        Runtime.getRuntime().exec("clear");
+                    }
                 } else {
-                    Runtime.getRuntime().exec("clear");
+                    noAnsiCode = true;
                 }
             } catch (Exception ignored) {
 
@@ -211,14 +217,18 @@ public class Out {
     private static void printAndResetColor(Object object) {
         String text = object + Color.ResetAll;
 
-        System.out.print(text);
+        if (noAnsiCode) {
+            System.out.print(getTextWithoutAnsiCode(text));
+        } else {
+            System.out.print(text);
+        }
 
         if (fileOutput != null) {
             try {
                 // Regular expression to remove ANSI escape sequences (e.g. colors),
                 // because we don't want to write ANSI escape sequences on the log file, as it wouldn't be recognized.
                 // Implementation from: https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python
-                fileOutput.print(text.replaceAll("(\\x9B|\\x1B\\[)[0-?]*[ -\\/]*[@-~]", ""));
+                fileOutput.print(getTextWithoutAnsiCode(text));
             } catch (Exception ignored) {
 
             }
@@ -244,5 +254,9 @@ public class Out {
         }
 
         oldestFile.delete();
+    }
+
+    private static String getTextWithoutAnsiCode(String text) {
+        return text.replaceAll("(\\x9B|\\x1B\\[)[0-?]*[ -\\/]*[@-~]", "");
     }
 }

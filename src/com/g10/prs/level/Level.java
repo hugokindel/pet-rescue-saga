@@ -1,6 +1,7 @@
 package com.g10.prs.level;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.Resources;
 import com.g10.prs.common.print.BackgroundColor;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
@@ -9,6 +10,9 @@ import com.g10.prs.njson.NJson;
 import com.g10.prs.njson.NJsonSerializable;
 import com.g10.prs.common.PrsException;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -62,6 +66,9 @@ public class Level {
 
     @NJsonSerializable(necessary = false)
     List<Group> groups;
+
+    @NJsonSerializable(necessary = false)
+    String backgroundImagePath;
 
     /**
      * The board is built with the backgroundGrid and the initialBlocks, it represents the current state of play:
@@ -119,7 +126,7 @@ public class Level {
      *
      * @return a copy of the level
      */
-    public Level copy(){
+    public Level copy() {
         Level level = new Level();
 
         level.name =  name;
@@ -202,6 +209,10 @@ public class Level {
                 level.board[r][c] = createBlock(level, block, level.colors);
                 level.background[r][c] = Visibility.values()[level.backgroundGrid.get(r).get(c)];
             }
+        }
+
+        if (level.backgroundImagePath == null) {
+            level.backgroundImagePath = "background.png";
         }
 
         return level;
@@ -687,5 +698,9 @@ public class Level {
     /** @return the score of the player */
     public int getScore() {
         return score;
+    }
+
+    public String getBackgroundImagePath() {
+        return backgroundImagePath;
     }
 }
