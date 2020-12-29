@@ -3,6 +3,8 @@ package com.g10.prs;
 import com.g10.prs.common.Resources;
 import com.g10.prs.common.print.Out;
 
+import java.util.Arrays;
+
 /** This is main class of the cli program. */
 public class Program {
     /** The instance of the game. */
@@ -10,7 +12,7 @@ public class Program {
 
     /** Start of the program. */
     public static void main(String[] args) {
-        Out.start();
+        Out.start(Arrays.stream(args).anyMatch(s -> s.equals("-h") || s.equals("--help") || s.equals("-v") || s.equals("--version")));
 
         prs = new PetRescueSaga();
         int errorCode = prs.run(args);

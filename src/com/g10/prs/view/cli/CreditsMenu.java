@@ -22,5 +22,6 @@ public class CreditsMenu extends CliMenu {
         Out.println(TextColor.Red + "Maxime JAUROYON");
         Out.println();
         Out.println("Merci d'avoir joué à " + TextColor.Red + "Pet Rescue Saga" + Color.ResetAll + " !");
+        Out.println();
     }
 }
