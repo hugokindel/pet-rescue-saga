@@ -171,6 +171,8 @@ public abstract class GuiMenu extends Menu {
     public void drawLast() {
         if (getView().getStyle() == GuiView.Style.Stylized) {
             panel.setBackground(new Color(144, 229, 249));
+            panel.setOpaque(false);
+
         }
     }
 

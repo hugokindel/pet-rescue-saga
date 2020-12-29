@@ -17,11 +17,15 @@ public class EndLevelMenu extends GuiMenu {
     protected void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
 
-        JPanel contentPanel = new Panel();
-        contentPanel.add(new Label("<html>Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
-                " et votre score final est de " + PetRescueSaga.level.getScore() + " !" +
-                "<br><br>" +
-                "Merci d'avoir joué à Pet Rescue Saga !</html>"));
+        Panel contentPanel = new Panel();
+        contentPanel.add(new Label("Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
+                " et votre score final est de " + PetRescueSaga.level.getScore() + " !", getView().getStyle() == GuiView.Style.Stylized ? 26 : 18));
         panel.add(contentPanel);
+        contentPanel.setBorder(0, 0, 20, 0);
+
+        Panel contentPanel2 = new Panel();
+        contentPanel2.add(new Label("Merci d'avoir joué à Pet Rescue Saga !", getView().getStyle() == GuiView.Style.Stylized ? 21 : 14));
+        panel.add(contentPanel2);
+        contentPanel2.setBorder(0, 0, 20, 0);
     }
 }

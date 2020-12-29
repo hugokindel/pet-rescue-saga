@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 /** Menu of a level */
 public class PlayLevelMenu extends GuiMenu {
@@ -30,27 +31,38 @@ public class PlayLevelMenu extends GuiMenu {
     protected void drawContent() {
         int numberOfPlay = PetRescueSaga.level.getNumberOfPlay();
         int animalsLeft = PetRescueSaga.level.getAnimalsLeft();
-        JPanel levelNamePanel = new Panel();
-        levelNamePanel.add(new Label(PetRescueSaga.level.getName()));
-        panel.add(levelNamePanel);
 
-        JPanel topPanel = new Panel();
-        topPanel.add(new Label("<html>Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
-                " et votre score est de " + PetRescueSaga.level.getScore() + ".<br> Il reste " +
-                animalsLeft + " " + (animalsLeft > 1 ? "animaux" : "animal") + " à sauver..."));
+        if (getView().getStyle() == GuiView.Style.Stylized) {
+            Panel levelNamePanel = new Panel();
+            levelNamePanel.add(new Label(PetRescueSaga.level.getName(), 26));
+            panel.add(levelNamePanel);
+        }
+
+        Panel topPanel = new Panel();
+        topPanel.add(new Label("Vous avez joué " + numberOfPlay + " " + (numberOfPlay > 1 ? "coups" : "coup") +
+                " et votre score est de " + PetRescueSaga.level.getScore() + ".", getView().getStyle() == GuiView.Style.Stylized ? 21 : 12));
+        topPanel.setBorder(0, 0, -5, 0);
         panel.add(topPanel);
+
+        Panel topPanel2 = new Panel();
+        topPanel2.add(new Label("Il reste " +animalsLeft + " " + (animalsLeft > 1 ? "animaux" : "animal") +
+                " à sauver...", getView().getStyle() == GuiView.Style.Stylized ? 21 : 12));
+        topPanel2.setBorder(0, 0, 10, 0);
+        panel.add(topPanel2);
 
         Level level = PetRescueSaga.level;
         JButton[][] buttons = new JButton[level.getRows()][level.getColumns()];
 
         for (int i = 0; i < level.getRows(); i++) {
-            JPanel levelPanel = new Panel();
+            Panel levelPanel = new Panel();
 
             for (int j = 0; j < level.getColumns(); j++) {
                 Cell cell = level.getBoard()[i][j];
 
                 JButton button = new JButton();
-                button.setPreferredSize(new Dimension(45, 45));
+                GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                button.setFont(Arrays.stream(gEnv.getAllFonts()).filter(k -> k.getName().equals("Curse Casual Regular")).findFirst().get().deriveFont(13f));
+                button.setPreferredSize(new Dimension(40, 40));
 
                 if (cell instanceof Block) {
                     BlockType type = ((Block)cell).getBlockType();
@@ -162,10 +174,8 @@ public class PlayLevelMenu extends GuiMenu {
             panel.add(levelPanel);
         }
 
-        JPanel contentPanel = new Panel();
-        Border border = contentPanel.getBorder();
-        Border margin = new EmptyBorder(0, 0, 0, 0);
-        contentPanel.setBorder(new CompoundBorder(border, margin));
+        Panel contentPanel = new Panel();
+        contentPanel.setBorder(10, 0, 20, 0);
         JButton destroyBlock = new JButton("Détruire un bloc coloré");
         contentPanel.add(destroyBlock);
         JButton useRocket = new JButton("Utiliser une fusée");
