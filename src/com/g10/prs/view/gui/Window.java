@@ -5,6 +5,8 @@ import com.g10.prs.common.Resources;
 import com.g10.prs.common.print.Out;
 
 import javax.swing.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 
 /** Window of the game */
@@ -24,6 +26,12 @@ public class Window extends JFrame {
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
+            public void windowStateChanged(WindowEvent e) {
+                Out.print("tes");
+                super.windowStateChanged(e);
+            }
+
+            @Override
             public void windowClosing(WindowEvent e) {
                 Resources.saveSettings();
                 Out.end();
@@ -33,6 +41,28 @@ public class Window extends JFrame {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 Resources.saveSettings();
                 Out.end();
+            }
+        });
+
+        addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                ((GuiView)PetRescueSaga.view).reload();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
             }
         });
     }
