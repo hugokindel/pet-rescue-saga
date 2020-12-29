@@ -1,9 +1,11 @@
 package com.g10.prs.view.gui;
 
+import com.g10.prs.PetRescueSaga;
 import com.g10.prs.common.Resources;
 import com.g10.prs.common.print.Out;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 /** Window of the game */
 public class Window extends JFrame {

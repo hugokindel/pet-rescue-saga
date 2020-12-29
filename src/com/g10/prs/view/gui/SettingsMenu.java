@@ -8,22 +8,33 @@ import java.awt.event.ActionListener;
 
 /** Menu that shows the settings */
 public class SettingsMenu extends GuiMenu {
-    String themeName = getView().getStyle().name();
-
     /** class constructor */
     public SettingsMenu() {
         super("Paramètres", null, true, "background.png", "settings.png");
 
-        themeName = getView().getStyle().name();
-
-        this.categories = new Pair[] { new Pair<String, ActionListener>("Changer de thème : " + themeName, e -> {
+        this.categories = new Pair[] { new Pair<String, ActionListener>("Changer de nom : " + PetRescueSaga.player.getName(), e -> {
+            String name = PetRescueSaga.player.getName();
+            GuiPopup.show(new ChangeNamePopup());
+            if (!name.equals(PetRescueSaga.player.getName())) {
+                this.categories[0].setObject1("Changer de nom : " + PetRescueSaga.player.getName());
+                getView().reload();
+            }
+        }), new Pair<String, ActionListener>("Changer de thème : " + getView().getStyle().name(), e -> {
             if (getView().getStyle() == GuiView.Style.Default) {
-                this.categories[0].setObject1("Changer de thème : Stylized");
+                this.categories[1].setObject1("Changer de thème : Stylized");
                 getView().setStyle(GuiView.Style.Stylized);
             } else {
-                this.categories[0].setObject1("Changer de thème : Default");
+                this.categories[1].setObject1("Changer de thème : Default");
                 getView().setStyle(GuiView.Style.Default);
             }
+        }), new Pair<String, ActionListener>("Musique : " + (getView().getMusicState() ? "Activé" : "Désactivé"), e -> {
+            if (getView().getMusicState()) {
+                this.categories[2].setObject1("Musique : Désactivé");
+            } else {
+                this.categories[2].setObject1("Musique : Activé");
+            }
+            getView().setMusicState(!getView().getMusicState());
+            getView().reload();
         })};
     }
 

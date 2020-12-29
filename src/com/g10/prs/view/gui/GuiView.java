@@ -4,6 +4,8 @@ import com.g10.prs.common.Resources;
 import com.g10.prs.view.Menu;
 import com.g10.prs.view.View;
 
+import javax.sound.sampled.Clip;
+
 /** Gui view class */
 public class GuiView extends View {
     public enum Style {
@@ -16,10 +18,17 @@ public class GuiView extends View {
 
     private Style style;
 
+    private boolean musicState;
+
+    private Clip music;
+
     /** class constructor */
     public GuiView() {
         super(new MainMenu());
         this.style = Style.Stylized;
+        musicState = true;
+        music = Resources.getSound("theme.wav");
+        music.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     /** show the window */
@@ -66,5 +75,19 @@ public class GuiView extends View {
     public void setStyle(Style style) {
         this.style = style;
         reload();
+    }
+
+    public void setMusicState(boolean state) {
+        musicState = state;
+
+        if (!musicState) {
+            music.stop();
+        } else {
+            music.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
+
+    public boolean getMusicState() {
+        return musicState;
     }
 }

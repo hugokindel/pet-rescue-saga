@@ -6,20 +6,25 @@ import com.g10.prs.njson.NJsonReader;
 import com.g10.prs.util.FileUtil;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.*;
 import java.util.List;
 
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {
     public static Map<String, BufferedImage> images;
+    public static Map<String, Clip> sounds;
 
     private static boolean imagesLoaded = false;
     private static boolean fontsLoaded = false;
+    private static boolean soundsLoaded = false;
 
     /**
      * Gets the data directory's path.
@@ -85,6 +90,10 @@ public class Resources {
 
     public static String getFontsDirectory() throws PrsException {
         return createPathIfNeeded(getAssetsDirectory() + "/fonts");
+    }
+
+    public static String getSoundsDirectory() throws PrsException {
+        return createPathIfNeeded(getAssetsDirectory() + "/sounds");
     }
 
     public static List<String> getCampaignLevelsList() {
@@ -153,9 +162,35 @@ public class Resources {
                 e.printStackTrace();
             }
         }
+
+        if (!soundsLoaded) {
+            try {
+                sounds = new HashMap<>();
+                for (final File fileEntry : new File(getSoundsDirectory()).listFiles()) {
+                    if (!fileEntry.isDirectory()) {
+                        String[] segments;
+                        if (fileEntry.getAbsolutePath().contains("\\")) {
+                            segments = fileEntry.getAbsolutePath().split("\\\\");
+                        } else {
+                            segments = fileEntry.getAbsolutePath().split("/");
+                        }
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(AudioSystem.getAudioInputStream(new File( Resources.getSoundsDirectory() + "/" + segments[segments.length - 1])));
+                        sounds.put(segments[segments.length - 1], clip);
+                    }
+                }
+                imagesLoaded = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static BufferedImage getImage(String name) {
         return images.get(name);
+    }
+
+    public static Clip getSound(String name) {
+        return sounds.get(name);
     }
 }

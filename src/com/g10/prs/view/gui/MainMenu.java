@@ -14,13 +14,6 @@ public class MainMenu extends GuiMenu {
     public MainMenu() {
         super("Menu principal", new Pair[] {
                 new Pair<String, ActionListener>("Jouer", e -> PetRescueSaga.view.changeMenu(new ChooseLevelMenu())),
-                new Pair<String, ActionListener>("Changer de nom", e -> {
-                    String name = PetRescueSaga.player.getName();
-                    GuiPopup.show(new ChangeNamePopup());
-                    if (!name.equals(PetRescueSaga.player.getName())) {
-                        getView().reload();
-                    }
-                }),
                 new Pair<String, ActionListener>("Voir les règles", e -> PetRescueSaga.view.changeMenu(new RulesMenu())),
                 new Pair<String, ActionListener>("Voir les crédits", e -> PetRescueSaga.view.changeMenu(new CreditsMenu())),
                 new Pair<String, ActionListener>("Paramétrer", e -> PetRescueSaga.view.changeMenu(new SettingsMenu()))
