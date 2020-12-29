@@ -131,7 +131,7 @@ public class Resources {
             try {
                 images = new HashMap<>();
                 for (final File fileEntry : new File(getImagesDirectory()).listFiles()) {
-                    if (fileEntry.getName().contains("copyright")) {
+                    if (!fileEntry.getName().contains(".png")) {
                         continue;
                     }
 
@@ -156,7 +156,7 @@ public class Resources {
 
             try {
                 for (final File fileEntry : new File(getFontsDirectory()).listFiles()) {
-                    if (fileEntry.getName().contains("copyright")) {
+                    if (!fileEntry.getName().contains(".ttf")) {
                         continue;
                     }
 
@@ -180,7 +180,7 @@ public class Resources {
             try {
                 sounds = new HashMap<>();
                 for (final File fileEntry : new File(getSoundsDirectory()).listFiles()) {
-                    if (fileEntry.getName().contains("copyright")) {
+                    if (!fileEntry.getName().contains(".wav")) {
                         continue;
                     }
 
