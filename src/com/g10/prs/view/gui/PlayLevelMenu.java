@@ -1,6 +1,7 @@
 package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.Resources;
 import com.g10.prs.level.*;
 
 import javax.swing.*;

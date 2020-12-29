@@ -1,1 +1,11 @@
-Some images and some designs are copyrighted by King and all rights goes to King.
+- background.png
+- level_01.png
+- level_02.png
+- level_03.png
+- level_04.png
+- level_05.png
+- level_06.png
+
+Those images are copyrighted by King and all rights goes to Ray Chan (author) and King.
+
+Source: https://www.behance.net/illustraytion
