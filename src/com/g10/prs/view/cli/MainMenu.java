@@ -1,6 +1,7 @@
 package com.g10.prs.view.cli;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.print.Color;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.common.print.TextColor;
 
@@ -24,8 +25,6 @@ public class MainMenu extends CliMenu {
         Out.println(TextColor.Red + "                                                                 __/ |      ");
         Out.println(TextColor.Red + "                                                                |___/       ");
         Out.println();
-        Out.println("Bienvenue, " + PetRescueSaga.player.getName() + " !");
-        Out.println();
 
         if (PetRescueSaga.isDebug()) {
             Out.println(("Informations de déboguage").toUpperCase());
@@ -33,6 +32,12 @@ public class MainMenu extends CliMenu {
             Out.println("Seed : " + PetRescueSaga.getSeed());
             Out.println();
         }
+    }
+
+    @Override
+    protected void drawContent() {
+        Out.println("Bienvenue, " + TextColor.Red + PetRescueSaga.player.getName() + Color.ResetAll + " !");
+        Out.println();
     }
 
     /** handle the answer of the player */
