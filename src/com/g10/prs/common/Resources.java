@@ -3,6 +3,7 @@ package com.g10.prs.common;
 import com.g10.prs.common.PrsException;
 import com.g10.prs.level.Level;
 import com.g10.prs.njson.NJsonReader;
+import com.g10.prs.njson.NJsonWriter;
 import com.g10.prs.util.FileUtil;
 
 import javax.imageio.ImageIO;
@@ -19,12 +20,16 @@ import java.util.List;
 
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {
-    public static Map<String, BufferedImage> images;
-    public static Map<String, Clip> sounds;
+    private static Map<String, BufferedImage> images;
+    private static Map<String, Clip> sounds;
 
     private static boolean imagesLoaded = false;
+
     private static boolean fontsLoaded = false;
+
     private static boolean soundsLoaded = false;
+
+    private static Map<String, Object> settings;
 
     /**
      * Gets the data directory's path.
@@ -192,5 +197,40 @@ public class Resources {
 
     public static Clip getSound(String name) {
         return sounds.get(name);
+    }
+
+    public static Object getSetting(String name) {
+        return settings.get(name);
+    }
+
+    public static void setSetting(String name, Object value) {
+        settings.put(name, value);
+    }
+
+    public static void loadSettings() {
+        if (settings == null) {
+            try {
+                File file = new File(getDataDirectory() + "/settings.njson");
+
+                if (file.exists()) {
+                    settings = new NJsonReader(getDataDirectory() + "/settings.njson").readMap();
+                } else {
+                    settings = new HashMap<>();
+                    settings.put("name", "Player");
+                    settings.put("theme", 1);
+                    settings.put("music", 1);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void saveSettings() {
+        try {
+            NJsonWriter.write(getDataDirectory() + "/settings.njson", settings);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

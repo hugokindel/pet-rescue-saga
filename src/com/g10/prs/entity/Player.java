@@ -1,5 +1,7 @@
 package com.g10.prs.entity;
 
+import com.g10.prs.common.Resources;
+
 /** Structure for a class. */
 public class Player {
     /** The nme of the player */
@@ -7,7 +9,7 @@ public class Player {
 
     /** Class constructor. */
     public Player() {
-        name = "Player";
+        name = (String)Resources.getSetting("name");
     }
 
     /**
@@ -17,6 +19,7 @@ public class Player {
      */
     public void setName(String name) {
         this.name = name;
+        Resources.setSetting("name", name);
     }
 
     /** @return the name of the player. */

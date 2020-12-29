@@ -24,7 +24,14 @@ public class Window extends JFrame {
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
+            public void windowClosing(WindowEvent e) {
+                Resources.saveSettings();
+                Out.end();
+            }
+
+            @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                Resources.saveSettings();
                 Out.end();
             }
         });

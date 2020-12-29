@@ -1,5 +1,6 @@
 package com.g10.prs;
 
+import com.g10.prs.common.Resources;
 import com.g10.prs.entity.AI;
 import com.g10.prs.level.Level;
 import com.g10.prs.option.Command;
@@ -28,7 +29,7 @@ public class PetRescueSaga extends Runnable {
     protected static String viewType;
 
     /** the player of the game */
-    public static Player player = new Player();
+    public static Player player;
 
     /** the bot of the game */
     public static AI bot = new AI();
@@ -57,6 +58,9 @@ public class PetRescueSaga extends Runnable {
                 Out.println("Unknown view !");
                 return 1;
             }
+
+            Resources.loadSettings();
+            player = new Player();
 
             if (!showHelp && !showVersion) {
                 if (viewType == null || viewType.equals("cli")) {

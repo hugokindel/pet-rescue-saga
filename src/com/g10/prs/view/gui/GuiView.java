@@ -25,10 +25,9 @@ public class GuiView extends View {
     /** class constructor */
     public GuiView() {
         super(new MainMenu());
-        this.style = Style.Stylized;
-        musicState = true;
+        this.style = (int)Resources.getSetting("theme") == 1 ? Style.Stylized : Style.Default;
         music = Resources.getSound("theme.wav");
-        music.loop(Clip.LOOP_CONTINUOUSLY);
+        setMusicState((int)Resources.getSetting("music") == 1);
     }
 
     /** show the window */
@@ -72,13 +71,22 @@ public class GuiView extends View {
         return style;
     }
 
-    public void setStyle(Style style) {
+    private void setStyle(Style style, boolean reload) {
         this.style = style;
-        reload();
+        Resources.setSetting("theme", style == Style.Stylized ? 1 : 0);
+
+        if (reload) {
+            reload();
+        }
+    }
+
+    public void setStyle(Style style) {
+        setStyle(style, true);
     }
 
     public void setMusicState(boolean state) {
         musicState = state;
+        Resources.setSetting("music", musicState ? 1 : 0);
 
         if (!musicState) {
             music.stop();
