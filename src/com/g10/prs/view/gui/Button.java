@@ -1,6 +1,7 @@
 package com.g10.prs.view.gui;
 
 import com.g10.prs.PetRescueSaga;
+import com.g10.prs.common.print.Out;
 import com.g10.prs.level.Block;
 import com.g10.prs.level.Obstacle;
 
@@ -15,6 +16,7 @@ public class Button extends Panel {
     JButton button;
     Label label;
     boolean mouseIn;
+    boolean enabled;
 
     public Button(String text) {
         this(text, null);
@@ -35,6 +37,7 @@ public class Button extends Panel {
             button.addActionListener(listener);
             add(button);
         }
+        enabled = true;
     }
 
     @Override
@@ -48,7 +51,13 @@ public class Button extends Panel {
 
             graphics.setColor(getBackground());
             graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
-            graphics.setColor(mouseIn ? new Color(29, 123, 201).darker() : new Color(29, 123, 201));
+
+            if (enabled) {
+                graphics.setColor(mouseIn ? new Color(29, 123, 201).darker() : new Color(29, 123, 201));
+            } else {
+                graphics.setColor(mouseIn ? new Color(7, 150, 0).darker() : new Color(7, 150, 0));
+            }
+
             graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
             graphics.drawRoundRect(1, 1, width-3, height-3, arcs.width, arcs.height);
         }
@@ -63,18 +72,33 @@ public class Button extends Panel {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    //setBackground(new Color(32, 129, 214).darker());
                     mouseIn = true;
+                    ((GuiView)PetRescueSaga.view).getWindow().repaint();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (enabled) {
+                        setBackground(new Color(32, 129, 214).darker());
+                    } else {
+                        setBackground(new Color(0, 198, 11).darker());
+                    }
+
+                    ((GuiView)PetRescueSaga.view).getWindow().repaint();
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     mouseIn = false;
+                    if (enabled) {
+                        setBackground(new Color(32, 129, 214));
+                    }
+                    ((GuiView)PetRescueSaga.view).getWindow().repaint();
                 }
 
                 @Override
-                public void mousePressed(MouseEvent e) {
-                    if (listener != null) {
+                public void mouseReleased(MouseEvent e) {
+                    if (mouseIn && listener != null) {
                         listener.actionPerformed(new ActionEvent(this, 0, ""));
                     }
                 }
@@ -90,5 +114,18 @@ public class Button extends Panel {
         } else {
             return button;
         }
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+
+        if (enabled) {
+            setBackground(new Color(32, 129, 214));
+        } else {
+            setBackground(new Color(0, 198, 11));
+        }
+
+        ((GuiView)PetRescueSaga.view).getWindow().repaint();
     }
 }
