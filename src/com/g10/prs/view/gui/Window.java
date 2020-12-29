@@ -33,12 +33,14 @@ public class Window extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
+                ((GuiView)PetRescueSaga.view).setMusicState(false, false);
                 Resources.saveSettings();
                 Out.end();
             }
 
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                ((GuiView)PetRescueSaga.view).setMusicState(false, false);
                 Resources.saveSettings();
                 Out.end();
             }

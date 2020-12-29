@@ -85,8 +85,15 @@ public class GuiView extends View {
     }
 
     public void setMusicState(boolean state) {
+        setMusicState(state, true);
+    }
+
+    public void setMusicState(boolean state, boolean save) {
         musicState = state;
-        Resources.setSetting("music", musicState ? 1 : 0);
+
+        if (save) {
+            Resources.setSetting("music", musicState ? 1 : 0);
+        }
 
         if (!musicState) {
             music.stop();
