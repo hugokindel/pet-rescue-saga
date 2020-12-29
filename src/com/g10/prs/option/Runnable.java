@@ -11,11 +11,11 @@ import java.util.Arrays;
  * attributes. Some syntax is inspired from: https://picocli.info */
 public abstract class Runnable {
     /** Option to show the help message. */
-    @Option(names = {"-h", "--help"}, description = "Montre ce message d'erreur.")
+    @Option(names = {"-h", "--help"}, description = "Montre ce message d'aide.")
     protected boolean showHelp;
 
     /** Option to show the version message. */
-    @Option(names = {"-v", "--version"}, description = "Montre la version actuelle de Pet Rescue Saga.")
+    @Option(names = {"-v", "--version"}, description = "Affiche le numero de version.")
     protected boolean showVersion;
 
     /** Class constructor. */
