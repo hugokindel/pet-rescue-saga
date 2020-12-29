@@ -118,14 +118,18 @@ public class Button extends Panel {
 
     @Override
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        if (((GuiView) PetRescueSaga.view).getStyle() == GuiView.Style.Stylized) {
+            this.enabled = enabled;
 
-        if (enabled) {
-            setBackground(new Color(32, 129, 214));
+            if (enabled) {
+                setBackground(new Color(32, 129, 214));
+            } else {
+                setBackground(new Color(0, 198, 11));
+            }
+
+            ((GuiView)PetRescueSaga.view).getWindow().repaint();
         } else {
-            setBackground(new Color(0, 198, 11));
+            button.setEnabled(enabled);
         }
-
-        ((GuiView)PetRescueSaga.view).getWindow().repaint();
     }
 }
