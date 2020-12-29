@@ -24,6 +24,8 @@ public class MainMenu extends CliMenu {
         Out.println(TextColor.Red + "                                                                 __/ |      ");
         Out.println(TextColor.Red + "                                                                |___/       ");
         Out.println();
+        Out.println("Bienvenue, " + PetRescueSaga.player.getName() + " !");
+        Out.println();
 
         if (PetRescueSaga.isDebug()) {
             Out.println(("Informations de déboguage").toUpperCase());
