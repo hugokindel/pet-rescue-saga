@@ -22,7 +22,7 @@ public class PlayLevelMenu extends GuiMenu {
 
     /** class cosntructor */
     public PlayLevelMenu() {
-        super(PetRescueSaga.level.getName());
+        super(PetRescueSaga.level.getName(), null, true, PetRescueSaga.level.getBackgroundImagePath(), "ingame.png");
     }
 
     /** show the content */

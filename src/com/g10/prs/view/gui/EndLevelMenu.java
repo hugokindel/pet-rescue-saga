@@ -9,7 +9,7 @@ public class EndLevelMenu extends GuiMenu {
 
     /** class constructor */
     public EndLevelMenu(String status) {
-        super(PetRescueSaga.level.getName() + " - Vous avez " + status + " !");
+        super(PetRescueSaga.level.getName() + " - Vous avez " + status + " !", null, true, "background.png", "win.png");
     }
 
     /** show the content */

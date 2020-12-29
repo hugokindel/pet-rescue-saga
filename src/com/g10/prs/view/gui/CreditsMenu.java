@@ -7,7 +7,7 @@ public class CreditsMenu extends GuiMenu {
 
     /** class constructor */
     public CreditsMenu() {
-        super("Crédits");
+        super("Crédits", null, true, "background.png", "credits.png");
     }
 
     /** show the content */
@@ -19,7 +19,12 @@ public class CreditsMenu extends GuiMenu {
         panel.add(contentPanel);
 
         JPanel contentPanel2 = new Panel();
-        contentPanel2.add(new Label("Merci d'avoir joué à Pet Rescue Saga !", 18, 25, 0, 0, 0));
+        contentPanel2.add(new Label(("Merci à").toUpperCase(), 18, 0, 0, 0, 25));
+        contentPanel2.add(new Label("<html>King<br>L'Université de Paris</html>"));
         panel.add(contentPanel2);
+
+        JPanel contentPanel3 = new Panel();
+        contentPanel3.add(new Label("Merci d'avoir joué à Pet Rescue Saga !", 18, 25, 0, 0, 0));
+        panel.add(contentPanel3);
     }
 }

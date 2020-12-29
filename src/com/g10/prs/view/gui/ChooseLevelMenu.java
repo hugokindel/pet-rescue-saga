@@ -15,7 +15,7 @@ public class ChooseLevelMenu extends GuiMenu {
 
     /** class constructor */
     public ChooseLevelMenu() {
-        super("Choisir un niveau");
+        super("Choisir un niveau", null, true, "background.png", "levels.png");
     }
 
     /** show the content */

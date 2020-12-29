@@ -7,7 +7,7 @@ public class RulesMenu extends GuiMenu {
 
     /** class constructor */
     public RulesMenu() {
-        super("Règles du jeu");
+        super("Règles du jeu", null, true, "background.png", "rules.png");
     }
 
     /** show the content */

@@ -30,12 +30,14 @@ public abstract class GuiMenu extends Menu {
     public GuiMenu(String title, Pair<String, ActionListener>[] categories, boolean canGoBack, String backgroundImagePath, String titleImagePath) {
         super(title, canGoBack);
 
+        Resources.loadImages();
+
         this.categories = categories;
         this.backgroundImage = null;
 
         if (backgroundImagePath != null) {
             try {
-                backgroundImage = ImageIO.read(new File(Resources.getImagesDirectory() + "/" + backgroundImagePath));
+                backgroundImage = Resources.getImage(backgroundImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,7 +45,7 @@ public abstract class GuiMenu extends Menu {
 
         if (titleImagePath != null) {
             try {
-                titleImage = ImageIO.read(new File(Resources.getImagesDirectory() + "/" + titleImagePath));
+                titleImage = Resources.getImage(titleImagePath);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -56,7 +58,7 @@ public abstract class GuiMenu extends Menu {
 
     /** class constructor */
     public GuiMenu(String title) {
-        this(title, null, true, null, null);
+        this(title, null, true, "background.png", null);
     }
 
     /** show the Menu */
@@ -64,7 +66,7 @@ public abstract class GuiMenu extends Menu {
     public void draw() {
         JPanel mainPanel = null;
 
-        if (backgroundImage != null) {
+        if (getView().getStyle() == GuiView.Style.Stylized && backgroundImage != null) {
             mainPanel = new Panel() {
                 @Override
                 protected void paintComponent(Graphics g) {
@@ -109,10 +111,10 @@ public abstract class GuiMenu extends Menu {
     protected void drawTitle() {
         JPanel topPanel = new Panel();
 
-        if (titleImage == null) {
-            topPanel.add(new Label(title, 40, 0, 0, 40, 0));
-        } else {
+        if (getView().getStyle() == GuiView.Style.Stylized && titleImage != null) {
             topPanel.add(new Label(new ImageIcon(titleImage), 20, 0, 40, 0));
+        } else {
+            topPanel.add(new Label(title, 40, 0, 0, 40, 0));
         }
 
         panel.add(topPanel);
@@ -164,5 +166,9 @@ public abstract class GuiMenu extends Menu {
     /** @return the window */
     public static Window getWindow() {
         return ((GuiView)PetRescueSaga.view).getWindow();
+    }
+
+    public static GuiView getView() {
+        return ((GuiView)PetRescueSaga.view);
     }
 }

@@ -5,13 +5,20 @@ import com.g10.prs.level.Level;
 import com.g10.prs.njson.NJsonReader;
 import com.g10.prs.util.FileUtil;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Contains useful function to find various paths for the project's data. */
 public class Resources {
+    public static Map<String, BufferedImage> images;
+
     /**
      * Gets the data directory's path.
      *
@@ -101,5 +108,30 @@ public class Resources {
     private static String createPathIfNeeded(String filepath) throws PrsException {
         FileUtil.createDirectoryIfNotExist(filepath);
         return filepath;
+    }
+
+    public static void loadImages() {
+        if (images == null) {
+            try {
+                images = new HashMap<>();
+                for (final File fileEntry : new File(getImagesDirectory()).listFiles()) {
+                    if (!fileEntry.isDirectory()) {
+                        String[] segments;
+                        if (fileEntry.getAbsolutePath().contains("\\")) {
+                            segments = fileEntry.getAbsolutePath().split("\\\\");
+                        } else {
+                            segments = fileEntry.getAbsolutePath().split("/");
+                        }
+                        images.put(segments[segments.length - 1], ImageIO.read(new File(Resources.getImagesDirectory() + "/" + segments[segments.length - 1])));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static BufferedImage getImage(String name) {
+        return images.get(name);
     }
 }

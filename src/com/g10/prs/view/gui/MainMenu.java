@@ -15,6 +15,6 @@ public class MainMenu extends GuiMenu {
                 new Pair<String, ActionListener>("Changer de nom", e -> GuiPopup.show(new ChangeNamePopup())),
                 new Pair<String, ActionListener>("Voir les règles", e -> PetRescueSaga.view.changeMenu(new RulesMenu())),
                 new Pair<String, ActionListener>("Voir les crédits", e -> PetRescueSaga.view.changeMenu(new CreditsMenu()))
-        }, false, "main_bg.png", "logo.png");
+        }, false, "background.png", "logo.png");
     }
 }

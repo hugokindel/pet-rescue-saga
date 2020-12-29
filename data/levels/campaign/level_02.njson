@@ -17,6 +17,7 @@
     [1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1]
   ],
+  "backgroundImagePath": "level_02.png",
   "initialBlocks": [
     [7, 2, 1, 2, 7],
     [1, 2, 1, 2, 1],

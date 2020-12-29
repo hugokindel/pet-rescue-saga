@@ -1,5 +1,6 @@
 package com.g10.prs.view.gui;
 
+import com.g10.prs.common.Resources;
 import com.g10.prs.common.print.Out;
 
 import javax.swing.*;
@@ -12,7 +13,12 @@ public class Window extends JFrame {
         setTitle("Pet Rescue Saga");
         setSize(960, 860);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon("icon.png").getImage());
+
+        try {
+            setIconImage(new ImageIcon(Resources.getImagesDirectory() + "/icon.png").getImage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override

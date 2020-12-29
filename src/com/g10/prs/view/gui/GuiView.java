@@ -1,16 +1,25 @@
 package com.g10.prs.view.gui;
 
+import com.g10.prs.common.Resources;
 import com.g10.prs.view.Menu;
 import com.g10.prs.view.View;
 
 /** Gui view class */
 public class GuiView extends View {
+    public enum Style {
+        Default,
+        Stylized
+    }
+
     /** window of the game */
     private Window window;
+
+    private Style style;
 
     /** class constructor */
     public GuiView() {
         super(new MainMenu());
+        setStyle(Style.Stylized);
     }
 
     /** show the window */
@@ -48,5 +57,17 @@ public class GuiView extends View {
     /** reload the current menu */
     public void reload() {
         changeMenu(currentMenu, false);
+    }
+
+    public Style getStyle() {
+        return style;
+    }
+
+    public void setStyle(Style style) {
+        this.style = style;
+
+        if (this.style == Style.Stylized) {
+            Resources.loadImages();
+        }
     }
 }
