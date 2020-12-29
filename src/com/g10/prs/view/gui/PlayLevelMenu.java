@@ -175,14 +175,15 @@ public class PlayLevelMenu extends GuiMenu {
         }
 
         Panel contentPanel = new Panel();
-        contentPanel.setBorder(10, 0, 20, 0);
-        JButton destroyBlock = new JButton("Détruire un bloc coloré");
-        contentPanel.add(destroyBlock);
-        JButton useRocket = new JButton("Utiliser une fusée");
-        contentPanel.add(useRocket);
-        JButton useSaber = new JButton("Utiliser un sabre");
-        contentPanel.add(useSaber);
-        JButton botPlay = new JButton("Laisser le robot jouer un tour");
+        contentPanel.setBorder(5, 0, 15, 0);
+        Button destroyBlock = new Button("Détruire un bloc coloré");
+        contentPanel.add(destroyBlock.get());
+        Button useRocket = new Button("Utiliser une fusée");
+        contentPanel.add(useRocket.get());
+        Button useSaber = new Button("Utiliser un sabre");
+        contentPanel.add(useSaber.get());
+        Button botPlay = new Button("Laisser le robot jouer un tour");
+        contentPanel.add(botPlay.get());
 
         if (destroyingBlock) {
             destroyBlock.setEnabled(false);
@@ -232,7 +233,7 @@ public class PlayLevelMenu extends GuiMenu {
 
             checkWin();
         });
-        contentPanel.add(botPlay);
+
         panel.add(contentPanel);
     }
 

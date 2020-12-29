@@ -141,29 +141,29 @@ public abstract class GuiMenu extends Menu {
 
         if (categories != null) {
             for (Pair<String, ActionListener> category : categories) {
-                JButton button = new JButton(category.getObject1());
+                Button button = new Button(category.getObject1());
 
                 if (category.getObject2() != null) {
                     button.addActionListener(category.getObject2());
                 }
 
                 constr.gridy = ++constr.gridy;
-                contentPanel.add(button, constr);
+                contentPanel.add(button.get(), constr);
             }
         }
 
         if (canGoBack) {
-            JButton backButtpn = new JButton("Retour");
-            backButtpn.addActionListener(e -> PetRescueSaga.view.goBack());
+            Button backButton = new Button("Retour");
+            backButton.addActionListener(e -> PetRescueSaga.view.goBack());
             constr.gridy = ++constr.gridy;
-            contentPanel.add(backButtpn, constr);
+            contentPanel.add(backButton.get(), constr);
         }
 
-        JButton quitButton = new JButton("Quitter");
+        Button quitButton = new Button("Quitter");
         quitButton.addActionListener(e -> getWindow().quit());
         constr.gridy = ++constr.gridy;
 
-        contentPanel.add(quitButton, constr);
+        contentPanel.add(quitButton.get(), constr);
 
         panel.add(contentPanel);
     }

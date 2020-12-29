@@ -19,12 +19,12 @@ public class SettingsMenu extends GuiMenu {
                 this.categories[0].setObject1("Changer de nom : " + PetRescueSaga.player.getName());
                 getView().reload();
             }
-        }), new Pair<String, ActionListener>("Changer de thème : " + getView().getStyle().name(), e -> {
+        }), new Pair<String, ActionListener>("Changer de thème : " + (getView().getStyle() == GuiView.Style.Default ? "Défaut" : "Stylisé"), e -> {
             if (getView().getStyle() == GuiView.Style.Default) {
-                this.categories[1].setObject1("Changer de thème : Stylized");
+                this.categories[1].setObject1("Changer de thème : Stylisé");
                 getView().setStyle(GuiView.Style.Stylized);
             } else {
-                this.categories[1].setObject1("Changer de thème : Default");
+                this.categories[1].setObject1("Changer de thème : Défaut");
                 getView().setStyle(GuiView.Style.Default);
             }
         }), new Pair<String, ActionListener>("Musique : " + (getView().getMusicState() ? "Activé" : "Désactivé"), e -> {

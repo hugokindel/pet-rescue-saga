@@ -43,7 +43,7 @@ public class ChooseLevelMenu extends GuiMenu {
         for (int i = 0; i < levelNames.length; i++) {
             try {
                 levelNames[i] = Level.load(Resources.getLevelsDirectory() + "/" + levels.get(i)).getName();
-                JButton levelButton = new JButton(levelNames[i]);
+                Button levelButton = new Button(levelNames[i]);
                 int finalI = i;
                 levelButton.addActionListener(ev -> {
                     try {
@@ -55,7 +55,7 @@ public class ChooseLevelMenu extends GuiMenu {
                     PetRescueSaga.view.changeMenu(new PlayLevelMenu());
                 });
                 constr.gridx++;
-                contentPanel.add(levelButton, constr);
+                contentPanel.add(levelButton.get(), constr);
             } catch (Exception e) {
                 e.printStackTrace();
             }
