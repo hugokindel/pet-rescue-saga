@@ -39,7 +39,7 @@ public abstract class Runnable {
      * @param classWithArgs The child's class.
      * @param <T> The type of the child class.
      */
-    protected <T extends Runnable> void readArguments(String[] args, Class<T> classWithArgs) {
+    protected <T extends Runnable> boolean readArguments(String[] args, Class<T> classWithArgs) {
         ArrayList<Field> fields = new ArrayList<>(Arrays.asList(Runnable.class.getDeclaredFields()));
         fields.addAll(Arrays.asList(classWithArgs.getDeclaredFields()));
         fields.removeIf(field -> !field.isAnnotationPresent(Option.class));
@@ -47,17 +47,20 @@ public abstract class Runnable {
         for (String arg : args) {
             if (arg.startsWith("-")) {
                 String[] parts = arg.split("=");
-                boolean find = false;
+                boolean found = false;
 
                 for (Field field : fields) {
                     for (String name : field.getAnnotation(Option.class).names()) {
                         if (parts[0].equals(name)) {
-                            find = true;
+                            found = true;
 
                             try {
                                 field.setAccessible(true);
                                 if (field.getType() == boolean.class) {
                                     field.set(this, true);
+                                } else if (parts.length == 1) {
+                                    Out.printlnError("Option '" + name + "' called with no values when one was expected (please use the -h command).");
+                                    return false;
                                 } else {
                                     field.set(this, Parser.parse(parts[1], field.getType()));
                                 }
@@ -69,12 +72,12 @@ public abstract class Runnable {
                         }
                     }
 
-                    if (find) {
+                    if (found) {
                         break;
                     }
                 }
 
-                if (!find) {
+                if (!found) {
                     displayUnknownOption(parts[0], fields);
                 }
             }
@@ -87,6 +90,8 @@ public abstract class Runnable {
         if (showVersion) {
             displayVersion(classWithArgs);
         }
+
+        return true;
     }
 
     /**

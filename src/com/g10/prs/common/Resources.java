@@ -240,7 +240,9 @@ public class Resources {
 
     public static void saveSettings() {
         try {
-            NJsonWriter.write(getDataDirectory() + "/settings.njson", settings);
+            if (settings != null) {
+                NJsonWriter.write(getDataDirectory() + "/settings.njson", settings);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

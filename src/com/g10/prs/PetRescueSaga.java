@@ -46,7 +46,9 @@ public class PetRescueSaga extends Runnable {
     /** run the game */
     public int run(String[] args) {
         try {
-            readArguments(args, PetRescueSaga.class);
+            if (!readArguments(args, PetRescueSaga.class)) {
+                return 1;
+            }
 
             if (seed == 0) {
                 seed = System.currentTimeMillis();
