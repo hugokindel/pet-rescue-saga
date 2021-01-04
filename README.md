@@ -35,7 +35,7 @@ You can finally run the program if you copy the data directory into the working 
 1) Make sure to have the `java` and `javac` command available from your path.
 2) Open a terminal in the root directory of the project.
 3) Compile using the following command:
-```javac -encoding utf8 src/com/g10/prs/*.java src/com/g10/prs/common/*.java src/com/g10/prs/common/print/*.java src/com/g10/prs/entity/*.java src/com/g10/prs/level/*.java src/com/g10/prs/njson/*.java src/com/g10/prs/option/*.java src/com/g10/prs/power/*.java src/com/g10/prs/util/*.java src/com/g10/prs/view/*.java src/com/g10/prs/view/cli/*.java src/com/g10/prs/view/gui/*.java```
+`javac -encoding utf8 src/com/g10/prs/*.java src/com/g10/prs/common/*.java src/com/g10/prs/common/print/*.java src/com/g10/prs/entity/*.java src/com/g10/prs/level/*.java src/com/g10/prs/njson/*.java src/com/g10/prs/option/*.java src/com/g10/prs/power/*.java src/com/g10/prs/util/*.java src/com/g10/prs/view/*.java src/com/g10/prs/view/cli/*.java src/com/g10/prs/view/gui/*.java`
 
 You can finally run the program using `java -cp src src/com/g10/prs/Program.java`.
 
