@@ -18,6 +18,7 @@ Pet Rescue Saga is game made in Java (1.8+) which aims at being a fun and simple
 	- Specific support for IntelliJ IDEA to provide a better debugging experience (better debugging experience of outputs than in a terminal).
 - Easy to understands level files (permitting modding).
 - Possibility to add custom levels to load.
+- Customized Java Swing theme.
 
 ## How to use
 
