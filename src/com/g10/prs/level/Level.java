@@ -103,6 +103,8 @@ public class Level {
     /** The number of animals left before winning. */
     int animalsLeft;
 
+    Level save;
+
     /**
      * getter of board
      *
@@ -119,6 +121,11 @@ public class Level {
      */
     public int getAnimalsLeft(){
         return animalsLeft;
+    }
+
+    public Level getSave() {
+        save.save = save.copy();
+        return save;
     }
 
     /**
@@ -214,6 +221,8 @@ public class Level {
         if (level.backgroundImagePath == null) {
             level.backgroundImagePath = "background.png";
         }
+
+        level.save = level.copy();
 
         return level;
     }
