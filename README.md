@@ -33,6 +33,7 @@ Pet Rescue Saga is game made in Java (1.8+) which aims at being a fun and simple
 You can finally run the program if you copy the data directory into the working directory of your project.
 
 #### Compiling from the command line:
+
 1) Make sure to have the `java` and `javac` command available from your path.
 2) Open a terminal in the root directory of the project.
 3) Compile using the following command:
