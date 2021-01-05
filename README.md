@@ -39,7 +39,7 @@ You can finally run the program if you copy the data directory into the working 
 3) Compile using the following command:
 `javac -encoding utf8 src/com/g10/prs/*.java src/com/g10/prs/common/*.java src/com/g10/prs/common/print/*.java src/com/g10/prs/entity/*.java src/com/g10/prs/level/*.java src/com/g10/prs/njson/*.java src/com/g10/prs/option/*.java src/com/g10/prs/power/*.java src/com/g10/prs/util/*.java src/com/g10/prs/view/*.java src/com/g10/prs/view/cli/*.java src/com/g10/prs/view/gui/*.java`
 
-You can finally run the program using `java -cp src src/com/g10/prs/Program.java`.
+You can finally run the program using `java -cp src com/g10/prs/Program`.
 
 ### From a binary release
 
