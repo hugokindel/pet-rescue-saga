@@ -32,7 +32,7 @@ public class EndLevelMenu extends CliMenu {
     public void handleChoice(int choice) {
         if (choice == 1) {
         	PetRescueSaga.level = PetRescueSaga.level.getSave();
-        	PetRescueSaga.view.changeMenu(new PlayLevelMenu());
+        	PetRescueSaga.view.changeMenu(new PlayLevelMenu(), false);
         } else if (choice == 2) {
             PetRescueSaga.view.changeMenu(new MainMenu());
         }

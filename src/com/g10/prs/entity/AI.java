@@ -5,6 +5,8 @@ import com.g10.prs.common.Pair;
 import com.g10.prs.common.Triplet;
 import com.g10.prs.common.print.Out;
 import com.g10.prs.level.*;
+import com.g10.prs.power.Firework;
+import com.g10.prs.power.Saber;
 
 import java.util.ArrayList;
 
@@ -37,13 +39,22 @@ public class AI {
      *
      * @param level The level
      */
-    public void play(Level level){
+    public void play(Level level) {
         ArrayList<Triplet<Integer, Integer, Double>> list = createList(level.getBoard());
         list = scoreAdj(copy(level.getBoard()), list);
         list = scoreAnimal(level.copy(), list);
         list = scoreAlea(list);
         Pair<Integer, Integer> pair = bestChoice(list);
-        PetRescueSaga.level.removeGameMode(pair.getObject2(), pair.getObject1(), true, true);
+
+        if (PetRescueSaga.level.countNumberOfBlocksSimilar(pair.getObject1(), pair.getObject2()) < 2) {
+            if ((int)Math.round(Math.random()) == 0) {
+                new Firework(pair.getObject2()).use();
+            } else {
+                new Saber(pair.getObject1()).use();
+            }
+        } else {
+            PetRescueSaga.level.removeGameMode(pair.getObject2(), pair.getObject1(), true, true);
+        }
     }
 
     /**

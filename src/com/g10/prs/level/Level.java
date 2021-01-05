@@ -157,22 +157,7 @@ public class Level {
         } else {
             level.groups = null;
         }
-        level.board = new Cell[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] instanceof Animal) {
-                    level.board[i][j] = ((Animal)board[i][j]).copy();
-                } else if (board[i][j] instanceof Block) {
-                    level.board[i][j] = ((Block)board[i][j]).copy();
-                } else if (board[i][j] instanceof Obstacle) {
-                    level.board[i][j] = ((Obstacle)board[i][j]).copy();
-                } else if (board[i][j] != null) {
-                    level.board[i][j] = board[i][j].copy();
-                } else {
-                    level.board[i][j] = null;
-                }
-            }
-        }
+        level.board = copyBoard(this);
         level.background = new Visibility[background.length][background[0].length];
         for (int i = 0; i < background.length; i++) {
             System.arraycopy(background[i], 0, level.background[i], 0, background[i].length);
@@ -184,6 +169,28 @@ public class Level {
         level.animalsLeft = animalsLeft;
 
         return level;
+    }
+
+    private Cell[][] copyBoard(Level level) {
+        Cell[][] board = new Cell[level.board.length][level.board[0].length];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (level.board[i][j] instanceof Animal) {
+                    board[i][j] = ((Animal)level.board[i][j]).copy();
+                } else if (level.board[i][j] instanceof Block) {
+                    board[i][j] = ((Block)level.board[i][j]).copy();
+                } else if (level.board[i][j] instanceof Obstacle) {
+                    board[i][j] = ((Obstacle)level.board[i][j]).copy();
+                } else if (level.board[i][j] != null) {
+                    board[i][j] = level.board[i][j].copy();
+                } else {
+                    board[i][j] = null;
+                }
+            }
+        }
+
+        return board;
     }
 
     /**
@@ -449,6 +456,7 @@ public class Level {
         }
 
         Block block = (Block)board[r][c];
+
         remove(c, r, true, false);
 
         if (r - 1 >= 0 && board[r - 1][c] instanceof Block &&
@@ -677,6 +685,38 @@ public class Level {
      */
     public boolean isMovable(int c, int r) {
         return !(background[r][c] == Visibility.Border || board[r][c] instanceof Obstacle);
+    }
+
+    public int countNumberOfBlocksSimilar(int r, int c) {
+        return countNumberOfBlocksSimilar(r, c, copyBoard(this));
+    }
+
+    public int countNumberOfBlocksSimilar(int r, int c, Cell[][] board) {
+        int res = 1;
+        BlockType type = ((Block)board[r][c]).getBlockType();
+        board[r][c] = null;
+
+        if (r - 1 >= 0 && board[r - 1][c] instanceof Block &&
+                ((Block)board[r - 1][c]).getBlockType() == type) {
+            res += countNumberOfBlocksSimilar(r - 1, c, board);
+        }
+
+        if (r + 1 < board.length && board[r + 1][c] instanceof Block &&
+                ((Block)board[r + 1][c]).getBlockType() == type) {
+            res += countNumberOfBlocksSimilar(r + 1, c, board);
+        }
+
+        if (c - 1 >= 0 && board[r][c - 1] instanceof Block &&
+                ((Block)board[r][c - 1]).getBlockType() == type) {
+            res += countNumberOfBlocksSimilar(r, c - 1, board);
+        }
+
+        if (c + 1 < board[r].length && board[r][c + 1] instanceof Block &&
+                ((Block)board[r][c + 1]).getBlockType() == type) {
+            res += countNumberOfBlocksSimilar(r, c + 1, board);
+        }
+
+        return res;
     }
 
     /** @return the name of the level*/

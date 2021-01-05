@@ -27,7 +27,7 @@ public class DestroyBlockPopup extends CliPopup {
             int x = nextInt("Veuillez choisir un coordonné " + TextColor.Red + "x" + Color.ResetAll, true, 0, true, PetRescueSaga.level.getColumns());
             int y = nextInt("Veuillez choisir un coordonné " + TextColor.Red + "y" + Color.ResetAll, true, 0, true, PetRescueSaga.level.getRows());
 
-            if (PetRescueSaga.level.isMovable(x, y)) {
+            if (PetRescueSaga.level.isMovable(x, y) && PetRescueSaga.level.countNumberOfBlocksSimilar(y, x) >= 2) {
                 PetRescueSaga.level.removeGameMode(x, y, true, true);
                 break;
             } else {

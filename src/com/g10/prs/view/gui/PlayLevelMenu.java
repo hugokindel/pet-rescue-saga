@@ -85,10 +85,11 @@ public class PlayLevelMenu extends GuiMenu {
 
                     int finalI = i;
                     int finalJ = j;
+
                     button.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mousePressed(MouseEvent e) {
-                            if (destroyingBlock) {
+                            if (destroyingBlock && PetRescueSaga.level.countNumberOfBlocksSimilar(finalI, finalJ) >= 2) {
                                 PetRescueSaga.level.removeGameMode(finalJ, finalI, true, true);
                                 getWindow().setCursor(cursor);
                                 checkWin();
@@ -105,7 +106,7 @@ public class PlayLevelMenu extends GuiMenu {
 
                         @Override
                         public void mouseEntered(MouseEvent e) {
-                            if (destroyingBlock) {
+                            if (destroyingBlock && PetRescueSaga.level.countNumberOfBlocksSimilar(finalI, finalJ) >= 2) {
                                 button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
                                 getWindow().setCursor(new Cursor(Cursor.HAND_CURSOR));
                             } else if (usingRocket) {

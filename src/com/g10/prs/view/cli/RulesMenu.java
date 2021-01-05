@@ -22,6 +22,7 @@ public class RulesMenu extends CliMenu {
         Out.println("N'oubliez pas de tenir compte de la gravité ! Les blocs tombent vers le bas et se déplace vers la gauche lorsqu'ils sont sur un obstacle et que la voie est libre.");
         Out.println("Il est aussi possible d'utiliser la " + TextColor.Red + "fusée" + Color.ResetAll + " pour supprimer tous les blocs d'une colonne ou le " +
                 TextColor.Red + "sabre" + Color.ResetAll + " pour supprimer tous les blocs d'une ligne.");
+        Out.println("Attention, vous ne pouvez pas supprimer les blocs de couleurs qui ne sont pas au moins par groupe de 2 !");
         Out.println();
         Out.println("Le fonctionnement du score est le suivant :");
         Out.println(TextColor.Red + "+ 100" + Color.ResetAll + " - pour chaque bloc enlevé.");
