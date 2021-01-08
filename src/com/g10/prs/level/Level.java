@@ -645,7 +645,7 @@ public class Level {
         if (groups != null) {
             for (int c = 0; c < columns; c++) {
                 if (!isMovable(c, 0)) {
-                    break;
+                    continue;
                 }
 
                 if (board[0][c] == null || board[0][c].getType() == CellType.Empty) {
