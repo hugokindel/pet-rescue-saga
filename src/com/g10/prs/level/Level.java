@@ -660,10 +660,12 @@ public class Level {
                             if (canRefill) {
                                 for (int r = 0; r < rows; r++) {
                                     if ((!isMovable(c, r))) {
-                                        break;
+                                        continue;
                                     }
 
-                                    board[r][c] = createBlock(this, group.getId(), colors);
+                                    if (board[r][c] == null || board[r][c].getType() == CellType.Empty) {
+                                        board[r][c] = createBlock(this, group.getId(), colors);
+                                    }
                                 }
                                 filled = true;
                             }
